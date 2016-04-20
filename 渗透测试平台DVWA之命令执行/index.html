@@ -1,0 +1,624 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="本文通过DVWA的Command Execution模块进行命令执行漏洞的一般演示，DVWA中共存在三个级别的命令执行漏洞。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="7.渗透测试平台DVWA之命令执行">
+<meta property="og:url" content="http://yoursite.com/渗透测试平台DVWA之命令执行/index.html">
+<meta property="og:site_name" content="Angoddess Blog">
+<meta property="og:description" content="本文通过DVWA的Command Execution模块进行命令执行漏洞的一般演示，DVWA中共存在三个级别的命令执行漏洞。">
+<meta property="og:image" content="http://yoursite.com/uploads/7/7-1.png">
+<meta property="og:image" content="http://yoursite.com/uploads/7/7-2.png">
+<meta property="og:image" content="http://yoursite.com/uploads/7/7-3.png">
+<meta property="og:image" content="http://yoursite.com/uploads/7/7-4.png">
+<meta property="og:image" content="http://yoursite.com/uploads/7/7-5.png">
+<meta property="og:image" content="http://yoursite.com/uploads/7/7-6.png">
+<meta property="og:updated_time" content="2016-04-20T11:15:46.615Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="7.渗透测试平台DVWA之命令执行">
+<meta name="twitter:description" content="本文通过DVWA的Command Execution模块进行命令执行漏洞的一般演示，DVWA中共存在三个级别的命令执行漏洞。">
+<meta name="twitter:image" content="http://yoursite.com/uploads/7/7-1.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 7.渗透测试平台DVWA之命令执行 | Angoddess Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Angoddess Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Security | Network | Develop</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                7.渗透测试平台DVWA之命令执行
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-20T18:09:16+08:00" content="2016-04-20">
+              2016-04-20
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/渗透测试平台DVWA之命令执行/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="渗透测试平台DVWA之命令执行/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>　　本文通过DVWA的Command Execution模块进行命令执行漏洞的一般演示，DVWA中共存在三个级别的命令执行漏洞。<a id="more"></a><br>　　DVWA中命令执行测试分三个级别，low，medium和high，下面依次来分析。</p>
+<h2 id="一-low级别命令执行测试"><a href="#一-low级别命令执行测试" class="headerlink" title="(一)low级别命令执行测试"></a>(一)low级别命令执行测试</h2><p>　　首先，把DVWA的安全级别调至low，如图所示：<br><img src="/uploads/7/7-1.png" alt="Angoddess"><br>　　此时，底部左侧会显示级别，如图所示：<br><img src="/uploads/7/7-2.png" alt="Angoddess"><br>　　接下来回到命令执行模块，根据提示输入IP地址，提交后返回了ping信息，如图所示：<br><img src="/uploads/7/7-3.png" alt="Angoddess"><br>　　以此可以判断这是一个ping程序，输入IP则进行ping操作。总所周知，ping命令是系统命令，即此处调用了系统命令，那么是否可以构造特殊命令执行语句执行其他命令呢？<br>　　我们知道，在window的DOS命令执行中可以用“&amp;&amp;”来连接两个命令一起执行，而linux中则可以利用“;”来连接两个命令共同执行，我们这里可以测试一下。由于测试服务器是linux系统，所以我们直接用“;”来测试。<br>　　输入“; cat /etc/passwd”，看是否能读取到passwd文件中的信息并打印出来。<br><img src="/uploads/7/7-4.png" alt="Angoddess"><br>　　从图中，可以很明显的看到，“;”后面的命令执行成功了，打印出了passwd文件的信息。<br>　　那么，可以判断其存在命令执行漏洞。通过此漏洞可以直接执行系统命令，如果权限够大，甚至可以直接执行添加系统管理员，开启敏感端口等。<br>　　现在我们来瞧瞧它的源码，看看这个漏洞是如何产生的。选择View Source查看相关源码，如图所示：<br><img src="/uploads/7/7-5.png" alt="Angoddess"><br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="keyword">if</span>( <span class="keyword">isset</span>( $_POST[ <span class="string">'submit'</span> ] ) ) &#123; </span><br><span class="line">    $target = $_REQUEST[ <span class="string">'ip'</span> ]; </span><br><span class="line">    <span class="comment">// Determine OS and execute the ping command. </span></span><br><span class="line">    <span class="keyword">if</span> (stristr(php_uname(<span class="string">'s'</span>), <span class="string">'Windows NT'</span>)) &#123;  </span><br><span class="line">        $cmd = shell_exec( <span class="string">'ping  '</span> . $target ); </span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'&lt;pre&gt;'</span>.$cmd.<span class="string">'&lt;/pre&gt;'</span>; </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">        $cmd = shell_exec( <span class="string">'ping  -c 3 '</span> . $target );        <span class="keyword">echo</span> <span class="string">'&lt;pre&gt;'</span>.$cmd.<span class="string">'&lt;/pre&gt;'</span>;  </span><br><span class="line">    &#125; </span><br><span class="line">&#125; </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>　　从代码中可以看到，用户输入的数据直接被赋值到$target变量，且在第二个if语句中被直接利用，而没有做任何的处理，所以导致了任意命令执行漏洞。</p>
+<h2 id="二-medium级别命令执行测试"><a href="#二-medium级别命令执行测试" class="headerlink" title="(二)medium级别命令执行测试"></a>(二)medium级别命令执行测试</h2><p>　　将DVWA security级别调到medium进行中等安全的命令执行测试。<br>　　当DVWA处于这个级别时，我们会发现，之前的命令执行方法已经不适用了，即使用“;”或“&amp;&amp;”来连接命令已经无法达到目的，可以猜测，其做了安全措施，如转义了敏感字符等。<br>　　我们直接来分析下这个级别的命令执行模块代码。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="keyword">if</span>( <span class="keyword">isset</span>( $_POST[ <span class="string">'submit'</span>] ) ) &#123; </span><br><span class="line">    $target = $_REQUEST[ <span class="string">'ip'</span> ]; </span><br><span class="line">    <span class="comment">// Remove any of the charactars in the array (blacklist). </span></span><br><span class="line">    $substitutions = <span class="keyword">array</span>( </span><br><span class="line">        <span class="string">'&amp;&amp;'</span> =&gt; <span class="string">''</span>, </span><br><span class="line">        <span class="string">';'</span> =&gt; <span class="string">''</span>, </span><br><span class="line">    ); </span><br><span class="line">    $target = str_replace( array_keys( $substitutions ), $substitutions, $target );     </span><br><span class="line">    <span class="comment">// Determine OS and execute the ping command. </span></span><br><span class="line">    <span class="keyword">if</span> (stristr(php_uname(<span class="string">'s'</span>), <span class="string">'Windows NT'</span>)) &#123;       </span><br><span class="line">        $cmd = shell_exec( <span class="string">'ping  '</span> . $target ); </span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'&lt;pre&gt;'</span>.$cmd.<span class="string">'&lt;/pre&gt;'</span>;          </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;       </span><br><span class="line">        $cmd = shell_exec( <span class="string">'ping  -c 3 '</span> . $target ); </span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'&lt;pre&gt;'</span>.$cmd.<span class="string">'&lt;/pre&gt;'</span>;          </span><br><span class="line">    &#125; </span><br><span class="line">&#125; </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>　　从代码不难看出，其对“&amp;&amp;”和“;”字符，利用str_replace方法做了转义，变成空字符了。所以我们没法用这两种方法来连接额外的命令，从而达到任意命令执行了。<br>　　然而，细心的你会想到，这里其用的是黑名单的方式，而且单单只是过滤了“&amp;&amp;”和“;”字符，那么是否有其他字符也能做到同样的效果呢？<br>　　这样想，过滤掉的两种连接字符是达到如and般效果，那么是否也有类似or的效果的方法呢？<br>　　答案是肯定的，无论在window还是linux系统中，我们都可以通过“||”来达到类似or一样的效果，不同的是，这其实并不完全是or，其实际效果是当“||”前的命令执行失败时，执行“||”后的命令。也就是说，如果“||”前的命令执行成功了，那么就不会执行后面的命令了。所以我们在构造特殊命令时要注意，不能在“||”前构造能够成功执行的命令语句。<br>　　结合DVWA的命令执行模块测试程序，这里是ping程序，需要用户输入IP，那么其实，我们只要不输入IP直接输入“||”并带上我们希望执行的语句就可以了，因为酱紫就导致了“||”前的ping语句没有目标而执行失败，从而会执行后面的语句，我们测试一下，输入“|| cat /etc/passwd”，结果如图：<br><img src="/uploads/7/7-6.png" alt="Angoddess"><br>　　成功执行了。所以说，黑名单的过滤方法真心不怎么安全，总能被人想到方法绕过。</p>
+<h2 id="三-high级别命令执行测试"><a href="#三-high级别命令执行测试" class="headerlink" title="(三)high级别命令执行测试"></a>(三)high级别命令执行测试</h2><p>　　最后介绍high级别的命令执行模块，先把DVWA security级别调到high。这个级别你会发现之前两个级别的所有方法都失效了，而且你如论如何也突破不了达到任意命令执行的效果，我们直接来分析源码。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="keyword">if</span>( <span class="keyword">isset</span>( $_POST[ <span class="string">'submit'</span> ] ) ) &#123; </span><br><span class="line">    $target = $_REQUEST[<span class="string">"ip"</span>]; </span><br><span class="line">    $target = stripslashes( $target ); </span><br><span class="line">    <span class="comment">// Split the IP into 4 octects </span></span><br><span class="line">    $octet = explode(<span class="string">"."</span>, $target); </span><br><span class="line">    <span class="comment">// Check IF each octet is an integer </span></span><br><span class="line">    <span class="keyword">if</span> ((is_numeric($octet[<span class="number">0</span>])) &amp;&amp; (is_numeric($octet[<span class="number">1</span>])) &amp;&amp; (is_numeric($octet[<span class="number">2</span>])) &amp;&amp; (is_numeric($octet[<span class="number">3</span>])) &amp;&amp; (sizeof($octet) == <span class="number">4</span>)  ) &#123; </span><br><span class="line">    <span class="comment">// If all 4 octets are int's put the IP back together. </span></span><br><span class="line">    $target = $octet[<span class="number">0</span>].<span class="string">'.'</span>.$octet[<span class="number">1</span>].<span class="string">'.'</span>.$octet[<span class="number">2</span>].<span class="string">'.'</span>.$octet[<span class="number">3</span>]; </span><br><span class="line">        <span class="comment">// Determine OS and execute the ping command. </span></span><br><span class="line">        <span class="keyword">if</span> (stristr(php_uname(<span class="string">'s'</span>), <span class="string">'Windows NT'</span>)) &#123;    </span><br><span class="line">            $cmd = shell_exec( <span class="string">'ping  '</span> . $target ); </span><br><span class="line">            <span class="keyword">echo</span> <span class="string">'&lt;pre&gt;'</span>.$cmd.<span class="string">'&lt;/pre&gt;'</span>;          </span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;       </span><br><span class="line">            $cmd = shell_exec( <span class="string">'ping  -c 3 '</span> . $target ); </span><br><span class="line">            <span class="keyword">echo</span> <span class="string">'&lt;pre&gt;'</span>.$cmd.<span class="string">'&lt;/pre&gt;'</span>;          </span><br><span class="line">        &#125;      </span><br><span class="line">    &#125;      </span><br><span class="line">    <span class="keyword">else</span> &#123; </span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'&lt;pre&gt;ERROR: You have entered an invalid IP&lt;/pre&gt;'</span>; </span><br><span class="line">    &#125;           </span><br><span class="line">&#125; </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>　　从代码中可以看到，$target接收来这用户输入的数据，然后利用explode以“.”为边界进行分割，成为一个数组赋值给$octet，接下来利用if语句判断数组中的数据是否都为数字，并且限制了数组的长度只能是4，也就是说，基本限制了用户输入的数据就只能是IP地址。<br>这样才会执行if里面的语句去执行使用用户输入的命令，而这样的限制已经非常苛刻了，至少目前我还没发现啥子方法可以绕过去的，在这里GG了，求路过的大神支招。</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/渗透测试平台DVWA之暴力破解/" rel="next" title="6.渗透测试平台DVWA之暴力破解">
+                <i class="fa fa-chevron-left"></i> 6.渗透测试平台DVWA之暴力破解
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="渗透测试平台DVWA之命令执行/"
+           data-title="7.渗透测试平台DVWA之命令执行" data-url="http://yoursite.com/渗透测试平台DVWA之命令执行/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Angoddess" />
+          <p class="site-author-name" itemprop="name">Angoddess</p>
+          <p class="site-description motion-element" itemprop="description">Angoddess技术博客</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Angoddess" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-low级别命令执行测试"><span class="nav-number">1.</span> <span class="nav-text">(一)low级别命令执行测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-medium级别命令执行测试"><span class="nav-number">2.</span> <span class="nav-text">(二)medium级别命令执行测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-high级别命令执行测试"><span class="nav-number">3.</span> <span class="nav-text">(三)high级别命令执行测试</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Angoddess</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"Angoddess"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
