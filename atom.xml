@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-04-20T11:15:46.615Z</updated>
+  <updated>2016-04-20T15:15:59.278Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0DVWA%E4%B9%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/"/>
     <id>http://yoursite.com/渗透测试平台DVWA之命令执行/</id>
     <published>2016-04-20T10:09:16.000Z</published>
-    <updated>2016-04-20T11:15:46.615Z</updated>
+    <updated>2016-04-20T15:15:59.278Z</updated>
     
     <content type="html">&lt;p&gt;　　本文通过DVWA的Command Execution模块进行命令执行漏洞的一般演示，DVWA中共存在三个级别的命令执行漏洞。&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;　　DVWA中命令执行测试分三个级别，low，medium和high，下面依次来分析。&lt;/p&gt;
 &lt;h2 id=&quot;一-low级别命令执行测试&quot;&gt;&lt;a href=&quot;#一-low级别命令执行测试&quot; class=&quot;headerlink&quot; title=&quot;(一)low级别命令执行测试&quot;&gt;&lt;/a&gt;(一)low级别命令执行测试&lt;/h2&gt;&lt;p&gt;　　首先，把DVWA的安全级别调至low，如图所示：&lt;br&gt;&lt;img src=&quot;/uploads/7/7-1.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;br&gt;　　此时，底部左侧会显示级别，如图所示：&lt;br&gt;&lt;img src=&quot;/uploads/7/7-2.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;br&gt;　　接下来回到命令执行模块，根据提示输入IP地址，提交后返回了ping信息，如图所示：&lt;br&gt;&lt;img src=&quot;/uploads/7/7-3.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;br&gt;　　以此可以判断这是一个ping程序，输入IP则进行ping操作。总所周知，ping命令是系统命令，即此处调用了系统命令，那么是否可以构造特殊命令执行语句执行其他命令呢？&lt;br&gt;　　我们知道，在window的DOS命令执行中可以用“&amp;amp;&amp;amp;”来连接两个命令一起执行，而linux中则可以利用“;”来连接两个命令共同执行，我们这里可以测试一下。由于测试服务器是linux系统，所以我们直接用“;”来测试。&lt;br&gt;　　输入“; cat /etc/passwd”，看是否能读取到passwd文件中的信息并打印出来。&lt;br&gt;&lt;img src=&quot;/uploads/7/7-4.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;br&gt;　　从图中，可以很明显的看到，“;”后面的命令执行成功了，打印出了passwd文件的信息。&lt;br&gt;　　那么，可以判断其存在命令执行漏洞。通过此漏洞可以直接执行系统命令，如果权限够大，甚至可以直接执行添加系统管理员，开启敏感端口等。&lt;br&gt;　　现在我们来瞧瞧它的源码，看看这个漏洞是如何产生的。选择View Source查看相关源码，如图所示：&lt;br&gt;&lt;img src=&quot;/uploads/7/7-5.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;br&gt;&lt;figure class=&quot;highlight php&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;( &lt;span class=&quot;keyword&quot;&gt;isset&lt;/span&gt;( $_POST[ &lt;span class=&quot;string&quot;&gt;&#39;submit&#39;&lt;/span&gt; ] ) ) &amp;#123; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    $target = $_REQUEST[ &lt;span class=&quot;string&quot;&gt;&#39;ip&#39;&lt;/span&gt; ]; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;// Determine OS and execute the ping command. &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (stristr(php_uname(&lt;span class=&quot;string&quot;&gt;&#39;s&#39;&lt;/span&gt;), &lt;span class=&quot;string&quot;&gt;&#39;Windows NT&#39;&lt;/span&gt;)) &amp;#123;  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        $cmd = shell_exec( &lt;span class=&quot;string&quot;&gt;&#39;ping  &#39;&lt;/span&gt; . $target ); &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;&amp;lt;pre&amp;gt;&#39;&lt;/span&gt;.$cmd.&lt;span class=&quot;string&quot;&gt;&#39;&amp;lt;/pre&amp;gt;&#39;&lt;/span&gt;; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125; &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &amp;#123;  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        $cmd = shell_exec( &lt;span class=&quot;string&quot;&gt;&#39;ping  -c 3 &#39;&lt;/span&gt; . $target );        &lt;span class=&quot;keyword&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;&amp;lt;pre&amp;gt;&#39;&lt;/span&gt;.$cmd.&lt;span class=&quot;string&quot;&gt;&#39;&amp;lt;/pre&amp;gt;&#39;&lt;/span&gt;;  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
@@ -37,6 +37,12 @@
     
     </summary>
     
+      <category term="others" scheme="http://yoursite.com/categories/others/"/>
+    
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
     
   </entry>
   
