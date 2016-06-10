@@ -98,7 +98,7 @@
 <meta property="og:image" content="http://yoursite.com/uploads/8/8-7.png">
 <meta property="og:image" content="http://yoursite.com/uploads/8/8-8.png">
 <meta property="og:image" content="http://yoursite.com/uploads/8/8-9.png">
-<meta property="og:updated_time" content="2016-06-09T13:05:04.973Z">
+<meta property="og:updated_time" content="2016-06-10T11:44:50.207Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="8.渗透测试平台DVWA之CSRF">
 <meta name="twitter:description" content="本文简单介绍了CSRF的形成原理，以及以DVWA平台为例，做了简单的利用分析！">
@@ -336,10 +336,11 @@
 
       
         <p>　　本文简单介绍了CSRF的形成原理，以及以DVWA平台为例，做了简单的利用分析！<a id="more"></a></p>
-<h2 id="CSRF原理简单分析"><a href="#CSRF原理简单分析" class="headerlink" title="CSRF原理简单分析"></a>CSRF原理简单分析</h2><p>　　CSRF，跨站请求伪造，其主要是通过盗用被攻击者的身份来进行非法操作，如修改你的密码，窃取个人敏感信息，银行转账等。<br>具体原理为，当我们登录我们某一网站的账号，如银行网站，登录后我们与浏览器之间便存在了一个可信任的会话连接，而该网站存在CSRF漏洞，那么，此时，如果我们又访问了一个加入了恶意代码的另一个网站，该恶意代码是执行该银行网站的某些敏感操作的，如转账，修改密码等。正常情况下，我们直接访问改网站，没有任何问题，因为这些恶意代码的操作需要用户权限支撑，否则执行失败，然而当我们登录了银行，而会话没有结束时，访问了该网站，那么则执行了这些恶意代码操作，而且是静默的，一般用户并不知情，也就是说，在不知不觉中，用户密码被修改，银行存款被转走等。<br>接下来，我们来看看DVWA中对于CSRF的实操。</p>
-<h2 id="DVWA平台low级别CSRF分析"><a href="#DVWA平台low级别CSRF分析" class="headerlink" title="DVWA平台low级别CSRF分析"></a>DVWA平台low级别CSRF分析</h2><p>low级别的CSRF模块中，密码修改并没有验证旧密码，直接就可以输入新密码即可。<br><img src="/uploads/8/8-1.png" alt="Angoddess"><br>首先我们先来查看dvwa中的admin的密码hash，以方便我们待会做对比。<br><img src="/uploads/8/8-2.png" alt="Angoddess"><br>然后我们随意输入一个密码，确认密码框里随便输入，不要跟新密码一样，我们现在要获取密码修改的连接或数据包，先不改动密码。<br><img src="/uploads/8/8-3.png" alt="Angoddess"><br>从图中可以看到，通过链接请求密码修改的，我们可以尝试在另一个浏览器里面直接访问该链接，发现其跳转到登录去了，因为没有可信任会话，接下来我们构造一个图片网站，嵌入该恶意链接。<br><img src="/uploads/8/8-4.png" alt="Angoddess"><br>访问该网站，就是一个正常的图片<br><img src="/uploads/8/8-5.png" alt="Angoddess"><br>接下来我们用已登录了DVWA的浏览器来访问该网站，依然正常，没有任何异常显示。<br><img src="/uploads/8/8-5.png" alt="Angoddess"><br>然而此时，密码已经修改成功，我们到数据库查看密码hash<br><img src="/uploads/8/8-6.png" alt="Angoddess"><br>可以看到密码hash已经变了，密码变成123456，CSRF攻击成功！<br>我们来分析下DVWA中CSRF的low级别源码<br><img src="/uploads/8/8-7.png" alt="Angoddess"><br>可以发现，只是做了新密码的两次输入验证，而并没有对来源进行验证，这也就导致了CSRF的跨站请求伪造。</p>
-<h2 id="DVWA平台medium级别CSRF分析"><a href="#DVWA平台medium级别CSRF分析" class="headerlink" title="DVWA平台medium级别CSRF分析"></a>DVWA平台medium级别CSRF分析</h2><p>medium级别的CSRF，我们先来看看源码<br><img src="/uploads/8/8-8.png" alt="Angoddess"><br>其先判断了请求是否来自于本地，而不是其他站点，那么像low级别那样构造恶意链接便行不通了，但是是否酱紫就安全了呢？<br>从源码中可以看到，其实通过referer来判断请求来源的，也就是客户端浏览器的referer值，然而我们可以通过设置篡改referer值来欺负服务器，我们的请求来源是本地的，从而达到CSRF跨站请求的目的。<br>可以在正常网站中，内嵌构造伪造referer值，如php当中，可以嵌入如下代码：<br>$ch = curl_init();<br> curl_setopt($ch,CURLOPT_URL,”<a href="http://114.215.127.138/baji/DVWA-1.0.8/vulnerabilities/csrf/?password_new=12345&amp;password_conf=12345&amp;Change=Change#" target="_blank" rel="external">http://114.215.127.138/baji/DVWA-1.0.8/vulnerabilities/csrf/?password_new=12345&amp;password_conf=12345&amp;Change=Change#</a>“);<br>    curl_setopt ($ch, CURLOPT_REFERER, “127.0.0.1”);<br>    curl_exec ($ch);<br>    curl_close ($ch)<br>这里就不做具体演示了。<br>DVWA中这个级别的本身就存在一些问题（不知道是不是我的版本问题），所以不要纠结于为什么不成功，可以自己修改下原代码修复之后再测试。</p>
-<h2 id="DVWA平台high级别CSRF分析"><a href="#DVWA平台high级别CSRF分析" class="headerlink" title="DVWA平台high级别CSRF分析"></a>DVWA平台high级别CSRF分析</h2><p>最后看看high级别的，high级别对于CSRF就有了较好的防御，来看源码：<br><img src="/uploads/8/8-9.png" alt="Angoddess"><br>从源码中可以看到，修改密码是需要旧密码做验证的，这样的话，不知道密码的情况下，我们是没办法做到跨站请求伪造攻击的，除非辅助以其他的漏洞攻击，这里不做额外衍生了。<br>旧密码验证是一种防御方式，也可以添加验证码等其他方式进行二次验证，这样则能尽量防御CSRF攻击。</p>
+<h2 id="CSRF原理简单分析"><a href="#CSRF原理简单分析" class="headerlink" title="CSRF原理简单分析"></a>CSRF原理简单分析</h2><p>　　CSRF，跨站请求伪造，其主要是通过盗用被攻击者的身份来进行非法操作，如修改你的密码，窃取个人敏感信息，银行转账等。<br>　　具体原理为，当我们登录我们某一网站的账号，如银行网站，登录后我们与浏览器之间便存在了一个可信任的会话连接，而该网站存在CSRF漏洞，那么，此时，如果我们又访问了一个加入了恶意代码的另一个网站，该恶意代码是执行该银行网站的某些敏感操作的，如转账，修改密码等。正常情况下，我们直接访问改网站，没有任何问题，因为这些恶意代码的操作需要用户权限支撑，否则执行失败，然而当我们登录了银行，而会话没有结束时，访问了该网站，那么则执行了这些恶意代码操作，而且是静默的，一般用户并不知情，也就是说，在不知不觉中，用户密码被修改，银行存款被转走等。<br>　　接下来，我们来看看DVWA中对于CSRF的实操。</p>
+<h2 id="DVWA平台low级别CSRF分析"><a href="#DVWA平台low级别CSRF分析" class="headerlink" title="DVWA平台low级别CSRF分析"></a>DVWA平台low级别CSRF分析</h2><p>　　low级别的CSRF模块中，密码修改并没有验证旧密码，直接就可以输入新密码即可。<br><img src="/uploads/8/8-1.png" alt="Angoddess"><br>　　首先我们先来查看dvwa中的admin的密码hash，以方便我们待会做对比。<br><img src="/uploads/8/8-2.png" alt="Angoddess"><br>　　然后我们随意输入一个密码，确认密码框里随便输入，不要跟新密码一样，我们现在要获取密码修改的连接或数据包，先不改动密码。<br><img src="/uploads/8/8-3.png" alt="Angoddess"><br>　　从图中可以看到，通过链接请求密码修改的，我们可以尝试在另一个浏览器里面直接访问该链接，发现其跳转到登录去了，因为没有可信任会话，接下来我们构造一个图片网站，嵌入该恶意链接。<br><img src="/uploads/8/8-4.png" alt="Angoddess"><br>　　访问该网站，就是一个正常的图片<br><img src="/uploads/8/8-5.png" alt="Angoddess"><br>　　接下来我们用已登录了DVWA的浏览器来访问该网站，依然正常，没有任何异常显示。<br><img src="/uploads/8/8-5.png" alt="Angoddess"><br>　　然而此时，密码已经修改成功，我们到数据库查看密码hash<br><img src="/uploads/8/8-6.png" alt="Angoddess"><br>　　可以看到密码hash已经变了，密码变成123456，CSRF攻击成功！<br>　　我们来分析下DVWA中CSRF的low级别源码<br><img src="/uploads/8/8-7.png" alt="Angoddess"><br>　　可以发现，只是做了新密码的两次输入验证，而并没有对来源进行验证，这也就导致了CSRF的跨站请求伪造。</p>
+<h2 id="DVWA平台medium级别CSRF分析"><a href="#DVWA平台medium级别CSRF分析" class="headerlink" title="DVWA平台medium级别CSRF分析"></a>DVWA平台medium级别CSRF分析</h2><p>　　medium级别的CSRF，我们先来看看源码<br><img src="/uploads/8/8-8.png" alt="Angoddess"><br>　　其先判断了请求是否来自于本地，而不是其他站点，那么像low级别那样构造恶意链接便行不通了，但是是否酱紫就安全了呢？<br>从源码中可以看到，其实通过referer来判断请求来源的，也就是客户端浏览器的referer值，然而我们可以通过设置篡改referer值来欺负服务器，我们的请求来源是本地的，从而达到CSRF跨站请求的目的。<br>　　可以在正常网站中，内嵌构造伪造referer值，如php当中，可以嵌入如下代码：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">  $ch = curl_init(); </span><br><span class="line">  curl_setopt($ch,CURLOPT_URL,<span class="string">"http://114.215.127.138/baji/DVWA-1.0.8/vulnerabilities/csrf/?password_new=12345&amp;password_conf=12345&amp;Change=Change#"</span>); </span><br><span class="line">  curl_setopt($ch, CURLOPT_REFERER, <span class="string">"127.0.0.1"</span>); </span><br><span class="line">  curl_exec($ch); </span><br><span class="line">  curl_close($ch);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>　　这里就不做具体演示了。<br>　　DVWA中这个级别的本身就存在一些问题（不知道是不是我的版本问题），所以不要纠结于为什么不成功，可以自己修改下原代码修复之后再测试。</p>
+<h2 id="DVWA平台high级别CSRF分析"><a href="#DVWA平台high级别CSRF分析" class="headerlink" title="DVWA平台high级别CSRF分析"></a>DVWA平台high级别CSRF分析</h2><p>　　最后看看high级别的，high级别对于CSRF就有了较好的防御，来看源码：<br><img src="/uploads/8/8-9.png" alt="Angoddess"><br>　　从源码中可以看到，修改密码是需要旧密码做验证的，这样的话，不知道密码的情况下，我们是没办法做到跨站请求伪造攻击的，除非辅助以其他的漏洞攻击，这里不做额外衍生了。<br>　　旧密码验证是一种防御方式，也可以添加验证码等其他方式进行二次验证，这样则能尽量防御CSRF攻击。</p>
 
       
     </div>
@@ -378,6 +379,10 @@
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/渗透测试平台DVWA之文件包含/" rel="prev" title="9.渗透测试平台DVWA之文件包含">
+                9.渗透测试平台DVWA之文件包含 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -449,7 +454,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

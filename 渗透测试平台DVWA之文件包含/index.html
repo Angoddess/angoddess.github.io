@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="渗透测试,网络安全," />
 
 
 
@@ -82,15 +82,29 @@
 
 
 
-<meta name="description" content="Angoddess技术博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Angoddess Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="本文通过利用DVWA平台，简单分析了PHP站点中，远程文件包含漏洞和本地文件包含漏洞的原理和利用和防范！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="9.渗透测试平台DVWA之文件包含">
+<meta property="og:url" content="http://yoursite.com/渗透测试平台DVWA之文件包含/index.html">
 <meta property="og:site_name" content="Angoddess Blog">
-<meta property="og:description" content="Angoddess技术博客">
+<meta property="og:description" content="本文通过利用DVWA平台，简单分析了PHP站点中，远程文件包含漏洞和本地文件包含漏洞的原理和利用和防范！">
+<meta property="og:image" content="http://yoursite.com/uploads/9/9-1.png">
+<meta property="og:image" content="http://yoursite.com/uploads/9/9-2.png">
+<meta property="og:image" content="http://yoursite.com/uploads/9/9-3.png">
+<meta property="og:image" content="http://yoursite.com/uploads/9/9-4.png">
+<meta property="og:image" content="http://yoursite.com/uploads/9/9-5.png">
+<meta property="og:image" content="http://yoursite.com/uploads/9/9-6.png">
+<meta property="og:image" content="http://yoursite.com/uploads/9/9-7.png">
+<meta property="og:image" content="http://yoursite.com/uploads/9/9-8.png">
+<meta property="og:image" content="http://yoursite.com/uploads/9/9-9.png">
+<meta property="og:image" content="http://yoursite.com/uploads/9/9-10.png">
+<meta property="og:image" content="http://yoursite.com/uploads/9/9-11.png">
+<meta property="og:image" content="http://yoursite.com/uploads/9/9-12.png">
+<meta property="og:updated_time" content="2016-06-10T11:46:48.871Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Angoddess Blog">
-<meta name="twitter:description" content="Angoddess技术博客">
+<meta name="twitter:title" content="9.渗透测试平台DVWA之文件包含">
+<meta name="twitter:description" content="本文通过利用DVWA平台，简单分析了PHP站点中，远程文件包含漏洞和本地文件包含漏洞的原理和利用和防范！">
+<meta name="twitter:image" content="http://yoursite.com/uploads/9/9-1.png">
 
 
 
@@ -108,7 +122,7 @@
   };
 </script>
 
-  <title> Angoddess Blog </title>
+  <title> 9.渗透测试平台DVWA之文件包含 | Angoddess Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -129,9 +143,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -228,9 +240,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -250,10 +262,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/渗透测试平台DVWA之文件包含/" itemprop="url">
-                  9.渗透测试平台DVWA之文件包含
-                </a>
+                9.渗透测试平台DVWA之文件包含
               
             
           </h1>
@@ -328,570 +337,65 @@
       
 
       
-        
-          <p>　　本文通过利用DVWA平台，简单分析了PHP站点中，远程文件包含漏洞和本地文件包含漏洞的原理和利用和防范！
-          <div class="post-more-link text-center">
-            <a class="btn" href="/渗透测试平台DVWA之文件包含/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
+        <p>　　本文通过利用DVWA平台，简单分析了PHP站点中，远程文件包含漏洞和本地文件包含漏洞的原理和利用和防范！<a id="more"></a></p>
+<h2 id="文件包含漏洞原理简析"><a href="#文件包含漏洞原理简析" class="headerlink" title="文件包含漏洞原理简析"></a>文件包含漏洞原理简析</h2><p>　　文件包含漏洞，是PHP独有的漏洞，是PHP通过函数引入文件时，没有对引入文件名做合法检验，即没有过滤引入文件时，传入参数是否合法或包含敏感字符，文件等，导致可以读取系统敏感文件信息，如系统密码文件等，甚至直接代码注入，如直接注入一句话木马等，一般风险较高。<br>　　文件包含分为本地文件包含和远程文件包含，本地文件包含指被包含文件存在本地服务器当中，直接使用本地物理路径即可，远程文件包含指被包含文件在另外的服务器上，需要利用url地址来包含，远程文件包含需要开启php配置文件中的allow_url_include，否则无法使用url包含文件，默认php不开启。</p>
+<h2 id="DVWA平台中Low级别案例"><a href="#DVWA平台中Low级别案例" class="headerlink" title="DVWA平台中Low级别案例"></a>DVWA平台中Low级别案例</h2><p>　　Low级别的文件包含漏洞非常简单，我们来看看界面<br><img src="/uploads/9/9-1.png" alt="Angoddess"><br>　　从链接当中可以看到，参数page传入一个值，而这个值是一个文件，那么我们就大概可以猜到，这里引用了外部文件，可能存在风险。<br>　　我们来测试一下，假设我们知道服务器是linux系统（实际渗透中可以通过其他技术获取服务器信息），那么我们改变page参数传入的值。<br><img src="/uploads/9/9-2.png" alt="Angoddess"><br>　　可以看我，我们改变了传入的值为/etc/passwd，这是linux系统的用户信息文件，直接暴露出来了，这就证明存在文件包含漏洞，我们可以通过该漏洞，任意读取系统文件，查看敏感信息。<br>上面说的是本地文件包含，在Low中还可以做到远程文件包含，不过前提是开启了php中的allow_url_fopen和allow_url_include，在php.ini文件中配置。<br><img src="/uploads/9/9-3.png" alt="Angoddess"><br>　　我们来看看文件包含效果:<br><img src="/uploads/9/9-4.png" alt="Angoddess"><br>　　下面是在本地服务器上直接访问phpinfo得到的信息<br><img src="/uploads/9/9-5.png" alt="Angoddess"><br>　　可以看到，我们获取到的的确是本地服务器的信息。甚至我们可以直接包含木马文件来控制服务器，这里不做演示了。<br>　　最后来看看源码：<br><img src="/uploads/9/9-6.png" alt="Angoddess"><br>　　源码很简单，直接用GET方法接收传递进来的值，没有做任何处理，这也就导致了攻击者可以随意更改传入参数值来达到文件包含攻击的目的。我们应假设用户的输入并非都是安全的，然后去过滤不安全的值来达到我们的正常访问。</p>
+<h2 id="DVWA平台中Medium级别案例"><a href="#DVWA平台中Medium级别案例" class="headerlink" title="DVWA平台中Medium级别案例"></a>DVWA平台中Medium级别案例</h2><p>　　Medium级别中，对于文件包含漏洞就做了一定的防范手段，我们来看看源码。<br><img src="/uploads/9/9-7.png" alt="Angoddess"><br>　　从源码中可以看到，其过滤了<a href="http://和https://，将其替换为空字符，这也就是说，在一定程度上防范了远程文件包含，然而其并没有对本地文件包含做过滤，也就是说，其仍然存在本地文件包含漏洞。" target="_blank" rel="external">http://和https://，将其替换为空字符，这也就是说，在一定程度上防范了远程文件包含，然而其并没有对本地文件包含做过滤，也就是说，其仍然存在本地文件包含漏洞。</a><br>　　首先先来试试远程文件包含<br><img src="/uploads/9/9-8.png" alt="Angoddess"><br>　　没有任何信息，包含失败了，再看看本地的，成功包含<br><img src="/uploads/9/9-9.png" alt="Angoddess"></p>
+<h2 id="DVWA平台中High级别案例"><a href="#DVWA平台中High级别案例" class="headerlink" title="DVWA平台中High级别案例"></a>DVWA平台中High级别案例</h2><p>　　现在我们来看看High级别的源码<br><img src="/uploads/9/9-10.png" alt="Angoddess"><br>　　很明显，这个级别利用了白名单的方式，只允许传入文件include.php，否则一律输出错误！<br>　　这是一种比较好的防御方法，无论远程和本地文件包含，利用白名单的形式，都较好的防御了文件包含漏洞攻击。<br>　　本地文件包含尝试结果<br><img src="/uploads/9/9-11.png" alt="Angoddess"><br>　　远程文件包含尝试结果<br><img src="/uploads/9/9-12.png" alt="Angoddess"></p>
+
       
     </div>
     
     <div>
       
+        
+      
     </div>
 
     <div>
+      
+        
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/渗透测试平台DVWA之CSRF/" itemprop="url">
-                  8.渗透测试平台DVWA之CSRF
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-09T19:25:00+08:00" content="2016-06-09">
-              2016-06-09
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/others/" itemprop="url" rel="index">
-                    <span itemprop="name">others</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
+            <a href="/tags/渗透测试/" rel="tag">#渗透测试</a>
           
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/渗透测试平台DVWA之CSRF/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="渗透测试平台DVWA之CSRF/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/渗透测试平台DVWA之CSRF/" class="leancloud_visitors" data-flag-title="8.渗透测试平台DVWA之CSRF">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
+            <a href="/tags/网络安全/" rel="tag">#网络安全</a>
           
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <p>　　本文简单介绍了CSRF的形成原理，以及以DVWA平台为例，做了简单的利用分析！
-          <div class="post-more-link text-center">
-            <a class="btn" href="/渗透测试平台DVWA之CSRF/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/渗透测试平台DVWA之CSRF/" rel="next" title="8.渗透测试平台DVWA之CSRF">
+                <i class="fa fa-chevron-left"></i> 8.渗透测试平台DVWA之CSRF
+              </a>
+            
           </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
 
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
+          <div class="post-nav-prev post-nav-item">
             
-            
-              
-                
-                <a class="post-title-link" href="/渗透测试平台DVWA之命令执行/" itemprop="url">
-                  7.渗透测试平台DVWA之命令执行
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-20T18:09:16+08:00" content="2016-04-20">
-              2016-04-20
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/others/" itemprop="url" rel="index">
-                    <span itemprop="name">others</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/渗透测试平台DVWA之命令执行/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="渗透测试平台DVWA之命令执行/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/渗透测试平台DVWA之命令执行/" class="leancloud_visitors" data-flag-title="7.渗透测试平台DVWA之命令执行">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
+          </div>
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <p>　　本文通过DVWA的Command Execution模块进行命令执行漏洞的一般演示，DVWA中共存在三个级别的命令执行漏洞。
-          <div class="post-more-link text-center">
-            <a class="btn" href="/渗透测试平台DVWA之命令执行/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-      
 
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/渗透测试平台DVWA之暴力破解/" itemprop="url">
-                  6.渗透测试平台DVWA之暴力破解
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-20T17:55:43+08:00" content="2016-04-20">
-              2016-04-20
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/others/" itemprop="url" rel="index">
-                    <span itemprop="name">others</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/渗透测试平台DVWA之暴力破解/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="渗透测试平台DVWA之暴力破解/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/渗透测试平台DVWA之暴力破解/" class="leancloud_visitors" data-flag-title="6.渗透测试平台DVWA之暴力破解">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>　　本文通过DVWA的Brute Force模块进行暴力破解漏洞的一般演示，其中还使用了burpsuite工具。
-          <div class="post-more-link text-center">
-            <a class="btn" href="/渗透测试平台DVWA之暴力破解/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
+    <div class="post-spread">
       
     </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/渗透测试平台DVWA之简单介绍/" itemprop="url">
-                  5.渗透测试平台DVWA之简单介绍
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-18T11:39:28+08:00" content="2016-04-18">
-              2016-04-18
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/others/" itemprop="url" rel="index">
-                    <span itemprop="name">others</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/渗透测试平台DVWA之简单介绍/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="渗透测试平台DVWA之简单介绍/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/渗透测试平台DVWA之简单介绍/" class="leancloud_visitors" data-flag-title="5.渗透测试平台DVWA之简单介绍">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>　　本文简单介绍了渗透测试平台DVWA的下载安装，以及平台上的基本功能。
-          <div class="post-more-link text-center">
-            <a class="btn" href="/渗透测试平台DVWA之简单介绍/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-  </section>
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
+  </div>
 
 
           </div>
@@ -899,6 +403,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="渗透测试平台DVWA之文件包含/"
+           data-title="9.渗透测试平台DVWA之文件包含" data-url="http://yoursite.com/渗透测试平台DVWA之文件包含/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -918,8 +430,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.jpg"
@@ -987,6 +508,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件包含漏洞原理简析"><span class="nav-number">1.</span> <span class="nav-text">文件包含漏洞原理简析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DVWA平台中Low级别案例"><span class="nav-number">2.</span> <span class="nav-text">DVWA平台中Low级别案例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DVWA平台中Medium级别案例"><span class="nav-number">3.</span> <span class="nav-text">DVWA平台中Medium级别案例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DVWA平台中High级别案例"><span class="nav-number">4.</span> <span class="nav-text">DVWA平台中High级别案例</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -1090,6 +622,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
