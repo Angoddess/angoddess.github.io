@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-08-04T04:24:53.268Z</updated>
+  <updated>2016-08-04T07:42:08.543Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>11.渗透测试平台DVWA之SQL盲注</title>
+    <link href="http://yoursite.com/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0DVWA%E4%B9%8BSQL%E7%9B%B2%E6%B3%A8/"/>
+    <id>http://yoursite.com/渗透测试平台DVWA之SQL盲注/</id>
+    <published>2016-08-04T07:31:57.000Z</published>
+    <updated>2016-08-04T07:42:08.543Z</updated>
+    
+    <content type="html">&lt;p&gt;　　本文通过DVWA平台的SQL Injection（Blind）模块简单介绍分析了SQL盲注的原理和运用。 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;SQL注入原理解析&quot;&gt;&lt;a href=&quot;#SQL注入原理解析&quot; class=&quot;headerlink&quot; title=&quot;SQL注入原理解析&quot;&gt;&lt;/a&gt;SQL注入原理解析&lt;/h2&gt;&lt;p&gt;　　SQL盲注跟DVWA的普通SQL注入在原理上，其实是一样的，不同的是，使用单引号已经不能作为测试注入是否存在的依据了，因为不会有sql语句报错提示，一切都是静默的，输入单引号，没有任何输出和反馈，显然是对错误信息做了处理了。&lt;br&gt;&lt;img src=&quot;/uploads/11/11-1.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;源码分析与运用&quot;&gt;&lt;a href=&quot;#源码分析与运用&quot; class=&quot;headerlink&quot; title=&quot;源码分析与运用&quot;&gt;&lt;/a&gt;源码分析与运用&lt;/h2&gt;&lt;p&gt;　　我们直接看源码会发现，无论Low，Medium还是High级别，源码跟DVWA的普通注入模块其实是基本一样的，唯一不同的只是在mysql_numrows函数前面加了@符号，做了预处理。&lt;br&gt;　　所以其实我们依然可以使用在DVWA的普通注入模块中的方法获取数据库数据，每个级别跟DVWA的普通注入模块获取数据方法是一样的，只是因为没有报错了，我们就要根据其它反馈信息来判断，当前的注入语句是否执行成功或有效了。&lt;br&gt;　　就如我们在进行order by判断字段数时，原先普通注入order by 3时会爆出数据库字段错误，而现在却不会，页面单纯显示空白，就像查询内容空白一样。&lt;br&gt;&lt;img src=&quot;/uploads/11/11-2.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;br&gt;　　而order by 2就有了用户信息显示&lt;br&gt;&lt;img src=&quot;/uploads/11/11-3.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;br&gt;　　这一样能够判断字段数为2。此时我们判断不再依据错误提示，而是页面返回内容来判断，其实跟报错判断大同小异。&lt;br&gt;　　盲注中比较不同和难分辨的就是基于时间的注入了，页面没有任何异常和不同，需要通过页面反馈的时间差异来判断SQL语句的执行情况。&lt;br&gt;　　做一个简单的测试，我们构造如下图这样的语句&lt;br&gt;&lt;img src=&quot;/uploads/11/11-4.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;br&gt;　　可以看到返回数据包用了10秒左右，跟我们设定的值是基本一致的，再试试1秒看看&lt;br&gt;&lt;img src=&quot;/uploads/11/11-5.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;br&gt;　　从而我们可以判断，该处是可以基于时间进行盲注的。在不同数据库中，我们还会利用不同的跟时间有关的函数来判断和猜测获取数据。不过基于时间的盲注有个弊端就是，耗时比较长，而且需要稳定的网络环境，如何网络不稳定，很容易影响判断，导致失误。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;　　本文通过DVWA平台的SQL Injection（Blind）模块简单介绍分析了SQL盲注的原理和运用。
+    
+    </summary>
+    
+      <category term="others" scheme="http://yoursite.com/categories/others/"/>
+    
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>10.渗透测试平台DVWA之SQL注入</title>

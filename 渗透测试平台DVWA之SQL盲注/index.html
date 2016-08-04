@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="渗透测试,网络安全," />
 
 
 
@@ -82,15 +82,22 @@
 
 
 
-<meta name="description" content="Angoddess技术博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Angoddess Blog">
-<meta property="og:url" content="http://yoursite.com/categories/others/page/2/index.html">
+<meta name="description" content="本文通过DVWA平台的SQL Injection（Blind）模块简单介绍分析了SQL盲注的原理和运用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="11.渗透测试平台DVWA之SQL盲注">
+<meta property="og:url" content="http://yoursite.com/渗透测试平台DVWA之SQL盲注/index.html">
 <meta property="og:site_name" content="Angoddess Blog">
-<meta property="og:description" content="Angoddess技术博客">
+<meta property="og:description" content="本文通过DVWA平台的SQL Injection（Blind）模块简单介绍分析了SQL盲注的原理和运用。">
+<meta property="og:image" content="http://yoursite.com/uploads/11/11-1.png">
+<meta property="og:image" content="http://yoursite.com/uploads/11/11-2.png">
+<meta property="og:image" content="http://yoursite.com/uploads/11/11-3.png">
+<meta property="og:image" content="http://yoursite.com/uploads/11/11-4.png">
+<meta property="og:image" content="http://yoursite.com/uploads/11/11-5.png">
+<meta property="og:updated_time" content="2016-08-04T07:42:08.543Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Angoddess Blog">
-<meta name="twitter:description" content="Angoddess技术博客">
+<meta name="twitter:title" content="11.渗透测试平台DVWA之SQL盲注">
+<meta name="twitter:description" content="本文通过DVWA平台的SQL Injection（Blind）模块简单介绍分析了SQL盲注的原理和运用。">
+<meta name="twitter:image" content="http://yoursite.com/uploads/11/11-1.png">
 
 
 
@@ -108,7 +115,7 @@
   };
 </script>
 
-  <title> 分类: others | Angoddess Blog </title>
+  <title> 11.渗透测试平台DVWA之SQL盲注 | Angoddess Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -129,7 +136,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -227,135 +234,159 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        others
-        <small>分类</small>
-      </h2>
-    </div>
-
+  <div id="posts" class="posts-expand">
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/渗透测试平台DVWA之暴力破解/" itemprop="url">
-              
-                <span itemprop="name">6.渗透测试平台DVWA之暴力破解</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-04-20T17:55:43+08:00"
-              content="2016-04-20" >
-          04-20
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/渗透测试平台DVWA之简单介绍/" itemprop="url">
-              
-                <span itemprop="name">5.渗透测试平台DVWA之简单介绍</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-04-18T11:39:28+08:00"
-              content="2016-04-18" >
-          04-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/Hexo配置与使用/" itemprop="url">
-              
-                <span itemprop="name">2.Hexo配置与使用</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-03-07T14:18:59+08:00"
-              content="2016-03-07" >
-          03-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/Build-Your-Blog-By-Github/" itemprop="url">
-              
-                <span itemprop="name">1.Build Your Blog By Github</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-03-01T10:52:39+08:00"
-              content="2016-03-01" >
-          03-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-  </section>
 
   
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/categories/others/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/categories/others/">1</a><span class="page-number current">2</span>
-  </nav>
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                11.渗透测试平台DVWA之SQL盲注
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-04T15:31:57+08:00" content="2016-08-04">
+              2016-08-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/others/" itemprop="url" rel="index">
+                    <span itemprop="name">others</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/渗透测试平台DVWA之SQL盲注/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="渗透测试平台DVWA之SQL盲注/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/渗透测试平台DVWA之SQL盲注/" class="leancloud_visitors" data-flag-title="11.渗透测试平台DVWA之SQL盲注">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
 
 
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>　　本文通过DVWA平台的SQL Injection（Blind）模块简单介绍分析了SQL盲注的原理和运用。 <a id="more"></a></p>
+<h2 id="SQL注入原理解析"><a href="#SQL注入原理解析" class="headerlink" title="SQL注入原理解析"></a>SQL注入原理解析</h2><p>　　SQL盲注跟DVWA的普通SQL注入在原理上，其实是一样的，不同的是，使用单引号已经不能作为测试注入是否存在的依据了，因为不会有sql语句报错提示，一切都是静默的，输入单引号，没有任何输出和反馈，显然是对错误信息做了处理了。<br><img src="/uploads/11/11-1.png" alt="Angoddess"></p>
+<h2 id="源码分析与运用"><a href="#源码分析与运用" class="headerlink" title="源码分析与运用"></a>源码分析与运用</h2><p>　　我们直接看源码会发现，无论Low，Medium还是High级别，源码跟DVWA的普通注入模块其实是基本一样的，唯一不同的只是在mysql_numrows函数前面加了@符号，做了预处理。<br>　　所以其实我们依然可以使用在DVWA的普通注入模块中的方法获取数据库数据，每个级别跟DVWA的普通注入模块获取数据方法是一样的，只是因为没有报错了，我们就要根据其它反馈信息来判断，当前的注入语句是否执行成功或有效了。<br>　　就如我们在进行order by判断字段数时，原先普通注入order by 3时会爆出数据库字段错误，而现在却不会，页面单纯显示空白，就像查询内容空白一样。<br><img src="/uploads/11/11-2.png" alt="Angoddess"><br>　　而order by 2就有了用户信息显示<br><img src="/uploads/11/11-3.png" alt="Angoddess"><br>　　这一样能够判断字段数为2。此时我们判断不再依据错误提示，而是页面返回内容来判断，其实跟报错判断大同小异。<br>　　盲注中比较不同和难分辨的就是基于时间的注入了，页面没有任何异常和不同，需要通过页面反馈的时间差异来判断SQL语句的执行情况。<br>　　做一个简单的测试，我们构造如下图这样的语句<br><img src="/uploads/11/11-4.png" alt="Angoddess"><br>　　可以看到返回数据包用了10秒左右，跟我们设定的值是基本一致的，再试试1秒看看<br><img src="/uploads/11/11-5.png" alt="Angoddess"><br>　　从而我们可以判断，该处是可以基于时间进行盲注的。在不同数据库中，我们还会利用不同的跟时间有关的函数来判断和猜测获取数据。不过基于时间的盲注有个弊端就是，耗时比较长，而且需要稳定的网络环境，如何网络不稳定，很容易影响判断，导致失误。</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/渗透测试/" rel="tag">#渗透测试</a>
+          
+            <a href="/tags/网络安全/" rel="tag">#网络安全</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/渗透测试平台DVWA之SQL注入/" rel="next" title="10.渗透测试平台DVWA之SQL注入">
+                <i class="fa fa-chevron-left"></i> 10.渗透测试平台DVWA之SQL注入
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -363,6 +394,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="渗透测试平台DVWA之SQL盲注/"
+           data-title="11.渗透测试平台DVWA之SQL盲注" data-url="http://yoursite.com/渗透测试平台DVWA之SQL盲注/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -382,8 +421,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.jpg"
@@ -451,6 +499,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL注入原理解析"><span class="nav-number">1.</span> <span class="nav-text">SQL注入原理解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源码分析与运用"><span class="nav-number">2.</span> <span class="nav-text">源码分析与运用</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -554,6 +613,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
