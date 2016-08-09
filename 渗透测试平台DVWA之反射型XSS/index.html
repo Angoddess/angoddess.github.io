@@ -82,24 +82,23 @@
 
 
 
-<meta name="description" content="考虑了好久，还是整理写了这篇文章哈！谨以此文告诫在校生加强自我安全意识，同时提醒校方加强学生信息安全的管理力度，以及对校园网络安全的重视。">
+<meta name="description" content="本文通过DVWA平台的XSS reflected模块进行反射型XSS漏洞的简单分析和原理讲解。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="3.一次诈骗电话事件引发的对母校学生信息安全的深思">
-<meta property="og:url" content="http://yoursite.com/一次诈骗电话事件引发的对母校学生信息安全的深思/index.html">
+<meta property="og:title" content="12.渗透测试平台DVWA之反射型XSS">
+<meta property="og:url" content="http://yoursite.com/渗透测试平台DVWA之反射型XSS/index.html">
 <meta property="og:site_name" content="Angoddess Blog">
-<meta property="og:description" content="考虑了好久，还是整理写了这篇文章哈！谨以此文告诫在校生加强自我安全意识，同时提醒校方加强学生信息安全的管理力度，以及对校园网络安全的重视。">
-<meta property="og:image" content="http://yoursite.com/uploads/3/3-1.png">
-<meta property="og:image" content="http://yoursite.com/uploads/3/3-2.png">
-<meta property="og:image" content="http://yoursite.com/uploads/3/3-3.png">
-<meta property="og:image" content="http://yoursite.com/uploads/3/3-4.png">
-<meta property="og:image" content="http://yoursite.com/uploads/3/3-5.png">
-<meta property="og:image" content="http://yoursite.com/uploads/3/3-6.png">
-<meta property="og:image" content="http://yoursite.com/uploads/3/3-7.png">
-<meta property="og:updated_time" content="2016-04-20T09:53:40.034Z">
+<meta property="og:description" content="本文通过DVWA平台的XSS reflected模块进行反射型XSS漏洞的简单分析和原理讲解。">
+<meta property="og:image" content="http://yoursite.com/uploads/12/12-1.png">
+<meta property="og:image" content="http://yoursite.com/uploads/12/12-2.png">
+<meta property="og:image" content="http://yoursite.com/uploads/12/12-3.png">
+<meta property="og:image" content="http://yoursite.com/uploads/12/12-4.png">
+<meta property="og:image" content="http://yoursite.com/uploads/12/12-5.png">
+<meta property="og:image" content="http://yoursite.com/uploads/12/12-6.png">
+<meta property="og:updated_time" content="2016-08-09T09:39:51.562Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="3.一次诈骗电话事件引发的对母校学生信息安全的深思">
-<meta name="twitter:description" content="考虑了好久，还是整理写了这篇文章哈！谨以此文告诫在校生加强自我安全意识，同时提醒校方加强学生信息安全的管理力度，以及对校园网络安全的重视。">
-<meta name="twitter:image" content="http://yoursite.com/uploads/3/3-1.png">
+<meta name="twitter:title" content="12.渗透测试平台DVWA之反射型XSS">
+<meta name="twitter:description" content="本文通过DVWA平台的XSS reflected模块进行反射型XSS漏洞的简单分析和原理讲解。">
+<meta name="twitter:image" content="http://yoursite.com/uploads/12/12-1.png">
 
 
 
@@ -117,7 +116,7 @@
   };
 </script>
 
-  <title> 3.一次诈骗电话事件引发的对母校学生信息安全的深思 | Angoddess Blog </title>
+  <title> 12.渗透测试平台DVWA之反射型XSS | Angoddess Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -257,7 +256,7 @@
             
             
               
-                3.一次诈骗电话事件引发的对母校学生信息安全的深思
+                12.渗透测试平台DVWA之反射型XSS
               
             
           </h1>
@@ -269,8 +268,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-15T17:36:00+08:00" content="2016-03-15">
-              2016-03-15
+            <time itemprop="dateCreated" datetime="2016-08-09T17:25:30+08:00" content="2016-08-09">
+              2016-08-09
             </time>
           </span>
 
@@ -283,8 +282,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/渗透事件/" itemprop="url" rel="index">
-                    <span itemprop="name">渗透事件</span>
+                  <a href="/categories/others/" itemprop="url" rel="index">
+                    <span itemprop="name">others</span>
                   </a>
                 </span>
 
@@ -299,8 +298,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/一次诈骗电话事件引发的对母校学生信息安全的深思/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="一次诈骗电话事件引发的对母校学生信息安全的深思/" itemprop="commentsCount"></span>
+                <a href="/渗透测试平台DVWA之反射型XSS/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="渗透测试平台DVWA之反射型XSS/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -310,7 +309,7 @@
 
           
           
-             <span id="/一次诈骗电话事件引发的对母校学生信息安全的深思/" class="leancloud_visitors" data-flag-title="3.一次诈骗电话事件引发的对母校学生信息安全的深思">
+             <span id="/渗透测试平台DVWA之反射型XSS/" class="leancloud_visitors" data-flag-title="12.渗透测试平台DVWA之反射型XSS">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -332,7 +331,14 @@
       
 
       
-        <p>　　考虑了好久，还是整理写了这篇文章哈！谨以此文告诫在校生加强自我安全意识，同时提醒校方加强学生信息安全的管理力度，以及对校园网络安全的重视。<br><a id="more"></a><br>　　年前的时候，临近放假，据说学校不少师生接到诈骗电话，而且大多是年级较低的同学，算是比较有针对性的诈骗了。<br>　　由于实习工作的性质，如今对信息安全都比较敏感，当时就想了，貌似每年都有这情况，而且不止母校的样子。<br>　　那么，学校网络被人捅了？师生信息泄露？于是就想着如何模拟陌生人对母校进行渗透，窃取师生信息。<br>　　下面开始模拟渗透过程：<br>　　首先，百度母校官网，直接访问<br><img src="/uploads/3/3-1.png" alt="Angoddess"><br>　　嗯，简单查看各个功能，子站，右上角可以发现有个学生系统入口，这个一看就是有学生数据的系统，直接访问看看能外网访问不<br><img src="/uploads/3/3-2.png" alt="Angoddess"><br>　　啧啧啧，看到的第一眼就是，没有验证码，可以考虑爆破，不过不知道数据传输有没有加密，密码错误次数什么的有没有限制。<br>　　经过测试，啧啧啧，数据明文，错误次数无限制，同IP高并发访问也没有限制，可以直接暴力破解个天昏地暗啊！<br>　　这里直接测试弱口令！不过在此之前，我们要搞到学号组成<br>　　什么地方能够提供这些基础信息？古代客栈是信息集中地，可以收集各种信息，那么在现在的网络社会呢？当然是各种社交网站，论坛等等，当然也可以直接通过Google关键字搜索技术进行搜集，这里我通过BBS搜集。<br>　　现在基本高校都有自己的BBS，百度一搜学校名+BBS，母校的BBS就出来了，我们直接进入进行吧内搜索，关键字学号。（也可以直接查看那些新生贴进行搜集）<br><img src="/uploads/3/3-3.png" alt="Angoddess"><br>　　啧啧啧，学号什么的就有例子了，搜集多个学号进行比对，然后猜测一下组成。<br>　　直接假设后三位或四位是编号之类的，那么我们对后四位进行遍历，来测试弱口令看看效果如何。<br>　　回到myscse登录界面，启动我们的burpsuite神器进行抓包，暴力破解，测试弱口令123456<br>　　不一会，效果出来了，数据包长度325的就是正确的<br><img src="/uploads/3/3-4.png" alt="Angoddess"><br>　　现在利用得到的任一弱口令账号登录进去看看，嗯，有个信息管理系统，那就是还要进去咯，毕竟我们的目标是师生信息！<br><img src="/uploads/3/3-5.png" alt="Angoddess"><br>　　同样需要学号密码登录，一般的第一反应都是会测试刚刚的账号密码是否可行，结果可想而知。<br>　　然后就可以查看各种个人信息了，啧啧啧！<br><img src="/uploads/3/3-6.png" alt="Angoddess"><br>　　不过没有联系电话住址呀这些更敏感的信息呀，看来要试试有没接口暴露信息或者注入了。（这里暂不考虑拿shell）<br>　　经测试，全校课程信息处有个注入点！这个注入点也是让我有点醉，只是做了简单的前端验证用户输入，可惜然并卵。<br>　　直接burpsuite抓包绕过前端验证，数据包扔sqlmap里开跑，等一会就有直接结果了,直接查学生表<br><img src="/uploads/3/3-7.png" alt="Angoddess"><br>　　啧啧啧，40000+学生档案数据，其他表还包括大量其他敏感数据，包括成绩，考试信息，毕业生工作信息等等，想怎么查就怎么查，脱裤就有点慢，不过可以自己写个针对性强些脚本来脱裤，优化一下哈，这里仅检测，就不深入了。<br>　　总结：<br>　　1、高校学生网络安全意识过于薄弱<br>　　2、校方对于校园网络安全管理力度不足，不够重视<br>　　3、校方对于学生网络安全意识的教育不足<br>PS：校方老师，领导如有修复问题，可联系本人咨询！</p>
+        <p>　　本文通过DVWA平台的XSS reflected模块进行反射型XSS漏洞的简单分析和原理讲解。 <a id="more"></a></p>
+<h2 id="XSS介绍"><a href="#XSS介绍" class="headerlink" title="XSS介绍"></a>XSS介绍</h2><p>　　XSS是由于数据获取传输过程中，对于用户输入过滤不严而导致的，这点上跟sql注入有点类似。区别在于sql注入主要针对于数据库，而xss则以前端js为主。然而千万不要小看XSS，其危害小可直接忽略，大可直捣后台。<br>　　这次要介绍的是反射型XSS，此类XSS一般局限性较大，而且其危害还要视站点的流量和用途而定。<br>　　那么什么是反射型XSS，我们以DVWA平台上的例子来说说</p>
+<h2 id="（一）Low级别XSS"><a href="#（一）Low级别XSS" class="headerlink" title="（一）Low级别XSS"></a>（一）Low级别XSS</h2><p>　　在DVWA平台中，Low级别的XSS是几乎没做防护处理的，我们可以任意的利用XSS攻击平台。<br>　　正常的显示如下图，会把我们输入的字符串直接打印出来。<br><img src="/uploads/12/12-1.png" alt="Angoddess"><br>　　我们直接输入特殊构造的字符串<code>&lt;script&gt;alert(“XSS Test”)&lt;/script&gt;</code>，来触发XSS，如图：<br><img src="/uploads/12/12-2.png" alt="Angoddess"><br>　　可以看到成功触发了XSS，弹窗显示了预期结果。<br>　　仔细看，我们会发现，其实我们输入的内容就在url当中作为name参数的值，所以，只要我们把这个链接发给任何人，他点击了，就都会触发该效果，是不是感觉有点眼熟？没错，这就跟我们平时收到的很多垃圾邮件啊，短信啊什么的，里面的链接是有点类似的，并非所有都是XSS，也可能是伪站，但还是有相当一部分就是XSS链接来的。<br>　　如果我们把script里的内容换了，不是弹窗，而是获取当前cookie并发送到指定邮箱，那么，呵呵，别人就获取到你当前的登录状态了，可以直接访问你的个人信息等等，如果还是个管理员，那就大发了。<br>　　当然，XSS的局限性也是挺强，首先必须cookie没过期才可以利用，其次必须点击者刚好登录了对应站点，所以往往此类漏洞都是跟其他的漏洞配合利用的，还多结合社会工程学。<br>　　下面看看源码：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(!array_key_exists (<span class="string">"name"</span>, $_GET) || $_GET[<span class="string">'name'</span>] == <span class="keyword">NULL</span> || $_GET[<span class="string">'name'</span>] == <span class="string">''</span>)&#123;</span><br><span class="line"></span><br><span class="line"> $isempty = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        </span><br><span class="line"> <span class="keyword">echo</span> <span class="string">'&lt;pre&gt;'</span>;</span><br><span class="line"> <span class="keyword">echo</span> <span class="string">'Hello '</span> . $_GET[<span class="string">'name'</span>];</span><br><span class="line"> <span class="keyword">echo</span> <span class="string">'&lt;/pre&gt;'</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>　　果然没有对输入做任何处理的，直接代入使用。从代码中也可以看到，用户输入的内容一直在客户端范围内传输而已，并没有涉及服务器端的东西，更不用说数据库了，所以它也是非持久的，也可以说是即时性的。</p>
+<h2 id="（二）Medium级别XSS"><a href="#（二）Medium级别XSS" class="headerlink" title="（二）Medium级别XSS"></a>（二）Medium级别XSS</h2><p>　　接下来我们来看看Medium级别的XSS，这个级别的XSS做了些简单的过滤，再用之前的方法，已经不能触发XSS了，如图：<br><img src="/uploads/12/12-3.png" alt="Angoddess"><br>　　可以看到，直接输出了script标签里的内容，可见其应该是过滤了script标签，那么我么就该设法绕过过滤。<br>　　我们试试改变script标签的大小写，即用大写字母书写，如图：<br><img src="/uploads/12/12-4.png" alt="Angoddess"><br>　　绕过成功，触发了XSS。<br>　　以此我们可以猜测，其应该是过滤了script这个字符串，且区分了大小写只过滤了小写的情况。<br>　　看看源码：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(!array_key_exists (<span class="string">"name"</span>, $_GET) || $_GET[<span class="string">'name'</span>] == <span class="keyword">NULL</span> || $_GET[<span class="string">'name'</span>] == <span class="string">''</span>)&#123;</span><br><span class="line"></span><br><span class="line"> $isempty = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">echo</span> <span class="string">'&lt;pre&gt;'</span>;</span><br><span class="line"> <span class="keyword">echo</span> <span class="string">'Hello '</span> . str_replace(<span class="string">'&lt;script&gt;'</span>, <span class="string">''</span>, $_GET[<span class="string">'name'</span>]);</span><br><span class="line"> <span class="keyword">echo</span> <span class="string">'&lt;/pre&gt;'</span>; </span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>　　从源码中可以看到，其的确是过滤了script，将该标签替换为空了，所以我们初次尝试时输出了script标签里的内容，因为script标签被去除了，然而这种利用替换来过滤的方法有一个弊端，就是较难考虑周全，容易疏忽，此处就忽略了大写的情况，还有大小写混合的情况。所以可以通过修改字符串大小写来绕过。</p>
+<h2 id="（三）High级别XSS"><a href="#（三）High级别XSS" class="headerlink" title="（三）High级别XSS"></a>（三）High级别XSS</h2><p>　　High级别的XSS模块，对于XSS的防护就相对高级一些了，前面用到的方法在这里也都行不通了。<br><img src="/uploads/12/12-5.png" alt="Angoddess"><br><img src="/uploads/12/12-6.png" alt="Angoddess"><br>　　可以看到，他连script标签一起输出了，哪怕改变了大小写也没有用。<br>　　我们直接看看源码：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">if</span>(!array_key_exists (<span class="string">"name"</span>, $_GET) || $_GET[<span class="string">'name'</span>] == <span class="keyword">NULL</span> || $_GET[<span class="string">'name'</span>] == <span class="string">''</span>)&#123;</span><br><span class="line">    </span><br><span class="line"> $isempty = <span class="keyword">true</span>;</span><br><span class="line">        </span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    </span><br><span class="line"> <span class="keyword">echo</span> <span class="string">'&lt;pre&gt;'</span>;</span><br><span class="line"> <span class="keyword">echo</span> <span class="string">'Hello '</span> . htmlspecialchars($_GET[<span class="string">'name'</span>]);</span><br><span class="line"> <span class="keyword">echo</span> <span class="string">'&lt;/pre&gt;'</span>;</span><br><span class="line">        </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>　　这里使用了php的一个函数方法htmlspecialchars对输入的内容做了处理，这个函数的作用是把预定义的<code>&lt;</code>和<code>&gt;</code>这两个符号以html的形式打印出来，而其他内容不变，所以我们最后看到了全部内容的输出。<br>　　这个方法一般来说也相对安全了。</p>
 
       
     </div>
@@ -364,17 +370,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Hexo配置与使用/" rel="next" title="2.Hexo配置与使用">
-                <i class="fa fa-chevron-left"></i> 2.Hexo配置与使用
+              <a href="/渗透测试平台DVWA之SQL盲注/" rel="next" title="11.渗透测试平台DVWA之SQL盲注">
+                <i class="fa fa-chevron-left"></i> 11.渗透测试平台DVWA之SQL盲注
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/中国菜刀爆菊记之我的检测之旅/" rel="prev" title="4.中国菜刀爆菊记之我的检测之旅">
-                4.中国菜刀爆菊记之我的检测之旅 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -400,8 +402,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="一次诈骗电话事件引发的对母校学生信息安全的深思/"
-           data-title="3.一次诈骗电话事件引发的对母校学生信息安全的深思" data-url="http://yoursite.com/一次诈骗电话事件引发的对母校学生信息安全的深思/">
+      <div class="ds-thread" data-thread-key="渗透测试平台DVWA之反射型XSS/"
+           data-title="12.渗透测试平台DVWA之反射型XSS" data-url="http://yoursite.com/渗透测试平台DVWA之反射型XSS/">
       </div>
     
   </div>
@@ -510,7 +512,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#XSS介绍"><span class="nav-number">1.</span> <span class="nav-text">XSS介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（一）Low级别XSS"><span class="nav-number">2.</span> <span class="nav-text">（一）Low级别XSS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（二）Medium级别XSS"><span class="nav-number">3.</span> <span class="nav-text">（二）Medium级别XSS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（三）High级别XSS"><span class="nav-number">4.</span> <span class="nav-text">（三）High级别XSS</span></a></li></ol></div>
             
           </div>
         </section>
