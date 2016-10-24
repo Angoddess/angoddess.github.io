@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="网络安全,渗透测试," />
 
 
 
@@ -82,15 +82,31 @@
 
 
 
-<meta name="description" content="Angoddess技术博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Angoddess Blog">
-<meta property="og:url" content="http://yoursite.com/page/3/index.html">
+<meta name="description" content="本文简单介绍了利用sqlmap进行注入测试的常规流程，基于get和post的方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="13.利用sqlmap进行简单的注入">
+<meta property="og:url" content="http://yoursite.com/利用sqlmap进行简单的注入/index.html">
 <meta property="og:site_name" content="Angoddess Blog">
-<meta property="og:description" content="Angoddess技术博客">
+<meta property="og:description" content="本文简单介绍了利用sqlmap进行注入测试的常规流程，基于get和post的方法。">
+<meta property="og:image" content="http://yoursite.com/uploads/13/13-1.png">
+<meta property="og:image" content="http://yoursite.com/uploads/13/13-2.png">
+<meta property="og:image" content="http://yoursite.com/uploads/13/13-3.png">
+<meta property="og:image" content="http://yoursite.com/uploads/13/13-4.png">
+<meta property="og:image" content="http://yoursite.com/uploads/13/13-5.png">
+<meta property="og:image" content="http://yoursite.com/uploads/13/13-6.png">
+<meta property="og:image" content="http://yoursite.com/uploads/13/13-7.png">
+<meta property="og:image" content="http://yoursite.com/uploads/13/13-8.png">
+<meta property="og:image" content="http://yoursite.com/uploads/13/13-9.png">
+<meta property="og:image" content="http://yoursite.com/uploads/13/13-10.png">
+<meta property="og:image" content="http://yoursite.com/uploads/13/13-11.png">
+<meta property="og:image" content="http://yoursite.com/uploads/13/13-12.png">
+<meta property="og:image" content="http://yoursite.com/uploads/13/13-13.png">
+<meta property="og:image" content="http://yoursite.com/uploads/13/13-14.png">
+<meta property="og:updated_time" content="2016-10-24T07:21:12.334Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Angoddess Blog">
-<meta name="twitter:description" content="Angoddess技术博客">
+<meta name="twitter:title" content="13.利用sqlmap进行简单的注入">
+<meta name="twitter:description" content="本文简单介绍了利用sqlmap进行注入测试的常规流程，基于get和post的方法。">
+<meta name="twitter:image" content="http://yoursite.com/uploads/13/13-1.png">
 
 
 
@@ -108,7 +124,7 @@
   };
 </script>
 
-  <title> Angoddess Blog </title>
+  <title> 13.利用sqlmap进行简单的注入 | Angoddess Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -129,9 +145,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -228,9 +242,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -250,10 +264,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/一次诈骗电话事件引发的对母校学生信息安全的深思/" itemprop="url">
-                  3.一次诈骗电话事件引发的对母校学生信息安全的深思
-                </a>
+                13.利用sqlmap进行简单的注入
               
             
           </h1>
@@ -265,132 +276,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-15T17:36:00+08:00" content="2016-03-15">
-              2016-03-15
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/渗透事件/" itemprop="url" rel="index">
-                    <span itemprop="name">渗透事件</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-             <span id="/一次诈骗电话事件引发的对母校学生信息安全的深思/" class="leancloud_visitors" data-flag-title="3.一次诈骗电话事件引发的对母校学生信息安全的深思">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>　　考虑了好久，还是整理写了这篇文章哈！谨以此文告诫在校生加强自我安全意识，同时提醒校方加强学生信息安全的管理力度，以及对校园网络安全的重视。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/一次诈骗电话事件引发的对母校学生信息安全的深思/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/Hexo配置与使用/" itemprop="url">
-                  2.Hexo配置与使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-07T14:18:59+08:00" content="2016-03-07">
-              2016-03-07
+            <time itemprop="dateCreated" datetime="2016-10-24T10:43:03+08:00" content="2016-10-24">
+              2016-10-24
             </time>
           </span>
 
@@ -423,7 +310,7 @@
 
           
           
-             <span id="/Hexo配置与使用/" class="leancloud_visitors" data-flag-title="2.Hexo配置与使用">
+             <span id="/利用sqlmap进行简单的注入/" class="leancloud_visitors" data-flag-title="13.利用sqlmap进行简单的注入">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -445,170 +332,64 @@
       
 
       
-        
-          <p>　　本文主要介绍Hexo的一些基本站点配置，主题的选择和使用，以及文章的撰写发表！<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/Hexo配置与使用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
+        <p>　　本文简单介绍了利用sqlmap进行注入测试的常规流程，基于get和post的方法。 <a id="more"></a></p>
+<h2 id="Sqlmap简介"><a href="#Sqlmap简介" class="headerlink" title="Sqlmap简介"></a>Sqlmap简介</h2><p>　　Sqlmap是一款python开发的自动化注入工具，在sql注入工具中，一直颇负盛名，也是广大渗透测试爱好者们的喜爱工具之一。<br>Kali系统中自带该工具，其他渗透测试系统一般也会自带有该工具。Github下载地址：<a href="https://github.com/sqlmapproject/sqlmap" target="_blank" rel="external">https://github.com/sqlmapproject/sqlmap</a></p>
+<h2 id="基于Get的注入"><a href="#基于Get的注入" class="headerlink" title="基于Get的注入"></a>基于Get的注入</h2><p>　　下面根据注入点的位置不同，我们来看看get和post的注入点，sqlmap如何利用的。<br>　　利用Sqlmap进行get注入非常简单，使用-u参数，后面带url链接即可<br><img src="/uploads/13/13-1.png" alt="Angoddess"><br>　　如果链接中有多个get参数，可以加-p指定想测试的参数<br><img src="/uploads/13/13-2.png" alt="Angoddess"><br>　　如果存在注入点可进行注入，那么结果会出现类似下图的信息<br><img src="/uploads/13/13-3.png" alt="Angoddess"><br>　　从图中可以看到，注入点参数，注入类型和方法，目标数据库类型，操作系统类型，中间件版本等信息。<br>　　由于我们只是执行了注入点的探测，所以只有这些信息，确定存在注入后，可以使用–dbs获取所有数据库列表，或者—current-db获取当前数据库名<br><img src="/uploads/13/13-4.png" alt="Angoddess"><br><img src="/uploads/13/13-5.png" alt="Angoddess"><br><img src="/uploads/13/13-6.png" alt="Angoddess"><br><img src="/uploads/13/13-7.png" alt="Angoddess"><br>　　一般我们是先读取当前数据库信息，寻找管理员表，以进入站点管理后台，如图获取当前数据库表名，–tables参数是读取表名，-D指定数据库名，这里使用当前数据库名<br><img src="/uploads/13/13-8.png" alt="Angoddess"><br>　　从得到的表名中，我们分析猜测，哪个最可能是站点管理员表<br><img src="/uploads/13/13-9.png" alt="Angoddess"><br>　　然后利用—columns参数读取该表字段名，查看是否有与用户名密码相关的字段名，进一步确定该表是否存放了管理员登陆用户名密码，-T参数后面跟的是要读取字段名信息的表<br><img src="/uploads/13/13-10.png" alt="Angoddess"><br>　　从字段名中可以看出，这极大可能就是管理员表<br><img src="/uploads/13/13-11.png" alt="Angoddess"><br>　　最后我们来读取信息，使用—dump参数进行数据读取<br><img src="/uploads/13/13-12.png" alt="Angoddess"><br>　　结果出来了，我们获取到了站点的管理员账号和密码，这里密码经过了加密，可以利用cmd5站点或其他方法进行解密，这就是sqlmap的常规注入流程。</p>
+<h2 id="基于Post的注入"><a href="#基于Post的注入" class="headerlink" title="基于Post的注入"></a>基于Post的注入</h2><p>　　那么post注入会是怎样的呢？<br>　　其实post注入也大体一样，只是在代入链接的同时，需要代入post数据。以DVWA登陆为例，登陆通常都是post提交登陆数据的（PS：只是举例，并非该位置真的存在注入）。<br><img src="/uploads/13/13-13.png" alt="Angoddess"><br>　　那么利用sqlmap进行注入时的用法如图：<br><img src="/uploads/13/13-14.png" alt="Angoddess"><br>　　从图中可以看到我们使用–data参数，后面跟的就是post数据，post数据从抓包软件抓取的数据包中得到，或者利用火狐插件hackbar得到。其余的获取数据库，表名，字段名，读取数据等，与get并无区别，不—data必须一直存在。<br>　　最后温馨提示：<br>　　Sqlmap读取数据是会默认下载到本地的，而且未经允许读取大量的数据是属于犯法的行为。<br>　　渗透需谨慎，拖库请三思！</p>
+
       
     </div>
     
     <div>
       
+        
+      
     </div>
 
     <div>
+      
+        
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/Build-Your-Blog-By-Github/" itemprop="url">
-                  1.Build Your Blog By Github
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-01T10:52:39+08:00" content="2016-03-01">
-              2016-03-01
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/others/" itemprop="url" rel="index">
-                    <span itemprop="name">others</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
+            <a href="/tags/网络安全/" rel="tag">#网络安全</a>
           
-
-          
-            
-          
-
-          
-
-          
-          
-             <span id="/Build-Your-Blog-By-Github/" class="leancloud_visitors" data-flag-title="1.Build Your Blog By Github">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
+            <a href="/tags/渗透测试/" rel="tag">#渗透测试</a>
           
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <p>Here I will teach you how to bulid your personal blog by github.<br>Tools: git | github | hexo<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/Build-Your-Blog-By-Github/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/渗透测试平台DVWA之反射型XSS/" rel="next" title="12.渗透测试平台DVWA之反射型XSS">
+                <i class="fa fa-chevron-left"></i> 12.渗透测试平台DVWA之反射型XSS
+              </a>
+            
           </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
 
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
-  </nav>
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -616,6 +397,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -635,8 +420,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.jpg"
@@ -704,6 +498,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sqlmap简介"><span class="nav-number">1.</span> <span class="nav-text">Sqlmap简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于Get的注入"><span class="nav-number">2.</span> <span class="nav-text">基于Get的注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于Post的注入"><span class="nav-number">3.</span> <span class="nav-text">基于Post的注入</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -807,6 +612,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
