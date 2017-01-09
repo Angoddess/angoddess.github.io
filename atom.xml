@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-10-24T07:21:12.334Z</updated>
+  <updated>2017-01-09T15:29:26.863Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,57 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>14.写给母校在学安全的小伙伴的一些碎碎念</title>
+    <link href="http://yoursite.com/%E5%86%99%E7%BB%99%E6%AF%8D%E6%A0%A1%E5%9C%A8%E5%AD%A6%E5%AE%89%E5%85%A8%E7%9A%84%E5%B0%8F%E4%BC%99%E4%BC%B4%E7%9A%84%E4%B8%80%E4%BA%9B%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    <id>http://yoursite.com/写给母校在学安全的小伙伴的一些碎碎念/</id>
+    <published>2017-01-09T14:23:03.000Z</published>
+    <updated>2017-01-09T15:29:26.863Z</updated>
+    
+    <content type="html">&lt;p&gt;　　大家都说安全专业热门，连国家领导都关注重视，那么大学念安全专业，毕业之后到底能做什么？有什么岗位选择？&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;　　之所以想写这么篇东西，完全是因为母校的师弟师妹对于安全行业的玩意太陌生了，虽然都是科班出身，还都是安全专业，然并卵，一毕业普遍两眼一抹黑，很多都转开发，转运维，甚至转行了。&lt;/p&gt;
+&lt;p&gt;　　为什么呢？因为茫然！大学四年，第一年基础课程，一些杂七杂八的基础课，大部分跟IT木有关系，少部分技术基础课程，像C语言之类的；第二年，网络相关课程，服务器啊，交换路由什么的。作为安全专业的孩子，很多学到这一年都有种深深的彷徨感，因为很多小伙伴都是怀着黑客梦选的专业啊，两年了毛都没摸到，开始有不少伙伴退缩了，转向了。。。第三年，终于接触安全课程了，然而，基本都是服务器安全，等保，密码学之类的知识，想象中的黑客攻击，壮观宏大的场面，绚丽的技术画面并木有。第四年，很好，准备毕业了，这年没什么课程了，搞搞毕设什么的就结束了。。。&lt;/p&gt;
+&lt;p&gt;　　讲真，我不知道其他学校安全专业怎么学的，然而如果真的按这流程学，我只能说，出来就小白从头来吧，除非你是学霸中的战斗机，自学的那就另说了。说白了，如果不靠自学，基本白混。而且我觉得吧，大学课程应该也早点给学生介绍安全企业存在哪些安全岗位方向，现在安全飞速发展，很多安全岗位方向，职责明确，如果学生早点知道，毕业就不至于跟无头苍蝇似的，不知道能干嘛，还要从新了解。&lt;/p&gt;
+&lt;h2 id=&quot;安全公司&quot;&gt;&lt;a href=&quot;#安全公司&quot; class=&quot;headerlink&quot; title=&quot;安全公司&quot;&gt;&lt;/a&gt;安全公司&lt;/h2&gt;&lt;p&gt;　　国外的这里就不说啦，国内的，老牌安全公司，启明星辰，绿盟科技，360企业安全，深信服，安恒等这些。&lt;/p&gt;
+&lt;p&gt;　　还有一些的企业安全团队，像阿里，腾讯，百度，唯品会等这些内部的安全团队也是挺厉害的。&lt;/p&gt;
+&lt;p&gt;　　接着就是一些初创安全公司，比较出名的有斗象科技，之前的乌云等。&lt;/p&gt;
+&lt;p&gt;　　这些公司各有所长，以及自己专攻的方向，像启明的话，还是设备为主，较攻防技术来说，绿盟要好一些,斗象科技则是主要做众包测试的，也就是常说的众测。&lt;/p&gt;
+&lt;p&gt;　　既然是写给母校小伙伴的福利，那么当然要重点说说广州的安全公司，毕竟大部分小伙伴应该还是会首选广州作为发展地的。&lt;/p&gt;
+&lt;p&gt;　　广州安全公司大大小小，说多不多，说少不少，好坏这里就不评价了，想知道的可以私我哈。说说有哪些吧！&lt;/p&gt;
+&lt;p&gt;　　启明星辰，绿盟科技在广州都有分公司，360在广州也有团队，不过貌似没有前面两家那么大。接着就是广东省信息安全测评中心，算半个国家机关吧，据说在华南地区还是蛮有影响力的。对了还有个蓝盾，据说呀，是广州本土唯一一家上市安全公司，不过讲真，去了你就知道，呵呵。剩下的还有南方信息安全产业基地，万方计算机科技，安佳信息科技，魔方安全科技，昊恒信息科技等等。&lt;/p&gt;
+&lt;h2 id=&quot;岗位简说&quot;&gt;&lt;a href=&quot;#岗位简说&quot; class=&quot;headerlink&quot; title=&quot;岗位简说&quot;&gt;&lt;/a&gt;岗位简说&lt;/h2&gt;&lt;p&gt;　　这里简单说说在安全公司当中，比较常见的一些技术岗位，以及相关的主要工作内容。PS：以下排名无先后&lt;/p&gt;
+&lt;p&gt;　　NO.1，等级保护测评师（等保测评师，信息安全等级测评师）。&lt;/p&gt;
+&lt;p&gt;　　这个岗位主要是对客户目标范围内的安全环境和强度进行评测，包括主机安全，网络环境安全，应用和数据安全，管理安全，物理安全等，每一个部分，每一项都有详细的标准，而且根据客户所属行业不同，对应的应达标的安全等级也不一样，标准也不同。详细客观的评测目标安全，每一项都会有特定的分数计算，严格按照国家规定标准执行。说白了，这是一个比较累人和繁琐的工作，要熟悉各种制度和等级划分之类的玩意，讲真，重点在于报告。&lt;/p&gt;
+&lt;p&gt;　　NO.2，安全服务攻城狮（简称安服）。&lt;/p&gt;
+&lt;p&gt;　　这个岗位一般涵盖几个内容，包括漏洞扫描，安全核查，安全加固这些。漏洞扫描，顾名思义，就是直接利用漏洞扫描软件对客户目标进行扫描，主要针对服务器主机操作系统，中间件，数据库以及其他开放的端口服务的漏洞。当然，这里用的都是商业级扫描器，或者自己公司开发的安全扫描器。最后整理做成报告，针对扫描结果提出修复加固建议。而安全核查则是针对服务器操作系统，中间件，应用系统，数据库，安全设备，网络环境等的安全配置进行核查，是否符合客户所在行业的安全最低标准，有点类似与等保，也是需要逐个去核对，一般会有核查表，一项项进行核对，打分，最后整理成报告并提出修复建议。最后安全加固，就是对服务器，以及其他网络设备，安全设备上存在的漏洞进行修复和加强防护。整体来说，安服的主要工作内容也比较简单，主要要熟悉基本的网络设备，安全设备，以及服务器上的一些安全配置和加固方法等。&lt;/p&gt;
+&lt;p&gt;　　NO.3，渗透测试攻城狮&lt;/p&gt;
+&lt;p&gt;　　渗透测试攻城狮，一般情况下，接触的比较多的是web渗透，有内网环境和外网环境，主要就是对客户目标web应用进行渗透，说白了就是找漏洞，如果处于内网环境，我们还会扩大测试手段，针对内网服务器，主机以及网络设备等直接进行漏洞测试，然后一一验证，把所有漏洞整理汇总写成报告，并提出修复方案，客户修复后，又再核查是否修复直至完全修复为止。当然，渗透还是要以客户要求为主，如果范围限死，那么就不能随便乱搞啦，只能指哪打哪，不然都白搞，还要被屌，所以，授权和范围很重要。在渗透当中，还会包含另外一项工作，这个在一些公司有，一些没有，也就是代码审计，针对源码进行漏洞挖掘，这项工作内容，在甲方公司存在的多。总体来说这个岗位对于技术的要求相对来说较高一些。&lt;/p&gt;
+&lt;p&gt;　　NO.4，逆向攻城狮&lt;/p&gt;
+&lt;p&gt;　　逆向攻城狮包括PC端和移动的，这里说说移动逆向。移动逆向可以分android和ios两个方向，初期可以先一个方向，积累足够再涉猎另一个吧，毕竟人的精力是有限的。在现在的普通安全公司，这个主要对移动应用进行反编译，重打包，组件漏洞，缓冲溢出，内存溢出等进行测试，然后整理汇总发现的漏洞，提出修复建议方案。个人觉得，技术含量相当高，至少笔者目前做不了，宝宝还是太水了。。。。&lt;/p&gt;
+&lt;p&gt;　　NO.5，无线安全攻城狮&lt;/p&gt;
+&lt;p&gt;　　不少安全公司会有无线安全攻城狮，专门研究无线安全的，毕竟现在在哪都有无线，覆盖率还是蛮大的，自然安全也就尤为重要了。这个我了解不多，还真不是特别清楚搞啥子，估计以研究为主吧。也有客户会要求做无线安全测试的，那就需要针对无线进行攻击测试了。&lt;/p&gt;
+&lt;p&gt;　　NO.6，安全开发攻城狮&lt;/p&gt;
+&lt;p&gt;　　顾名思义，就是高安全开发的啦，有开发脚本程序的，也有开发大型工具的，如商业级扫描器。具体就要看公司要求了。用到的语言，我知道的，python，java为主吧。&lt;/p&gt;
+&lt;p&gt;　　其他&lt;/p&gt;
+&lt;p&gt;　　还有一些其他的安全岗位，如安全架构师，云安全攻城狮什么的，这里就不说啦，毕竟这些基本甲方公司才会有，普通安全公司还是以乙方服务为主，并没有这么的哈，或者一些专攻特定方向的安全公司会有相关岗位，如主攻云安全的，肯定有大量云安全相关的岗位。还有类似专门研究CTF的，在众测平台还会有漏洞审核岗位，这些都是公司性质和研究方向定的哈，另外就是公司如果有自己的研究实验室，也会有研究型的安全岗位的。这里就说说大众的乙方安全公司岗位，其他不谈。&lt;/p&gt;
+&lt;h2 id=&quot;结束&quot;&gt;&lt;a href=&quot;#结束&quot; class=&quot;headerlink&quot; title=&quot;结束&quot;&gt;&lt;/a&gt;结束&lt;/h2&gt;&lt;p&gt;　　暂时就说这么多啦，以后有空再给小伙伴们说说其他的，或者详细讲讲其中的一些道道，希望对你们有帮助哈。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;　　大家都说安全专业热门，连国家领导都关注重视，那么大学念安全专业，毕业之后到底能做什么？有什么岗位选择？
+    
+    </summary>
+    
+      <category term="others" scheme="http://yoursite.com/categories/others/"/>
+    
+    
+      <category term="信息安全" scheme="http://yoursite.com/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="安全见识" scheme="http://yoursite.com/tags/%E5%AE%89%E5%85%A8%E8%A7%81%E8%AF%86/"/>
+    
+  </entry>
   
   <entry>
     <title>13.利用sqlmap进行简单的注入</title>
@@ -37,9 +88,9 @@
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
       <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -69,9 +120,9 @@
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
       <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -96,9 +147,9 @@
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
       <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -128,9 +179,9 @@
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
       <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -157,9 +208,9 @@
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
       <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -187,9 +238,9 @@
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
       <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -218,9 +269,9 @@
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
       <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -243,9 +294,9 @@
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
       <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -271,9 +322,9 @@
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
       <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -296,9 +347,9 @@
       <category term="代码审计" scheme="http://yoursite.com/categories/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/"/>
     
     
-      <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
-    
       <category term="代码审计" scheme="http://yoursite.com/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/"/>
+    
+      <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
     
   </entry>
   
@@ -321,9 +372,9 @@
       <category term="渗透事件" scheme="http://yoursite.com/categories/%E6%B8%97%E9%80%8F%E4%BA%8B%E4%BB%B6/"/>
     
     
-      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
       <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
