@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-01-09T15:29:26.863Z</updated>
+  <updated>2017-01-22T08:50:20.608Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,77 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>14.ubuntu+shadowsocks搭建国外vpn实现翻墙</title>
+    <link href="http://yoursite.com/ubuntu+shadowsocks%E6%90%AD%E5%BB%BA%E5%9B%BD%E5%A4%96vpn%E5%AE%9E%E7%8E%B0%E7%BF%BB%E5%A2%99/"/>
+    <id>http://yoursite.com/ubuntu+shadowsocks搭建国外vpn实现翻墙/</id>
+    <published>2017-01-22T08:46:12.000Z</published>
+    <updated>2017-01-22T08:50:20.608Z</updated>
+    
+    <content type="html">&lt;p&gt;　　今天来说说，如何在ubuntu上搭建vpn服务器，让我们可以愉快的翻墙！&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;前期准备&quot;&gt;&lt;a href=&quot;#前期准备&quot; class=&quot;headerlink&quot; title=&quot;前期准备&quot;&gt;&lt;/a&gt;前期准备&lt;/h2&gt;&lt;p&gt;　　这里我们用ubuntu + shadowsocks来搭建我们的vpn服务器进行翻墙&lt;/p&gt;
+&lt;p&gt;　　首先，我们需要一个国外的ubuntu服务器，这里我用的是搬瓦工（bandwagon），附上地址：&lt;a href=&quot;http://banwagong.cn/&quot; title=&quot;搬瓦工中文网&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://banwagong.cn/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/14/14-1.png&quot; alt=&quot;Angoddess&quot;&gt; &lt;/p&gt;
+&lt;p&gt;　　还是挺便宜的，比阿里便宜很多，当然，土壕请忽略哈！&lt;/p&gt;
+&lt;p&gt;　　这是我的服务器&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/14/14-2.png&quot; alt=&quot;Angoddess&quot;&gt; &lt;/p&gt;
+&lt;p&gt;　　这里要说下，如果你搬瓦工用的centos的系统（系统可以任意重装的），他的web端管理后台提供一键安装shadowsocks的功能，非常方便，不过我们今天主要讲ubuntu的安装哈。&lt;/p&gt;
+&lt;p&gt;　　接下来，我们先下个shadowsocks的客户端，地址：&lt;a href=&quot;http://pan.baidu.com/s/1nuAcrwP&quot; title=&quot;shadowsocks客户端&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://pan.baidu.com/s/1nuAcrwP&lt;/a&gt; 4k6u&lt;/p&gt;
+&lt;h2 id=&quot;安装shadowsocks&quot;&gt;&lt;a href=&quot;#安装shadowsocks&quot; class=&quot;headerlink&quot; title=&quot;安装shadowsocks&quot;&gt;&lt;/a&gt;安装shadowsocks&lt;/h2&gt;&lt;p&gt;　　搬瓦工系统刚装完，要更新获取一下源，ubuntu直接&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;apt-get update &amp;amp; apt-get upgrade
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;　　完成之后，我们开始安装shadowsocks服务端，首先安装pip&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;apt-get install python-pip
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;　　接着就可以用pip来安装shadowsocks服务端了&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;pip install shadowsocks
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;配置启用shadowsocks服务端&quot;&gt;&lt;a href=&quot;#配置启用shadowsocks服务端&quot; class=&quot;headerlink&quot; title=&quot;配置启用shadowsocks服务端&quot;&gt;&lt;/a&gt;配置启用shadowsocks服务端&lt;/h2&gt;&lt;p&gt;　　安装非常快的，秒好，剩下的就是配置了，在etc下创建一个文件，保存配置信息&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;vim /etc/shadowsocks.json
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;　　内容如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{
+    &amp;quot;server&amp;quot;: &amp;quot;10.10.10.10&amp;quot;,
+    &amp;quot;server_port&amp;quot;: &amp;quot;8388&amp;quot;,
+    &amp;quot;local_address&amp;quot;: &amp;quot;127.0.0.1&amp;quot;,
+    &amp;quot;local_port&amp;quot;: &amp;quot;1080&amp;quot;,
+    &amp;quot;port_password&amp;quot;: {
+        &amp;quot;8387&amp;quot;: &amp;quot;password&amp;quot;
+    },
+    &amp;quot;timeout&amp;quot;: 300,
+    &amp;quot;method&amp;quot;: &amp;quot;aes-256-cfb&amp;quot;,
+    &amp;quot;fast_open&amp;quot;: false
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;　　server是你的服务器外网IP，server_port是你服务器开通该服务的端口号，local_address是本地代理的地址，local_port是本地代理的端口号，port_password是创建客户端账号，其中8387是端口号，password是密码，这里可以创建多个账号，供多人连接，再往下，timeout是超时时间，method是加密方式，从客户端那里可以看到有多种加密方式，fast_open是提供是否使用TCP连接。&lt;/p&gt;
+&lt;p&gt;　　配置好文件之后，我们就启动它&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ssserver ‐c /etc/shadowsocks.json ‐d start
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;客户端连接&quot;&gt;&lt;a href=&quot;#客户端连接&quot; class=&quot;headerlink&quot; title=&quot;客户端连接&quot;&gt;&lt;/a&gt;客户端连接&lt;/h2&gt;&lt;p&gt;　　服务端shadowsocks启用好了，现在我们尝试用客户端连接试试，注意信息要跟服务器配置一致，加密方式也要一致&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/14/14-3.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;　　在任务栏中右键我们的shadowsocks客户端（纸飞机图标），选在启用系统代理&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/14/14-4.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;　　图标由灰色变白色即可&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/14/14-5.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;　　最后我们测试下，是否真的连上了，百度ip，成功了！&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/14/14-6.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;　　访问fackbook&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/14/14-7.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;　　注意浏览器要设置本地代理，代理端口就是之前设置的本地代理端口，这里我用chrome插件实现代理&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/14/14-8.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;　　今天来说说，如何在ubuntu上搭建vpn服务器，让我们可以愉快的翻墙！&lt;br&gt;
+    
+    </summary>
+    
+      <category term="others" scheme="http://yoursite.com/categories/others/"/>
+    
+    
+      <category term="服务器" scheme="http://yoursite.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+      <category term="vpn" scheme="http://yoursite.com/tags/vpn/"/>
+    
+      <category term="翻墙" scheme="http://yoursite.com/tags/%E7%BF%BB%E5%A2%99/"/>
+    
+  </entry>
   
   <entry>
     <title>14.写给母校在学安全的小伙伴的一些碎碎念</title>
@@ -88,9 +159,9 @@
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
-    
       <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
     
   </entry>
   
@@ -120,9 +191,9 @@
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
-    
       <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
     
   </entry>
   
@@ -147,9 +218,9 @@
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
-    
       <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
     
   </entry>
   
@@ -179,9 +250,9 @@
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
-    
       <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
     
   </entry>
   
@@ -208,9 +279,9 @@
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
-    
       <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
     
   </entry>
   
@@ -238,9 +309,9 @@
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
-    
       <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
     
   </entry>
   
@@ -269,9 +340,9 @@
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
-    
       <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
     
   </entry>
   
@@ -294,9 +365,9 @@
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
-    
       <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
     
   </entry>
   
@@ -322,9 +393,9 @@
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
-    
       <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
     
   </entry>
   
@@ -347,9 +418,9 @@
       <category term="代码审计" scheme="http://yoursite.com/categories/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/"/>
     
     
-      <category term="代码审计" scheme="http://yoursite.com/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/"/>
-    
       <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="代码审计" scheme="http://yoursite.com/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/"/>
     
   </entry>
   
@@ -372,9 +443,9 @@
       <category term="渗透事件" scheme="http://yoursite.com/categories/%E6%B8%97%E9%80%8F%E4%BA%8B%E4%BB%B6/"/>
     
     
-      <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
-    
       <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
     
   </entry>
   
