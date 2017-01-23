@@ -88,18 +88,18 @@
 <meta property="og:url" content="http://yoursite.com/ubuntu-shadowsocks搭建国外vpn实现翻墙/index.html">
 <meta property="og:site_name" content="Angoddess Blog">
 <meta property="og:description" content="今天来说说，如何在ubuntu上搭建vpn服务器，让我们可以愉快的翻墙！">
-<meta property="og:image" content="http://yoursite.com/uploads/14/14-1.png">
-<meta property="og:image" content="http://yoursite.com/uploads/14/14-2.png">
-<meta property="og:image" content="http://yoursite.com/uploads/14/14-3.png">
-<meta property="og:image" content="http://yoursite.com/uploads/14/14-4.png">
-<meta property="og:image" content="http://yoursite.com/uploads/14/14-5.png">
-<meta property="og:image" content="http://yoursite.com/uploads/14/14-6.png">
-<meta property="og:image" content="http://yoursite.com/uploads/14/14-7.png">
-<meta property="og:updated_time" content="2017-01-23T01:27:41.898Z">
+<meta property="og:image" content="http://yoursite.com/uploads/15/15-1.png">
+<meta property="og:image" content="http://yoursite.com/uploads/15/15-2.png">
+<meta property="og:image" content="http://yoursite.com/uploads/15/15-3.png">
+<meta property="og:image" content="http://yoursite.com/uploads/15/15-4.png">
+<meta property="og:image" content="http://yoursite.com/uploads/15/15-5.png">
+<meta property="og:image" content="http://yoursite.com/uploads/15/15-6.png">
+<meta property="og:image" content="http://yoursite.com/uploads/15/15-7.png">
+<meta property="og:updated_time" content="2017-01-23T01:30:28.804Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="15.ubuntu+shadowsocks搭建国外vpn实现翻墙">
 <meta name="twitter:description" content="今天来说说，如何在ubuntu上搭建vpn服务器，让我们可以愉快的翻墙！">
-<meta name="twitter:image" content="http://yoursite.com/uploads/14/14-1.png">
+<meta name="twitter:image" content="http://yoursite.com/uploads/15/15-1.png">
 
 
 
@@ -335,10 +335,10 @@
         <p>　　今天来说说，如何在ubuntu上搭建vpn服务器，让我们可以愉快的翻墙！<br><a id="more"></a></p>
 <h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><p>　　这里我们用ubuntu + shadowsocks来搭建我们的vpn服务器进行翻墙</p>
 <p>　　首先，我们需要一个国外的ubuntu服务器，这里我用的是搬瓦工（bandwagon），附上地址：<a href="http://banwagong.cn/" title="搬瓦工中文网" target="_blank" rel="external">http://banwagong.cn/</a></p>
-<p><img src="/uploads/14/14-1.png" alt="Angoddess"> </p>
+<p><img src="/uploads/15/15-1.png" alt="Angoddess"> </p>
 <p>　　还是挺便宜的，比阿里便宜很多，当然，土壕请忽略哈！</p>
 <p>　　这是我的服务器</p>
-<p><img src="/uploads/14/14-2.png" alt="Angoddess"> </p>
+<p><img src="/uploads/15/15-2.png" alt="Angoddess"> </p>
 <p>　　这里要说下，如果你搬瓦工用的centos的系统（系统可以任意重装的），他的web端管理后台提供一键安装shadowsocks的功能，非常方便，不过我们今天主要讲ubuntu的安装哈。</p>
 <p>　　接下来，我们先下个shadowsocks的客户端，地址：<a href="http://pan.baidu.com/s/1nuAcrwP" title="shadowsocks客户端" target="_blank" rel="external">http://pan.baidu.com/s/1nuAcrwP</a> 4k6u</p>
 <h2 id="安装shadowsocks"><a href="#安装shadowsocks" class="headerlink" title="安装shadowsocks"></a>安装shadowsocks</h2><p>　　搬瓦工系统刚装完，要更新获取一下源，ubuntu直接</p>
@@ -366,15 +366,15 @@
 <p>　　配置好文件之后，我们就启动它</p>
 <pre><code>ssserver ‐c /etc/shadowsocks.json ‐d start
 </code></pre><h2 id="客户端连接"><a href="#客户端连接" class="headerlink" title="客户端连接"></a>客户端连接</h2><p>　　服务端shadowsocks启用好了，现在我们尝试用客户端连接试试，注意信息要跟服务器配置一致，加密方式也要一致</p>
-<p><img src="/uploads/14/14-3.png" alt="Angoddess"></p>
+<p><img src="/uploads/15/15-3.png" alt="Angoddess"></p>
 <p>　　在任务栏中右键我们的shadowsocks客户端（纸飞机图标），选在启用系统代理</p>
-<p><img src="/uploads/14/14-4.png" alt="Angoddess"></p>
+<p><img src="/uploads/15/15-4.png" alt="Angoddess"></p>
 <p>　　图标由灰色变白色即可</p>
-<p><img src="/uploads/14/14-5.png" alt="Angoddess"></p>
+<p><img src="/uploads/15/15-5.png" alt="Angoddess"></p>
 <p>　　最后我们测试下，是否真的连上了，百度ip，成功了！</p>
-<p><img src="/uploads/14/14-6.png" alt="Angoddess"></p>
+<p><img src="/uploads/15/15-6.png" alt="Angoddess"></p>
 <p>　　访问fackbook</p>
-<p><img src="/uploads/14/14-7.png" alt="Angoddess"></p>
+<p><img src="/uploads/15/15-7.png" alt="Angoddess"></p>
 <p>　　注意浏览器要设置本地代理，代理端口就是之前设置的本地代理端口，这里我用chrome插件实现代理</p>
 
       
