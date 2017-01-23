@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-01-23T01:30:28.804Z</updated>
+  <updated>2017-01-23T01:45:42.569Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>15.ubuntu+shadowsocks搭建国外vpn实现翻墙</title>
+    <title>15.使用ubuntu和shadowsocks搭建国外vpn实现翻墙</title>
     <link href="http://yoursite.com/ubuntu-shadowsocks%E6%90%AD%E5%BB%BA%E5%9B%BD%E5%A4%96vpn%E5%AE%9E%E7%8E%B0%E7%BF%BB%E5%A2%99/"/>
     <id>http://yoursite.com/ubuntu-shadowsocks搭建国外vpn实现翻墙/</id>
     <published>2017-01-22T09:32:41.000Z</published>
-    <updated>2017-01-23T01:30:28.804Z</updated>
+    <updated>2017-01-23T01:45:42.569Z</updated>
     
     <content type="html">&lt;p&gt;　　今天来说说，如何在ubuntu上搭建vpn服务器，让我们可以愉快的翻墙！&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;前期准备&quot;&gt;&lt;a href=&quot;#前期准备&quot; class=&quot;headerlink&quot; title=&quot;前期准备&quot;&gt;&lt;/a&gt;前期准备&lt;/h2&gt;&lt;p&gt;　　这里我们用ubuntu + shadowsocks来搭建我们的vpn服务器进行翻墙&lt;/p&gt;
