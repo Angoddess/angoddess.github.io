@@ -84,27 +84,27 @@
 
 <meta name="description" content="前阵子网上曝出了WordPress4.6的任意命令执行漏洞，而且还有poc和exp，不过貌似很多小伙伴复现失败了，这里就来分析分析吧！">
 <meta property="og:type" content="article">
-<meta property="og:title" content="17.WordPress4.6任意命令执行漏洞复现与Exp简单分析">
+<meta property="og:title" content="16.WordPress4.6任意命令执行漏洞复现与Exp简单分析">
 <meta property="og:url" content="http://yoursite.com/WordPress4-6任意命令执行漏洞复现与Exp简单分析/index.html">
 <meta property="og:site_name" content="Angoddess Blog">
 <meta property="og:description" content="前阵子网上曝出了WordPress4.6的任意命令执行漏洞，而且还有poc和exp，不过貌似很多小伙伴复现失败了，这里就来分析分析吧！">
-<meta property="og:image" content="http://yoursite.com/uploads/17/17-1.png">
-<meta property="og:image" content="http://yoursite.com/uploads/17/17-2.png">
-<meta property="og:image" content="http://yoursite.com/uploads/17/17-3.png">
-<meta property="og:image" content="http://yoursite.com/uploads/17/17-4.png">
-<meta property="og:image" content="http://yoursite.com/uploads/17/17-5.png">
-<meta property="og:image" content="http://yoursite.com/uploads/17/17-6.png">
-<meta property="og:image" content="http://yoursite.com/uploads/17/17-7.png">
-<meta property="og:image" content="http://yoursite.com/uploads/17/17-8.png">
-<meta property="og:image" content="http://yoursite.com/uploads/17/17-9.png">
-<meta property="og:image" content="http://yoursite.com/uploads/17/17-10.png">
-<meta property="og:image" content="http://yoursite.com/uploads/17/17-11.png">
-<meta property="og:image" content="http://yoursite.com/uploads/17/17-12.png">
-<meta property="og:updated_time" content="2017-05-09T12:03:58.517Z">
+<meta property="og:image" content="http://yoursite.com/uploads/16/16-1.png">
+<meta property="og:image" content="http://yoursite.com/uploads/16/16-2.png">
+<meta property="og:image" content="http://yoursite.com/uploads/16/16-3.png">
+<meta property="og:image" content="http://yoursite.com/uploads/16/16-4.png">
+<meta property="og:image" content="http://yoursite.com/uploads/16/16-5.png">
+<meta property="og:image" content="http://yoursite.com/uploads/16/16-6.png">
+<meta property="og:image" content="http://yoursite.com/uploads/16/16-7.png">
+<meta property="og:image" content="http://yoursite.com/uploads/16/16-8.png">
+<meta property="og:image" content="http://yoursite.com/uploads/16/16-9.png">
+<meta property="og:image" content="http://yoursite.com/uploads/16/16-10.png">
+<meta property="og:image" content="http://yoursite.com/uploads/16/16-11.png">
+<meta property="og:image" content="http://yoursite.com/uploads/16/16-12.png">
+<meta property="og:updated_time" content="2017-05-09T12:11:32.658Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="17.WordPress4.6任意命令执行漏洞复现与Exp简单分析">
+<meta name="twitter:title" content="16.WordPress4.6任意命令执行漏洞复现与Exp简单分析">
 <meta name="twitter:description" content="前阵子网上曝出了WordPress4.6的任意命令执行漏洞，而且还有poc和exp，不过貌似很多小伙伴复现失败了，这里就来分析分析吧！">
-<meta name="twitter:image" content="http://yoursite.com/uploads/17/17-1.png">
+<meta name="twitter:image" content="http://yoursite.com/uploads/16/16-1.png">
 
 
 
@@ -122,7 +122,7 @@
   };
 </script>
 
-  <title> 17.WordPress4.6任意命令执行漏洞复现与Exp简单分析 | Angoddess Blog </title>
+  <title> 16.WordPress4.6任意命令执行漏洞复现与Exp简单分析 | Angoddess Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -262,7 +262,7 @@
             
             
               
-                17.WordPress4.6任意命令执行漏洞复现与Exp简单分析
+                16.WordPress4.6任意命令执行漏洞复现与Exp简单分析
               
             
           </h1>
@@ -315,7 +315,7 @@
 
           
           
-             <span id="/WordPress4-6任意命令执行漏洞复现与Exp简单分析/" class="leancloud_visitors" data-flag-title="17.WordPress4.6任意命令执行漏洞复现与Exp简单分析">
+             <span id="/WordPress4-6任意命令执行漏洞复现与Exp简单分析/" class="leancloud_visitors" data-flag-title="16.WordPress4.6任意命令执行漏洞复现与Exp简单分析">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -349,16 +349,16 @@
 <p>　　IP地址：192.168.10.33</p>
 <p>　　怎么搭建php站点就不多说了，小伙伴们不明白的自己百度哈，在ubuntu上搭建还是很方便快捷的。然后下载wordpress4.6版本的源码，搭上去，具体步骤不懂的百度有，4.6版本传送门在这里<a href="https://wordpress.org/wordpress-4.6.zip" title="wordpress-4.6下载" target="_blank" rel="external">https://wordpress.org/wordpress-4.6.zip</a></p>
 <p>　　wordpress安装成功后登陆界面</p>
-<p><img src="/uploads/17/17-1.png" alt="Angoddess"></p>
+<p><img src="/uploads/16/16-1.png" alt="Angoddess"></p>
 <p>　　因为我们用的忘记密码功能涉及到发邮件，那么肯定要有邮件的服务啊<br>，我用的是exim4！这里说一下，没搭这个服务，估计是复现不了的。</p>
 <p>　　ubuntu安装exim非常简单</p>
 <p>　　<code>#apt-get install exim4</code></p>
 <p>　　然后我们再进行一下配置</p>
 <p>　　<code>#dpkg-reconfigure exim4-config</code>　</p>
 <p>　　选择第一个，使用SMTP进行网络发送邮件</p>
-<p><img src="/uploads/17/17-2.png" alt="Angoddess"></p>
+<p><img src="/uploads/16/16-2.png" alt="Angoddess"></p>
 <p>　　这里输入系统邮件的名称，随意，我用了本机IP</p>
-<p><img src="/uploads/17/17-3.png" alt="Angoddess"></p>
+<p><img src="/uploads/16/16-3.png" alt="Angoddess"></p>
 <p>　　剩下的一路默认即可！freebuf上的文章说必须得exim4，我觉得不一定，只要能实现邮件服务器即可，验证成功与否直接通过搭好的wordpress忘记密码功能，执行一遍，没有出错就可以了！至此，我们的靶机环境就完成了！</p>
 <p>　　攻击机我用的kali，脚本直接扔进去即可，这里需要注意的是，脚本权限要高，不然会执行失败，我直接设置成777了。</p>
 <p>　　攻击机IP：192.168.10.55</p>
@@ -556,27 +556,27 @@ exit 0
 <p>　　这里根据我的环境，设置成了<code>192.168.10.55</code>，改完<code>rev_host</code>之后，我们需要注意的就是166行和172行当中的<code>user_login</code>的值，这里必须是跟你安装wordpress的时候，设置的管理员一致的用户名或邮箱地址，这里默认是admin，当然，如果是实际生产环境中的wordpress，任意一个用户名或邮箱地址也可以，但必须是正确的，不然根本触发不了漏洞，更别提命令执行了。</p>
 <p>　　我安装wordpress就是用的admin做管理员用户名，那么我这里就不用改变，还是用<code>user_login=admin</code></p>
 <p>　　现在我们可以尝试进行攻击了，这里需要注意的是，如果端口被占用了，我们就要换个端口，源码158行和176行中的1337改掉，换成其他端口即可，如替换成58888。</p>
-<p><img src="/uploads/17/17-4.png" alt="Angoddess"></p>
+<p><img src="/uploads/16/16-4.png" alt="Angoddess"></p>
 <p>　　另外看176行源码，我们会发现，nc命令中1337前面少了个参数-p，这也是我们执行失败的原因之一，不加-p的执行结果如下：</p>
-<p><img src="/uploads/17/17-5.png" alt="Angoddess"></p>
+<p><img src="/uploads/16/16-5.png" alt="Angoddess"></p>
 <p>　　所以176行源码改为<code>nc -vv -l -p 1337</code></p>
 <p>　　那么到这里我们就把EXP脚本配置修改完毕了！</p>
 <p>　　现在来整体解析下主要部分的功能！</p>
 <p>　　81行<code>rev_host</code>的值是攻击机的IP地址</p>
 <p>　　83-97行，这部分是构造header中攻击代码的函数，具体把我们要执行的命令传递进来按照漏洞规则写进host中。</p>
-<p><img src="/uploads/17/17-6.png" alt="Angoddess"></p>
+<p><img src="/uploads/16/16-6.png" alt="Angoddess"></p>
 <p>　　142-155行，是判断输入，是否输入目标地址，以及是否确认获取目标地址的反弹shell。</p>
-<p><img src="/uploads/17/17-7.png" alt="Angoddess"></p>
+<p><img src="/uploads/16/16-7.png" alt="Angoddess"></p>
 <p>　　157-161行，这里是把目标服务器（靶机）请求连接的命令写入到当前目录中的rce.txt文件中，同时使用python把当前目录临时发布到http网络中，使得可以远程访问当前目录中的文件。</p>
-<p><img src="/uploads/17/17-8.png" alt="Angoddess"></p>
+<p><img src="/uploads/16/16-8.png" alt="Angoddess"></p>
 <p>　　163行-173行，这部分调用了两次prep_host_header函数，也执行了两次命令，163-167行是在靶机上执行命令，远程把攻击机上的rce.txt文件内容下载到本地/tmp/目录下的rce文件中；而169-173行是在靶机上执行命令，执行/tmp/目录下的rce文件，也就是执行了rce中的请求连接攻击机的命令，以此达到反弹shell到攻击机的目的。</p>
-<p><img src="/uploads/17/17-9.png" alt="Angoddess"></p>
+<p><img src="/uploads/16/16-9.png" alt="Angoddess"></p>
 <p>　　最后一部分，这里是在攻击机上执行nc监听命令，监听并连接靶机发送过来的连接请求，从而得到靶机的shell。</p>
-<p><img src="/uploads/17/17-10.png" alt="Angoddess"></p>
+<p><img src="/uploads/16/16-10.png" alt="Angoddess"></p>
 <h2 id="EXP攻击效果展示"><a href="#EXP攻击效果展示" class="headerlink" title="EXP攻击效果展示"></a>EXP攻击效果展示</h2><p>　　EXP攻击命令：<br>　　<code>#./test.sh http://192.168.10.33/frame/WordPress/WordPress-4.6/</code><br>　　从攻击命令可以看出，不需要什么特殊连接，直接就是wordpress的主页地址即可。攻击成功后，效果如图：</p>
-<p><img src="/uploads/17/17-11.png" alt="Angoddess"></p>
+<p><img src="/uploads/16/16-11.png" alt="Angoddess"></p>
 <p>　　执行whoami和ifconfig命令：</p>
-<p><img src="/uploads/17/17-12.png" alt="Angoddess"></p>
+<p><img src="/uploads/16/16-12.png" alt="Angoddess"></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>　　整个攻击过程，需要注意的问题：</p>
 <p>　　1、靶机的搭建，邮件服务必须有</p>
 <p>　　2、EXP中攻击机的IP设置</p>
@@ -648,7 +648,7 @@ exit 0
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="WordPress4-6任意命令执行漏洞复现与Exp简单分析/"
-           data-title="17.WordPress4.6任意命令执行漏洞复现与Exp简单分析" data-url="http://yoursite.com/WordPress4-6任意命令执行漏洞复现与Exp简单分析/">
+           data-title="16.WordPress4.6任意命令执行漏洞复现与Exp简单分析" data-url="http://yoursite.com/WordPress4-6任意命令执行漏洞复现与Exp简单分析/">
       </div>
     
   </div>
