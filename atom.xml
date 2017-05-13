@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-05-13T04:29:31.958Z</updated>
+  <updated>2017-05-13T04:37:38.876Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>2017年5月13日国内高校比特币勒索事件与防范应对措施</title>
+    <title>17.2017年5月13日国内高校比特币勒索事件与防范应对措施</title>
     <link href="http://yoursite.com/2017%E5%B9%B45%E6%9C%8813%E6%97%A5%E5%9B%BD%E5%86%85%E9%AB%98%E6%A0%A1%E6%AF%94%E7%89%B9%E5%B8%81%E5%8B%92%E7%B4%A2%E4%BA%8B%E4%BB%B6%E4%B8%8E%E9%98%B2%E8%8C%83%E5%BA%94%E5%AF%B9%E6%8E%AA%E6%96%BD/"/>
     <id>http://yoursite.com/2017年5月13日国内高校比特币勒索事件与防范应对措施/</id>
     <published>2017-05-13T04:28:39.000Z</published>
-    <updated>2017-05-13T04:29:31.958Z</updated>
+    <updated>2017-05-13T04:37:38.876Z</updated>
     
     <content type="html">&lt;p&gt;　　445端口的蠕虫病毒一夜之间爆发，瞬间秒杀高校学生电脑，漏洞源于NSA泄露的windows漏洞攻击脚本，危害极大，把原本只在业内广泛流传和熟知的NSA泄露的win漏洞直接推向了大众。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;事件背景与分析&quot;&gt;&lt;a href=&quot;#事件背景与分析&quot; class=&quot;headerlink&quot; title=&quot;事件背景与分析&quot;&gt;&lt;/a&gt;事件背景与分析&lt;/h2&gt;&lt;p&gt;　　2017年4月，Shadow Brokers在网上放出了方程式组织的入侵工具，方程式组织隶属于美国安全局（NSA）。工具中包含大量针对windows系统的0day漏洞，其中ETERNALBLUE模块是通过SMB影响最新版本windows 2008 R2的RCE 0day漏洞，同时也影响大部分windows 7系统，其他模块攻击还涉及win 2003，win xp等版本系统，可造成直接被控制系统，危害极大。&lt;/p&gt;
@@ -501,9 +501,9 @@ exit 0
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
       <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -533,9 +533,9 @@ exit 0
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
       <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -560,9 +560,9 @@ exit 0
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
       <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -592,9 +592,9 @@ exit 0
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
       <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -621,9 +621,9 @@ exit 0
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
       <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -651,9 +651,9 @@ exit 0
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
       <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -682,9 +682,9 @@ exit 0
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
       <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -707,9 +707,9 @@ exit 0
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
       <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -735,9 +735,9 @@ exit 0
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
       <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -760,9 +760,9 @@ exit 0
       <category term="代码审计" scheme="http://yoursite.com/categories/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/"/>
     
     
-      <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
-    
       <category term="代码审计" scheme="http://yoursite.com/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/"/>
+    
+      <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
     
   </entry>
   
@@ -785,9 +785,9 @@ exit 0
       <category term="渗透事件" scheme="http://yoursite.com/categories/%E6%B8%97%E9%80%8F%E4%BA%8B%E4%BB%B6/"/>
     
     
-      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
       <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
