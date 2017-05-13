@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-05-09T12:11:32.658Z</updated>
+  <updated>2017-05-13T04:29:31.958Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,80 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2017年5月13日国内高校比特币勒索事件与防范应对措施</title>
+    <link href="http://yoursite.com/2017%E5%B9%B45%E6%9C%8813%E6%97%A5%E5%9B%BD%E5%86%85%E9%AB%98%E6%A0%A1%E6%AF%94%E7%89%B9%E5%B8%81%E5%8B%92%E7%B4%A2%E4%BA%8B%E4%BB%B6%E4%B8%8E%E9%98%B2%E8%8C%83%E5%BA%94%E5%AF%B9%E6%8E%AA%E6%96%BD/"/>
+    <id>http://yoursite.com/2017年5月13日国内高校比特币勒索事件与防范应对措施/</id>
+    <published>2017-05-13T04:28:39.000Z</published>
+    <updated>2017-05-13T04:29:31.958Z</updated>
+    
+    <content type="html">&lt;p&gt;　　445端口的蠕虫病毒一夜之间爆发，瞬间秒杀高校学生电脑，漏洞源于NSA泄露的windows漏洞攻击脚本，危害极大，把原本只在业内广泛流传和熟知的NSA泄露的win漏洞直接推向了大众。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;事件背景与分析&quot;&gt;&lt;a href=&quot;#事件背景与分析&quot; class=&quot;headerlink&quot; title=&quot;事件背景与分析&quot;&gt;&lt;/a&gt;事件背景与分析&lt;/h2&gt;&lt;p&gt;　　2017年4月，Shadow Brokers在网上放出了方程式组织的入侵工具，方程式组织隶属于美国安全局（NSA）。工具中包含大量针对windows系统的0day漏洞，其中ETERNALBLUE模块是通过SMB影响最新版本windows 2008 R2的RCE 0day漏洞，同时也影响大部分windows 7系统，其他模块攻击还涉及win 2003，win xp等版本系统，可造成直接被控制系统，危害极大。&lt;/p&gt;
+&lt;p&gt;　　微软对此也发布了紧急更新，攻击模块对应补丁如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/17/17-1.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;　　此次国内多所高校学生电脑被感染的蠕虫病毒就是源于NSA公布的漏洞脚本中的windows 445端口的0day漏洞演变的，被攻击者电脑系统会被加密锁定进行比特币勒索，勒索软件加密手段采用了AES和RSA加密算法，解密难度相当高，爆破运算量十分庞大，没有密钥的情况下目前可以说基本无解。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/17/17-2.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;紧急防御方案&quot;&gt;&lt;a href=&quot;#紧急防御方案&quot; class=&quot;headerlink&quot; title=&quot;紧急防御方案&quot;&gt;&lt;/a&gt;紧急防御方案&lt;/h2&gt;&lt;p&gt;　　针对此次蠕虫病毒事件，建议大家妥善处理，小伙伴们做些安全措施再开机，尤其是使用windows 7系统的小伙伴。&lt;br&gt;　　以win 7为例，系统开机前，先断开网络，有线网络拔网线，无线网络先关闭路由器。之后启动电脑系统，进系统第一件事先开启系统防火墙。&lt;/p&gt;
+&lt;p&gt;　　具体步骤如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/17/17-3.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/17/17-4.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/17/17-5.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/17/17-6.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/17/17-7.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;　　启动完防火墙之后，我们再修改防火墙入站规则，加强防御。&lt;/p&gt;
+&lt;p&gt;　　打开防火墙高级设置&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/17/17-8.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;　　左侧选择入站规则，右侧选择新建规则&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/17/17-9.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;　　我们要防止445端口被漏洞利用进行蠕虫感染，所以规则类型选择端口&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/17/17-10.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;　　选择TCP协议，端口就是445端口&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/17/17-11.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;　　这里我们选择阻止连接，来阻断所有外部主动对本机445端口的连接请求&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/17/17-12.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;　　这里全部勾选，作用于所有网络环境当中&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/17/17-13.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;　　最后这里的名称和描述可以随意填写，没有关系，然后完成&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/17/17-14.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;　　这就是我们新建的防火墙规则&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/17/17-15.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;　　做完这些，我们最后还需要对系统中的重要文件进行备份，拷贝到U盘或移动硬盘等外部存储介质当中，以防万一。&lt;/p&gt;
+&lt;p&gt;　　最后，我们可以连接网络了，连接网络后，第一件事就是更新系统补丁。&lt;/p&gt;
+&lt;p&gt;　　依然在控制面板的系统和安全选项中，选择Windows Update&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/17/17-16.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;　　我们选择检查更新进行补丁更新即可，&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/17/17-17.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;　　更新完毕后，记得重启电脑&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/17/17-18.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;事件总结&quot;&gt;&lt;a href=&quot;#事件总结&quot; class=&quot;headerlink&quot; title=&quot;事件总结&quot;&gt;&lt;/a&gt;事件总结&lt;/h2&gt;&lt;p&gt;　　首先此次蠕虫感染事件主要受害群体是国内高校师生，为什么呢？&lt;/p&gt;
+&lt;p&gt;　　1、国内高校大部分师生网络安全意识薄弱，电脑系统长期不更新&lt;/p&gt;
+&lt;p&gt;　　2、国内高校大部分师生电脑操作系统均为windows 7，甚至为windows XP系统。&lt;/p&gt;
+&lt;p&gt;　　3、国内高校大部分师生缺乏网络安全保护意识，随意浏览不明网站平台。&lt;/p&gt;
+&lt;p&gt;　　4、高校师生基数大，且不少法律意识低，有的甚至钱多人傻，容易勒索成功。&lt;/p&gt;
+&lt;p&gt;　　5、国内高校很多领导不重视校园安全，首先学校网站漏洞百出，容易被攻击，从而被不法分子进入学校内部网络，危害师生电脑安全。&lt;/p&gt;
+&lt;p&gt;　　6、国内高校普遍不重视内网安全，众所周知，很多高校都有wifi，而且wifi密码也容易从各种途径获取，甚至直接没有密码，而很多高校都是接受访客的，也就给不法分子直接连接校园内部网络进行攻击提供方便，甚至不需进入校园，在校园附近的休闲场所即可连上校园wifi进行内网。&lt;/p&gt;
+&lt;p&gt;　　从这次国内高校师生电脑感染蠕虫病毒的事件来看，我们不得不重视系统安全，提高个人网络安全意识，尤其是国内高校师生，甚至我觉得有必要把网络安全意识作为基础必修课程加入大学所有专业的必修课里。而且，高校领导也应该且必需重视网络安全，保护校园师生的电脑安全，且能够在安全的网络环境中工作学习，校方具有相当的责任。&lt;/p&gt;
+&lt;p&gt;　　另外，从此次事件中，我们要警醒，NSA泄露的漏洞脚本已经有相当一段时间了，各种批量利用和演变的工具接下来会越来越多，我们要加强防范，尤其是&lt;strong&gt;机关单位，运营商，重点互联网企业&lt;/strong&gt;的办公系统和重要服务器，更是重中之重，必须做好对应的安全措施，加强防护。&lt;/p&gt;
+&lt;p&gt;　　最后，NSA泄露的工具中，还涉及135，139，3389等端口的攻击，建议用不到这些端口的用户，在防火墙规则中自行屏蔽阻止连接，过程跟上面445一样，尤其是3389，在高校用的十分频繁，需谨慎。&lt;/p&gt;
+&lt;p&gt;　　提高网络安全安全意识，保护个人隐私数据。&lt;/p&gt;
+&lt;p&gt;　　PS：这里给大伙附上2017年6月1号即将执行的中华人民共和国网络安全法&lt;a href=&quot;http://www.miit.gov.cn/n1146295/n1146557/n1146614/c5345009/content.html&quot; title=&quot;中华人民共和国网络安全法&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.miit.gov.cn/n1146295/n1146557/n1146614/c5345009/content.html&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;　　445端口的蠕虫病毒一夜之间爆发，瞬间秒杀高校学生电脑，漏洞源于NSA泄露的windows漏洞攻击脚本，危害极大，把原本只在业内广泛流传和熟知的NSA泄露的win漏洞直接推向了大众。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="others" scheme="http://yoursite.com/categories/others/"/>
+    
+    
+      <category term="蠕虫" scheme="http://yoursite.com/tags/%E8%A0%95%E8%99%AB/"/>
+    
+      <category term="勒索" scheme="http://yoursite.com/tags/%E5%8B%92%E7%B4%A2/"/>
+    
+  </entry>
   
   <entry>
     <title>16.WordPress4.6任意命令执行漏洞复现与Exp简单分析</title>
