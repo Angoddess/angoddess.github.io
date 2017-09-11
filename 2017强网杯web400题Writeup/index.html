@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://yoursite.com/uploads/18/18-3.png">
 <meta property="og:image" content="http://yoursite.com/uploads/18/18-4.png">
 <meta property="og:image" content="http://yoursite.com/uploads/18/18-5.png">
-<meta property="og:updated_time" content="2017-09-11T08:30:07.937Z">
+<meta property="og:updated_time" content="2017-09-11T08:34:38.873Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="18.2017强网杯web400题Writeup">
 <meta name="twitter:description" content="2017强网杯web题web400的Writeup，详细分析利用过程。">
@@ -331,9 +331,9 @@
 
       
         <p>　　2017强网杯web题web400的Writeup，详细分析利用过程。<br><a id="more"></a></p>
-<h2 id="Jinja模板注入漏洞验证"><a href="#Jinja模板注入漏洞验证" class="headerlink" title="Jinja模板注入漏洞验证"></a>Jinja模板注入漏洞验证</h2><p>　　注册一个账号2，然后利用donate功能，填入一个正常可访问的url地址，用户名是我们刚注册的用户名</p>
+<h2 id="Jinja模板注入漏洞验证"><a href="#Jinja模板注入漏洞验证" class="headerlink" title="Jinja模板注入漏洞验证"></a>Jinja模板注入漏洞验证</h2><p>　　注册一个账号2，然后利用donate功能，填入一个正常可访问的url地址（这里不要放正确的图片地址），用户名是我们刚注册的用户名</p>
 <p><img src="/uploads/18/18-1.png" alt="Angoddess"></p>
-<p>　　触发报错，如图：</p>
+<p>　　由于address不是正确的图片地址，解析不到图片而触发报错，如图：</p>
 <p><img src="/uploads/18/18-2.png" alt="Angoddess"></p>
 <p>　　变量text的值就是我们构造的用户名，在jinja模板中执行的结果，执行代码看下图：</p>
 <p><img src="/uploads/18/18-3.png" alt="Angoddess"> </p>
