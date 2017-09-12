@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-09-11T08:34:38.873Z</updated>
+  <updated>2017-09-12T15:07:50.696Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,10 +20,11 @@
     <link href="http://yoursite.com/2017%E5%BC%BA%E7%BD%91%E6%9D%AFweb400%E9%A2%98Writeup/"/>
     <id>http://yoursite.com/2017强网杯web400题Writeup/</id>
     <published>2017-09-11T07:48:35.000Z</published>
-    <updated>2017-09-11T08:34:38.873Z</updated>
+    <updated>2017-09-12T15:07:50.696Z</updated>
     
     <content type="html">&lt;p&gt;　　2017强网杯web题web400的Writeup，详细分析利用过程。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&quot;Jinja模板注入漏洞验证&quot;&gt;&lt;a href=&quot;#Jinja模板注入漏洞验证&quot; class=&quot;headerlink&quot; title=&quot;Jinja模板注入漏洞验证&quot;&gt;&lt;/a&gt;Jinja模板注入漏洞验证&lt;/h2&gt;&lt;p&gt;　　注册一个账号2，然后利用donate功能，填入一个正常可访问的url地址（这里不要放正确的图片地址），用户名是我们刚注册的用户名&lt;/p&gt;
+&lt;h2 id=&quot;Jinja模板注入漏洞验证&quot;&gt;&lt;a href=&quot;#Jinja模板注入漏洞验证&quot; class=&quot;headerlink&quot; title=&quot;Jinja模板注入漏洞验证&quot;&gt;&lt;/a&gt;Jinja模板注入漏洞验证&lt;/h2&gt;&lt;p&gt;　　注册一个账号，用户名为&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&amp;#123;1+1&amp;#125;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;　　然后利用donate功能，填入一个正常可访问的url地址（这里不要放正确的图片地址），用户名是我们刚注册的用户名&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/uploads/18/18-1.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
 &lt;p&gt;　　由于address不是正确的图片地址，解析不到图片而触发报错，如图：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/uploads/18/18-2.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
