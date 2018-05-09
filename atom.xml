@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-09-12T15:07:50.696Z</updated>
+  <updated>2018-05-09T16:32:29.556Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>19.风评中渗透的那些事</title>
+    <link href="http://yoursite.com/%E9%A3%8E%E8%AF%84%E4%B8%AD%E6%B8%97%E9%80%8F%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/"/>
+    <id>http://yoursite.com/风评中渗透的那些事/</id>
+    <published>2018-05-09T16:29:51.000Z</published>
+    <updated>2018-05-09T16:32:29.556Z</updated>
+    
+    <content type="html">&lt;p&gt;　　信息安全风险评估，我们简称风评！这次就风评中的渗透测试(本文仅针对Web应用相关的渗透)，我们来叨叨一下，都有些什么深深浅浅的道道！&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;什么是风评&quot;&gt;&lt;a href=&quot;#什么是风评&quot; class=&quot;headerlink&quot; title=&quot;什么是风评&quot;&gt;&lt;/a&gt;什么是风评&lt;/h2&gt;&lt;p&gt;　　信息安全风险评估，在业界我们一般简称风评！&lt;/p&gt;
+&lt;p&gt;　　风评是一个相对比较大的项目，一般情况下，都会涵盖基线核查，漏洞扫描，渗透测试这三大块内容。除了这三大块内容，还有其它一些增值服务，如应急响应，入侵痕迹分析等等。当然，也有把这些独立为单独项目的情况。&lt;/p&gt;
+&lt;p&gt;　　基线核查就是对被测目标（服务器，web站点，Web支撑环境等）进行安全配置标准的检查，查看其是否符合被测目标所在行业的信息安全标准，这点跟等保是有点像的，基线核查可以依赖工具进行扫描，如启明星辰，绿盟的安全配置核查系统等，然后整理验证结果形成报告并给出整改方案，当然也可以人工核查，不过这个就有点工作量了，但相对就更加准确以及自主性。&lt;/p&gt;
+&lt;p&gt;　　漏洞扫描就是使用商业级漏洞扫描平台系统对目标进行扫描，如启明的天镜，绿盟的极光等，扫描出来的结果其实是由一定的误报可能性的，所以还要对扫描结果进行一定的验证整理，给出修复建议，最终形成漏洞扫描报告，漏洞扫描针对的是服务器操作系统，中间件，数据库，以及其它第三方软件等，一般不针对web应用本身进行扫描。&lt;/p&gt;
+&lt;p&gt;　　渗透测试就是模拟黑客的行为，对目标服务器和服务器上的web应用以及相关的支撑环境和软件（中间件，数据库等）进行漏洞挖掘和攻击尝试，也有仅对Web应用本身进行渗透的情况，从而发现被测目标上存在的漏洞，给出相应的修复建议形成渗透测试报告。&lt;/p&gt;
+&lt;h2 id=&quot;风评中的渗透&quot;&gt;&lt;a href=&quot;#风评中的渗透&quot; class=&quot;headerlink&quot; title=&quot;风评中的渗透&quot;&gt;&lt;/a&gt;风评中的渗透&lt;/h2&gt;&lt;p&gt;　　渗透测试，一般分内网环境和外网环境的渗透，内网环境一般都要到客户公司现场进行渗透测试，其所有的被测目标均是需要接入内网环境才能访问到的，外网就可以直接互联网上远程测试了，被测目标是直接在互联网上可以访问的。&lt;/p&gt;
+&lt;p&gt;　　可能在很多没怎么接触项目和刚入行的小伙伴眼里，渗透测试就是要拿到目标的shell或者数据库酱紫，像网上流传很广的流程：注入脱裤后台上马远控什么的。其实，在风评中，并不是一定要拿shell，客户需要的是我们能发现目标所存在的所有漏洞，而我们需要做的就是，在项目周期内，尽可能全面的发现漏洞的存在，无论漏洞高危，中危还是低危，而在此期间，能够发现能够拿shell或数据库权限的漏洞，当然是更好的，一个可以彰显个人实力，另一个也可以为项目成果验收加分，但是切忌为了拿shell这些高风险的漏洞，不断钻研一个点，导致没有全面渗透目标，酱紫是很容易就被人家补刀出问题的。针对这些情况，我们可以把风评中的渗透测试分为两大类，常规渗透和深度渗透。&lt;/p&gt;
+&lt;h2 id=&quot;常规渗透&quot;&gt;&lt;a href=&quot;#常规渗透&quot; class=&quot;headerlink&quot; title=&quot;常规渗透&quot;&gt;&lt;/a&gt;常规渗透&lt;/h2&gt;&lt;p&gt;　　一般情况下，我们在风评中所做的都是常规渗透，也就是上面所说的，尽可能的发现目标上所存在的所有漏洞，无论高中低危风险。对于刚入行的小伙伴来说，其实很容易忽略了中低危风险的漏洞，尤其是低危漏洞（如登陆验证码绕过等），而把目标盯死在高危漏洞上，导致可能最后成果寥寥，甚至还可能会被客户质疑为什么这些中低危的漏洞你都没发现，而被其它公司或团队发现了。&lt;/p&gt;
+&lt;p&gt;　　所以，平时自己搭环境或靶机练习，CTF这些，我们可以尽情钻研，施展你的高超技术研究能力，但是在风评项目中，我们要适时的收敛，除非你有大量的时间可以做渗透，但一般情况下，渗透测试的时间都不会特别的长，很多时候，我们需要在短时间内渗透测试大量系统。因此，在风评中，我建议的是，先尽可能过一遍目标整体内容，把一些明显的漏洞找出来，然后根据时间再一步步深入利用。&lt;/p&gt;
+&lt;p&gt;　　最后有一点，很重要，常规渗透一般我们都是点到为止，如注入只需证明可以注入即可，你可以利用注入只查询需要的部分数据（如查询几条管理员的账号密码），千万不要脱裤，不要脱裤，不要脱裤，重要事情说三遍，哪怕拿shell，也只是证明可以上传shell即可，切忌未经允许利用shell进行深入操作，尤其是外网环境渗透，利用shell去深入搞内网。&lt;/p&gt;
+&lt;h2 id=&quot;深度渗透&quot;&gt;&lt;a href=&quot;#深度渗透&quot; class=&quot;headerlink&quot; title=&quot;深度渗透&quot;&gt;&lt;/a&gt;深度渗透&lt;/h2&gt;&lt;p&gt;　　除了常规渗透，另一个就是深度渗透了。那么什么是深度渗透呢？顾名思义，就是深层次的渗透，一般目标比较明确，如需要我们测试是否能够拿到某台服务器的管理控制权限等，甚至进一步进行更深入的测试操作，如打通内网，内网漫游等。针对性比较强，而且程度深，当然难度也大得多。&lt;/p&gt;
+&lt;p&gt;　　在外网环境中，做深度渗透，难度是比内网要大一些的，因为在外网你需要考虑WAF，IPS等这些安全设备的拦截，多了很多限制。大多数时候，我们可能做深度渗透，是在内网环境中，而且会跟常规渗透分开来做，也就是不同人或团队负责，因为深度渗透相当耗时，而且技能水平要求高。&lt;/p&gt;
+&lt;p&gt;　　内网渗透，也有人叫穿透性测试，其实就是深度渗透。那什么是内网渗透？简单的说就是模拟一个正常的客户公司的员工，在办公区网络中，接入内网（权限与普通员工等同），然后就直接进行渗透测试了，整个内网都是你的测试范围，你的主要目标不是测试整个内网都有什么漏洞，而是尽可能深入的利用内网中存在的漏洞，扩大影响范围和力度，如获取到域控管理员的权限，拿下整个域，甚至从一个域跳到另一个域，如子域跳到根域，从一个内网打通到另一个内网等等，在于体现内网存在的漏洞，能够造成的危害力度和范围，最终让客户重视内网安全。&lt;/p&gt;
+&lt;h2 id=&quot;渗透与业务的结合&quot;&gt;&lt;a href=&quot;#渗透与业务的结合&quot; class=&quot;headerlink&quot; title=&quot;渗透与业务的结合&quot;&gt;&lt;/a&gt;渗透与业务的结合&lt;/h2&gt;&lt;p&gt;　　说了常规渗透和深度渗透，相信小伙伴对风评中的渗透也有一定的了解了，接着我们来唠嗑唠嗑渗透与业务的结合。&lt;/p&gt;
+&lt;p&gt;　　在渗透测试当中，我们往往需要考虑客户的业务问题，首先我们的漏洞评级，相同的问题，其实在不同的业务功能当中，是有可能风险不一样的，比如验证码的绕过，如果在登陆处，你可以绕过验证码进行暴力破解，但其实你并没有直接登陆到系统，那么这里验证码顶多就只能是中危，多时候可能会评为低危，但如果是忘记密码处，你绕过了验证码，就可以直接修改新密码了，那么这里就直接是高危了，因为已经可以修改任意账号的密码进行登陆了。&lt;/p&gt;
+&lt;p&gt;　　第二点，我们在描述漏洞风险危害的时候，应该尽可能的结合当前系统的业务功能来描述可能或能够造成的危害，如SQL注入，在人力资源系统，我们可以结合人力资源系统本身的业务功能进行描述危害，SQL注入能够获取到数据库中的数据，如员工的身份证号，住址，电话，工资等信息，或者管理员的账号密码，登陆后台对员工信息进行增删改查操作，甚至利用SQL注入可以拿shell控制服务器等等，具体化危害，不要仅仅只写能够获取数据库信息这么笼统的描述。&lt;/p&gt;
+&lt;p&gt;　　第三点，我们在渗透的时候，要尽可能猜测和理解系统的业务逻辑。开发人员的水平参差不齐，加上开发规范的实施力度不足以及新旧版本更替迭代等情况，导致业务逻辑的漏洞越来越受重视，而且现在很多时候，我们的关注点也大都在业务逻辑漏洞上，因为传统的常规漏洞，开发人员以及WAF等安全设备都有了防范。而需要挖掘业务逻辑漏洞，就需要对业务逻辑有一定的了解，从而才能去破解和发现逻辑上可能存在的问题，以及提出符合其业务逻辑的修复建议等。&lt;/p&gt;
+&lt;p&gt;　　最后，客户经常会对我们的渗透测试报告中的漏洞提出疑问，甚至质疑，我们除了在报告中要结合业务写清楚漏洞风险、危害以及建议，同时在跟客户交流沟通时，也要结合系统业务或客户公司的业务对漏洞信息进行阐述，尽可能的让客户明白漏洞对其公司业务的影响以及如何修复才是我们需要达到的目的（qi shi dou shi wei le money money money）。&lt;/p&gt;
+&lt;p&gt;　　好了，这次就唠嗑到这里了！熄灯睡觉！&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;　　信息安全风险评估，我们简称风评！这次就风评中的渗透测试(本文仅针对Web应用相关的渗透)，我们来叨叨一下，都有些什么深深浅浅的道道！&lt;br&gt;
+    
+    </summary>
+    
+      <category term="others" scheme="http://yoursite.com/categories/others/"/>
+    
+    
+      <category term="security" scheme="http://yoursite.com/tags/security/"/>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
   
   <entry>
     <title>18.2017强网杯web400题Writeup</title>
@@ -483,7 +527,7 @@ exit 0
     <link href="http://yoursite.com/%E5%86%99%E7%BB%99%E6%AF%8D%E6%A0%A1%E5%9C%A8%E5%AD%A6%E5%AE%89%E5%85%A8%E7%9A%84%E5%B0%8F%E4%BC%99%E4%BC%B4%E7%9A%84%E4%B8%80%E4%BA%9B%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
     <id>http://yoursite.com/写给母校在学安全的小伙伴的一些碎碎念/</id>
     <published>2017-01-09T14:23:03.000Z</published>
-    <updated>2017-01-09T15:29:26.863Z</updated>
+    <updated>2017-01-09T15:29:26.864Z</updated>
     
     <content type="html">&lt;p&gt;　　大家都说安全专业热门，连国家领导都关注重视，那么大学念安全专业，毕业之后到底能做什么？有什么岗位选择？&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;　　之所以想写这么篇东西，完全是因为母校的师弟师妹对于安全行业的玩意太陌生了，虽然都是科班出身，还都是安全专业，然并卵，一毕业普遍两眼一抹黑，很多都转开发，转运维，甚至转行了。&lt;/p&gt;
@@ -551,9 +595,9 @@ exit 0
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
       <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -562,7 +606,7 @@ exit 0
     <link href="http://yoursite.com/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0DVWA%E4%B9%8B%E5%8F%8D%E5%B0%84%E5%9E%8BXSS/"/>
     <id>http://yoursite.com/渗透测试平台DVWA之反射型XSS/</id>
     <published>2016-08-09T09:25:30.000Z</published>
-    <updated>2016-08-09T09:39:51.562Z</updated>
+    <updated>2016-08-09T09:39:51.563Z</updated>
     
     <content type="html">&lt;p&gt;　　本文通过DVWA平台的XSS reflected模块进行反射型XSS漏洞的简单分析和原理讲解。 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;XSS介绍&quot;&gt;&lt;a href=&quot;#XSS介绍&quot; class=&quot;headerlink&quot; title=&quot;XSS介绍&quot;&gt;&lt;/a&gt;XSS介绍&lt;/h2&gt;&lt;p&gt;　　XSS是由于数据获取传输过程中，对于用户输入过滤不严而导致的，这点上跟sql注入有点类似。区别在于sql注入主要针对于数据库，而xss则以前端js为主。然而千万不要小看XSS，其危害小可直接忽略，大可直捣后台。&lt;br&gt;　　这次要介绍的是反射型XSS，此类XSS一般局限性较大，而且其危害还要视站点的流量和用途而定。&lt;br&gt;　　那么什么是反射型XSS，我们以DVWA平台上的例子来说说&lt;/p&gt;
@@ -583,9 +627,9 @@ exit 0
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
       <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -594,7 +638,7 @@ exit 0
     <link href="http://yoursite.com/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0DVWA%E4%B9%8BSQL%E7%9B%B2%E6%B3%A8/"/>
     <id>http://yoursite.com/渗透测试平台DVWA之SQL盲注/</id>
     <published>2016-08-04T07:31:57.000Z</published>
-    <updated>2016-08-04T07:42:08.543Z</updated>
+    <updated>2016-08-04T07:42:08.544Z</updated>
     
     <content type="html">&lt;p&gt;　　本文通过DVWA平台的SQL Injection（Blind）模块简单介绍分析了SQL盲注的原理和运用。 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;SQL注入原理解析&quot;&gt;&lt;a href=&quot;#SQL注入原理解析&quot; class=&quot;headerlink&quot; title=&quot;SQL注入原理解析&quot;&gt;&lt;/a&gt;SQL注入原理解析&lt;/h2&gt;&lt;p&gt;　　SQL盲注跟DVWA的普通SQL注入在原理上，其实是一样的，不同的是，使用单引号已经不能作为测试注入是否存在的依据了，因为不会有sql语句报错提示，一切都是静默的，输入单引号，没有任何输出和反馈，显然是对错误信息做了处理了。&lt;br&gt;&lt;img src=&quot;/uploads/11/11-1.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
@@ -610,9 +654,9 @@ exit 0
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
       <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -642,9 +686,9 @@ exit 0
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
       <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -653,7 +697,7 @@ exit 0
     <link href="http://yoursite.com/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0DVWA%E4%B9%8B%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/"/>
     <id>http://yoursite.com/渗透测试平台DVWA之文件包含/</id>
     <published>2016-06-10T11:27:32.000Z</published>
-    <updated>2016-06-10T11:46:48.871Z</updated>
+    <updated>2016-06-10T11:46:48.872Z</updated>
     
     <content type="html">&lt;p&gt;　　本文通过利用DVWA平台，简单分析了PHP站点中，远程文件包含漏洞和本地文件包含漏洞的原理和利用和防范！&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;文件包含漏洞原理简析&quot;&gt;&lt;a href=&quot;#文件包含漏洞原理简析&quot; class=&quot;headerlink&quot; title=&quot;文件包含漏洞原理简析&quot;&gt;&lt;/a&gt;文件包含漏洞原理简析&lt;/h2&gt;&lt;p&gt;　　文件包含漏洞，是PHP独有的漏洞，是PHP通过函数引入文件时，没有对引入文件名做合法检验，即没有过滤引入文件时，传入参数是否合法或包含敏感字符，文件等，导致可以读取系统敏感文件信息，如系统密码文件等，甚至直接代码注入，如直接注入一句话木马等，一般风险较高。&lt;br&gt;　　文件包含分为本地文件包含和远程文件包含，本地文件包含指被包含文件存在本地服务器当中，直接使用本地物理路径即可，远程文件包含指被包含文件在另外的服务器上，需要利用url地址来包含，远程文件包含需要开启php配置文件中的allow_url_include，否则无法使用url包含文件，默认php不开启。&lt;/p&gt;
@@ -671,9 +715,9 @@ exit 0
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
       <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -682,7 +726,7 @@ exit 0
     <link href="http://yoursite.com/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0DVWA%E4%B9%8BCSRF/"/>
     <id>http://yoursite.com/渗透测试平台DVWA之CSRF/</id>
     <published>2016-06-09T11:25:00.000Z</published>
-    <updated>2016-06-10T11:44:50.207Z</updated>
+    <updated>2016-06-10T11:44:50.208Z</updated>
     
     <content type="html">&lt;p&gt;　　本文简单介绍了CSRF的形成原理，以及以DVWA平台为例，做了简单的利用分析！&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;CSRF原理简单分析&quot;&gt;&lt;a href=&quot;#CSRF原理简单分析&quot; class=&quot;headerlink&quot; title=&quot;CSRF原理简单分析&quot;&gt;&lt;/a&gt;CSRF原理简单分析&lt;/h2&gt;&lt;p&gt;　　CSRF，跨站请求伪造，其主要是通过盗用被攻击者的身份来进行非法操作，如修改你的密码，窃取个人敏感信息，银行转账等。&lt;br&gt;　　具体原理为，当我们登录我们某一网站的账号，如银行网站，登录后我们与浏览器之间便存在了一个可信任的会话连接，而该网站存在CSRF漏洞，那么，此时，如果我们又访问了一个加入了恶意代码的另一个网站，该恶意代码是执行该银行网站的某些敏感操作的，如转账，修改密码等。正常情况下，我们直接访问改网站，没有任何问题，因为这些恶意代码的操作需要用户权限支撑，否则执行失败，然而当我们登录了银行，而会话没有结束时，访问了该网站，那么则执行了这些恶意代码操作，而且是静默的，一般用户并不知情，也就是说，在不知不觉中，用户密码被修改，银行存款被转走等。&lt;br&gt;　　接下来，我们来看看DVWA中对于CSRF的实操。&lt;/p&gt;
@@ -701,9 +745,9 @@ exit 0
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
       <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -712,7 +756,7 @@ exit 0
     <link href="http://yoursite.com/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0DVWA%E4%B9%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/"/>
     <id>http://yoursite.com/渗透测试平台DVWA之命令执行/</id>
     <published>2016-04-20T10:09:16.000Z</published>
-    <updated>2016-06-09T13:05:44.265Z</updated>
+    <updated>2016-06-09T13:05:44.266Z</updated>
     
     <content type="html">&lt;p&gt;　　本文通过DVWA的Command Execution模块进行命令执行漏洞的一般演示，DVWA中共存在三个级别的命令执行漏洞。&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;　　DVWA中命令执行测试分三个级别，low，medium和high，下面依次来分析。&lt;/p&gt;
 &lt;h2 id=&quot;low级别命令执行测试&quot;&gt;&lt;a href=&quot;#low级别命令执行测试&quot; class=&quot;headerlink&quot; title=&quot;low级别命令执行测试&quot;&gt;&lt;/a&gt;low级别命令执行测试&lt;/h2&gt;&lt;p&gt;　　首先，把DVWA的安全级别调至low，如图所示：&lt;br&gt;&lt;img src=&quot;/uploads/7/7-1.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;br&gt;　　此时，底部左侧会显示级别，如图所示：&lt;br&gt;&lt;img src=&quot;/uploads/7/7-2.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;br&gt;　　接下来回到命令执行模块，根据提示输入IP地址，提交后返回了ping信息，如图所示：&lt;br&gt;&lt;img src=&quot;/uploads/7/7-3.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;br&gt;　　以此可以判断这是一个ping程序，输入IP则进行ping操作。总所周知，ping命令是系统命令，即此处调用了系统命令，那么是否可以构造特殊命令执行语句执行其他命令呢？&lt;br&gt;　　我们知道，在window的DOS命令执行中可以用“&amp;amp;&amp;amp;”来连接两个命令一起执行，而linux中则可以利用“;”来连接两个命令共同执行，我们这里可以测试一下。由于测试服务器是linux系统，所以我们直接用“;”来测试。&lt;br&gt;　　输入“; cat /etc/passwd”，看是否能读取到passwd文件中的信息并打印出来。&lt;br&gt;&lt;img src=&quot;/uploads/7/7-4.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;br&gt;　　从图中，可以很明显的看到，“;”后面的命令执行成功了，打印出了passwd文件的信息。&lt;br&gt;　　那么，可以判断其存在命令执行漏洞。通过此漏洞可以直接执行系统命令，如果权限够大，甚至可以直接执行添加系统管理员，开启敏感端口等。&lt;br&gt;　　现在我们来瞧瞧它的源码，看看这个漏洞是如何产生的。选择View Source查看相关源码，如图所示：&lt;br&gt;&lt;img src=&quot;/uploads/7/7-5.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;br&gt;&lt;figure class=&quot;highlight php&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;( &lt;span class=&quot;keyword&quot;&gt;isset&lt;/span&gt;( $_POST[ &lt;span class=&quot;string&quot;&gt;&#39;submit&#39;&lt;/span&gt; ] ) ) &amp;#123; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    $target = $_REQUEST[ &lt;span class=&quot;string&quot;&gt;&#39;ip&#39;&lt;/span&gt; ]; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;// Determine OS and execute the ping command. &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (stristr(php_uname(&lt;span class=&quot;string&quot;&gt;&#39;s&#39;&lt;/span&gt;), &lt;span class=&quot;string&quot;&gt;&#39;Windows NT&#39;&lt;/span&gt;)) &amp;#123;  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        $cmd = shell_exec( &lt;span class=&quot;string&quot;&gt;&#39;ping  &#39;&lt;/span&gt; . $target ); &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;&amp;lt;pre&amp;gt;&#39;&lt;/span&gt;.$cmd.&lt;span class=&quot;string&quot;&gt;&#39;&amp;lt;/pre&amp;gt;&#39;&lt;/span&gt;; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125; &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &amp;#123;  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        $cmd = shell_exec( &lt;span class=&quot;string&quot;&gt;&#39;ping  -c 3 &#39;&lt;/span&gt; . $target );        &lt;span class=&quot;keyword&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;&amp;lt;pre&amp;gt;&#39;&lt;/span&gt;.$cmd.&lt;span class=&quot;string&quot;&gt;&#39;&amp;lt;/pre&amp;gt;&#39;&lt;/span&gt;;  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
@@ -732,9 +776,9 @@ exit 0
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
       <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -757,9 +801,9 @@ exit 0
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
       <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -768,7 +812,7 @@ exit 0
     <link href="http://yoursite.com/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0DVWA%E4%B9%8B%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/"/>
     <id>http://yoursite.com/渗透测试平台DVWA之简单介绍/</id>
     <published>2016-04-18T03:39:28.000Z</published>
-    <updated>2016-06-10T11:42:41.265Z</updated>
+    <updated>2016-06-10T11:42:41.266Z</updated>
     
     <content type="html">&lt;p&gt;　　本文简单介绍了渗透测试平台DVWA的下载安装，以及平台上的基本功能。&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;下载安装DVWA&quot;&gt;&lt;a href=&quot;#下载安装DVWA&quot; class=&quot;headerlink&quot; title=&quot;下载安装DVWA&quot;&gt;&lt;/a&gt;下载安装DVWA&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://www.dvwa.co.uk/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;DVWA下载入口&lt;/a&gt;&lt;br&gt;　　DVWA是使用PHP语言写的测试平台，以及使用的MySql数据库，所以要先搭好PHP+MYSQL的环境。&lt;br&gt;　　下载完成后，把文件直接解压到你的站点根目录就可以了！&lt;br&gt;　　接下来就要修改配置文件，即config文件夹中的config.ini.php&lt;br&gt;　　根据你的数据库实际情况进行数据库地址，用户名和密码修改。&lt;br&gt;　　最后访问&lt;a href=&quot;http://你的DVWA地址/setup.php安装即可。&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://你的DVWA地址/setup.php安装即可。&lt;/a&gt;&lt;br&gt;　　安装完成后，DVWA有五个默认用户，分别为：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;admin/password&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;gordonb/abc123&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;1337/charley&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;pablo/letmein&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;smithy/password&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
@@ -785,9 +829,9 @@ exit 0
       <category term="others" scheme="http://yoursite.com/categories/others/"/>
     
     
-      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
       <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -810,9 +854,9 @@ exit 0
       <category term="代码审计" scheme="http://yoursite.com/categories/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/"/>
     
     
-      <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
-    
       <category term="代码审计" scheme="http://yoursite.com/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/"/>
+    
+      <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
     
   </entry>
   
@@ -835,9 +879,9 @@ exit 0
       <category term="渗透事件" scheme="http://yoursite.com/categories/%E6%B8%97%E9%80%8F%E4%BA%8B%E4%BB%B6/"/>
     
     
-      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
       <category term="网络安全" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -878,7 +922,7 @@ exit 0
     <link href="http://yoursite.com/Build-Your-Blog-By-Github/"/>
     <id>http://yoursite.com/Build-Your-Blog-By-Github/</id>
     <published>2016-03-01T02:52:39.000Z</published>
-    <updated>2016-04-20T02:34:56.369Z</updated>
+    <updated>2016-04-20T02:34:56.370Z</updated>
     
     <content type="html">&lt;p&gt;Here I will teach you how to bulid your personal blog by github.&lt;br&gt;Tools: git | github | hexo&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;&lt;code&gt;My System:window 7 64bit&lt;/code&gt;&lt;/p&gt;
 &lt;h2 id=&quot;Frist-Register-your-github-user&quot;&gt;&lt;a href=&quot;#Frist-Register-your-github-user&quot; class=&quot;headerlink&quot; title=&quot;Frist: Register your github user.&quot;&gt;&lt;/a&gt;Frist: Register your github user.&lt;/h2&gt;&lt;p&gt;Input your email and password,then follow the tips to do.Just so easy!&lt;br&gt;&lt;img src=&quot;/uploads/1/1-1.png&quot; alt=&quot;Angoddess&quot;&gt;&lt;/p&gt;
