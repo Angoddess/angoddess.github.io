@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="渗透测试,网络安全," />
+  <meta name="keywords" content="security,渗透测试," />
 
 
 
@@ -82,23 +82,23 @@
 
 
 
-<meta name="description" content="本文通过DVWA平台的XSS reflected模块进行反射型XSS漏洞的简单分析和原理讲解。">
+<meta name="description" content="在平时工作的渗透项目中，经常会遇到USBKey数字证书的系统，因此积累了一些测试经验，在此与各位分享，欢迎交流！">
 <meta property="og:type" content="article">
-<meta property="og:title" content="12.渗透测试平台DVWA之反射型XSS">
-<meta property="og:url" content="http://yoursite.com/渗透测试平台DVWA之反射型XSS/index.html">
+<meta property="og:title" content="20.关于USBKey数字证书安全测试的一些心得">
+<meta property="og:url" content="http://yoursite.com/关于USBKey数字证书安全测试的一些心得/index.html">
 <meta property="og:site_name" content="Angoddess Blog">
-<meta property="og:description" content="本文通过DVWA平台的XSS reflected模块进行反射型XSS漏洞的简单分析和原理讲解。">
-<meta property="og:image" content="http://yoursite.com/uploads/12/12-1.png">
-<meta property="og:image" content="http://yoursite.com/uploads/12/12-2.png">
-<meta property="og:image" content="http://yoursite.com/uploads/12/12-3.png">
-<meta property="og:image" content="http://yoursite.com/uploads/12/12-4.png">
-<meta property="og:image" content="http://yoursite.com/uploads/12/12-5.png">
-<meta property="og:image" content="http://yoursite.com/uploads/12/12-6.png">
-<meta property="og:updated_time" content="2016-08-09T09:39:51.563Z">
+<meta property="og:description" content="在平时工作的渗透项目中，经常会遇到USBKey数字证书的系统，因此积累了一些测试经验，在此与各位分享，欢迎交流！">
+<meta property="og:image" content="http://yoursite.com/uploads/20/20-1.png">
+<meta property="og:image" content="http://yoursite.com/uploads/20/20-2.png">
+<meta property="og:image" content="http://yoursite.com/uploads/20/20-3.png">
+<meta property="og:image" content="http://yoursite.com/uploads/20/20-4.png">
+<meta property="og:image" content="http://yoursite.com/uploads/20/20-5.png">
+<meta property="og:image" content="http://yoursite.com/uploads/20/20-6.png">
+<meta property="og:updated_time" content="2018-11-15T15:11:10.102Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="12.渗透测试平台DVWA之反射型XSS">
-<meta name="twitter:description" content="本文通过DVWA平台的XSS reflected模块进行反射型XSS漏洞的简单分析和原理讲解。">
-<meta name="twitter:image" content="http://yoursite.com/uploads/12/12-1.png">
+<meta name="twitter:title" content="20.关于USBKey数字证书安全测试的一些心得">
+<meta name="twitter:description" content="在平时工作的渗透项目中，经常会遇到USBKey数字证书的系统，因此积累了一些测试经验，在此与各位分享，欢迎交流！">
+<meta name="twitter:image" content="http://yoursite.com/uploads/20/20-1.png">
 
 
 
@@ -116,7 +116,7 @@
   };
 </script>
 
-  <title> 12.渗透测试平台DVWA之反射型XSS | Angoddess Blog </title>
+  <title> 20.关于USBKey数字证书安全测试的一些心得 | Angoddess Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -256,7 +256,7 @@
             
             
               
-                12.渗透测试平台DVWA之反射型XSS
+                20.关于USBKey数字证书安全测试的一些心得
               
             
           </h1>
@@ -268,8 +268,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-09T17:25:30+08:00" content="2016-08-09">
-              2016-08-09
+            <time itemprop="dateCreated" datetime="2018-11-15T22:51:16+08:00" content="2018-11-15">
+              2018-11-15
             </time>
           </span>
 
@@ -282,8 +282,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/others/" itemprop="url" rel="index">
-                    <span itemprop="name">others</span>
+                  <a href="/categories/经验分享/" itemprop="url" rel="index">
+                    <span itemprop="name">经验分享</span>
                   </a>
                 </span>
 
@@ -298,8 +298,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/渗透测试平台DVWA之反射型XSS/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="渗透测试平台DVWA之反射型XSS/" itemprop="commentsCount"></span>
+                <a href="/关于USBKey数字证书安全测试的一些心得/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="关于USBKey数字证书安全测试的一些心得/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -309,7 +309,7 @@
 
           
           
-             <span id="/渗透测试平台DVWA之反射型XSS/" class="leancloud_visitors" data-flag-title="12.渗透测试平台DVWA之反射型XSS">
+             <span id="/关于USBKey数字证书安全测试的一些心得/" class="leancloud_visitors" data-flag-title="20.关于USBKey数字证书安全测试的一些心得">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -331,14 +331,13 @@
       
 
       
-        <p>　　本文通过DVWA平台的XSS reflected模块进行反射型XSS漏洞的简单分析和原理讲解。 <a id="more"></a></p>
-<h2 id="XSS介绍"><a href="#XSS介绍" class="headerlink" title="XSS介绍"></a>XSS介绍</h2><p>　　XSS是由于数据获取传输过程中，对于用户输入过滤不严而导致的，这点上跟sql注入有点类似。区别在于sql注入主要针对于数据库，而xss则以前端js为主。然而千万不要小看XSS，其危害小可直接忽略，大可直捣后台。<br>　　这次要介绍的是反射型XSS，此类XSS一般局限性较大，而且其危害还要视站点的流量和用途而定。<br>　　那么什么是反射型XSS，我们以DVWA平台上的例子来说说</p>
-<h2 id="（一）Low级别XSS"><a href="#（一）Low级别XSS" class="headerlink" title="（一）Low级别XSS"></a>（一）Low级别XSS</h2><p>　　在DVWA平台中，Low级别的XSS是几乎没做防护处理的，我们可以任意的利用XSS攻击平台。<br>　　正常的显示如下图，会把我们输入的字符串直接打印出来。<br><img src="/uploads/12/12-1.png" alt="Angoddess"><br>　　我们直接输入特殊构造的字符串<code>&lt;script&gt;alert(“XSS Test”)&lt;/script&gt;</code>，来触发XSS，如图：<br><img src="/uploads/12/12-2.png" alt="Angoddess"><br>　　可以看到成功触发了XSS，弹窗显示了预期结果。<br>　　仔细看，我们会发现，其实我们输入的内容就在url当中作为name参数的值，所以，只要我们把这个链接发给任何人，他点击了，就都会触发该效果，是不是感觉有点眼熟？没错，这就跟我们平时收到的很多垃圾邮件啊，短信啊什么的，里面的链接是有点类似的，并非所有都是XSS，也可能是伪站，但还是有相当一部分就是XSS链接来的。<br>　　如果我们把script里的内容换了，不是弹窗，而是获取当前cookie并发送到指定邮箱，那么，呵呵，别人就获取到你当前的登录状态了，可以直接访问你的个人信息等等，如果还是个管理员，那就大发了。<br>　　当然，XSS的局限性也是挺强，首先必须cookie没过期才可以利用，其次必须点击者刚好登录了对应站点，所以往往此类漏洞都是跟其他的漏洞配合利用的，还多结合社会工程学。<br>　　下面看看源码：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(!array_key_exists (<span class="string">"name"</span>, $_GET) || $_GET[<span class="string">'name'</span>] == <span class="keyword">NULL</span> || $_GET[<span class="string">'name'</span>] == <span class="string">''</span>)&#123;</span><br><span class="line"></span><br><span class="line"> $isempty = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        </span><br><span class="line"> <span class="keyword">echo</span> <span class="string">'&lt;pre&gt;'</span>;</span><br><span class="line"> <span class="keyword">echo</span> <span class="string">'Hello '</span> . $_GET[<span class="string">'name'</span>];</span><br><span class="line"> <span class="keyword">echo</span> <span class="string">'&lt;/pre&gt;'</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>　　果然没有对输入做任何处理的，直接代入使用。从代码中也可以看到，用户输入的内容一直在客户端范围内传输而已，并没有涉及服务器端的东西，更不用说数据库了，所以它也是非持久的，也可以说是即时性的。</p>
-<h2 id="（二）Medium级别XSS"><a href="#（二）Medium级别XSS" class="headerlink" title="（二）Medium级别XSS"></a>（二）Medium级别XSS</h2><p>　　接下来我们来看看Medium级别的XSS，这个级别的XSS做了些简单的过滤，再用之前的方法，已经不能触发XSS了，如图：<br><img src="/uploads/12/12-3.png" alt="Angoddess"><br>　　可以看到，直接输出了script标签里的内容，可见其应该是过滤了script标签，那么我么就该设法绕过过滤。<br>　　我们试试改变script标签的大小写，即用大写字母书写，如图：<br><img src="/uploads/12/12-4.png" alt="Angoddess"><br>　　绕过成功，触发了XSS。<br>　　以此我们可以猜测，其应该是过滤了script这个字符串，且区分了大小写只过滤了小写的情况。<br>　　看看源码：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(!array_key_exists (<span class="string">"name"</span>, $_GET) || $_GET[<span class="string">'name'</span>] == <span class="keyword">NULL</span> || $_GET[<span class="string">'name'</span>] == <span class="string">''</span>)&#123;</span><br><span class="line"></span><br><span class="line"> $isempty = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">echo</span> <span class="string">'&lt;pre&gt;'</span>;</span><br><span class="line"> <span class="keyword">echo</span> <span class="string">'Hello '</span> . str_replace(<span class="string">'&lt;script&gt;'</span>, <span class="string">''</span>, $_GET[<span class="string">'name'</span>]);</span><br><span class="line"> <span class="keyword">echo</span> <span class="string">'&lt;/pre&gt;'</span>; </span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>　　从源码中可以看到，其的确是过滤了script，将该标签替换为空了，所以我们初次尝试时输出了script标签里的内容，因为script标签被去除了，然而这种利用替换来过滤的方法有一个弊端，就是较难考虑周全，容易疏忽，此处就忽略了大写的情况，还有大小写混合的情况。所以可以通过修改字符串大小写来绕过。</p>
-<h2 id="（三）High级别XSS"><a href="#（三）High级别XSS" class="headerlink" title="（三）High级别XSS"></a>（三）High级别XSS</h2><p>　　High级别的XSS模块，对于XSS的防护就相对高级一些了，前面用到的方法在这里也都行不通了。<br><img src="/uploads/12/12-5.png" alt="Angoddess"><br><img src="/uploads/12/12-6.png" alt="Angoddess"><br>　　可以看到，他连script标签一起输出了，哪怕改变了大小写也没有用。<br>　　我们直接看看源码：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">if</span>(!array_key_exists (<span class="string">"name"</span>, $_GET) || $_GET[<span class="string">'name'</span>] == <span class="keyword">NULL</span> || $_GET[<span class="string">'name'</span>] == <span class="string">''</span>)&#123;</span><br><span class="line">    </span><br><span class="line"> $isempty = <span class="keyword">true</span>;</span><br><span class="line">        </span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    </span><br><span class="line"> <span class="keyword">echo</span> <span class="string">'&lt;pre&gt;'</span>;</span><br><span class="line"> <span class="keyword">echo</span> <span class="string">'Hello '</span> . htmlspecialchars($_GET[<span class="string">'name'</span>]);</span><br><span class="line"> <span class="keyword">echo</span> <span class="string">'&lt;/pre&gt;'</span>;</span><br><span class="line">        </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>　　这里使用了php的一个函数方法htmlspecialchars对输入的内容做了处理，这个函数的作用是把预定义的<code>&lt;</code>和<code>&gt;</code>这两个符号以html的形式打印出来，而其他内容不变，所以我们最后看到了全部内容的输出。<br>　　这个方法一般来说也相对安全了。</p>
+        <p>　　在平时工作的渗透项目中，经常会遇到USBKey数字证书的系统，因此积累了一些测试经验，在此与各位分享，欢迎交流！<br><a id="more"></a></p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>　　USBKey是一个USB接口的硬件，主要用于存放数字证书，你可以理解为就是一个特殊的U盘（也不完全是），一些企业公司的重要网站系统都会用USBKey作为用户身份凭证之一，尤其是涉及金融的网站系统，如网上银行系统等。那么它能保证什么呢？比如我们输入正确的账号密码，但如果没有USBKey还是无法登陆系统，它和密码组合使用就是双因子验证，保障用户账户的安全。<br>　　然而一旦USBKey本身存在缺陷，或者服务端对于USBKey的校验存在漏洞，那么将导致攻击者可以无需USBKey就可以伪造用户证书身份，或者绕过证书校验，从而只需要密码等单一手段，甚至直接就可以登陆系统。在网上银行系统中，所有交易操作都是会校验证书的，一旦可以绕过，可以想象，风险有多大。<br>　　下面了解一些测试思路和防御方法，主要针对数字证书校验方面，这里不说硬件破解。</p>
+<h2 id="JS识别获取USBKey"><a href="#JS识别获取USBKey" class="headerlink" title="JS识别获取USBKey"></a>JS识别获取USBKey</h2><p><strong>（一）风险描述</strong><br>　　以网上银行系统为例，当我们插入USBKey的时候，访问网银登陆页，会判断我们是否插入USBKey，而这一步，其实有不少都是JS进行判断的，这里可以通过篡改JS，让系统以为我们插入了USBKey，绕过硬件插入检测，不过如果无法进一步利用，如伪造USBKey的证书信息，那么酱紫的操作，其实有点鸡肋，没啥鸟用的赶脚。<br>　　案例片段：<br><img src="/uploads/20/20-1.png" alt="Angoddess"><br>　　JS识别完USBKey插入后，有些系统会使用JS提取证书编号，并发送给服务端，通过返回的数据来判断USBKey是否正常等，这一步，可能返回的数据会泄露证书信息，并且这些信息会用于登陆等的证书校验，通过篡改该步请求的证书编号，可以获取到大量的证书信息，如用户id，证书SN等，用于伪造证书等。<br><strong>（二）防御建议</strong><br>　　针对上面的情况，我们要如何防御呢？首先证书编号等信息，可以加密存储于USBKey中，提取出来也是密文，也就很难去正确篡改，因为不知道值的变化规则，同时如果要检测证书编号，返回的数据尽量简洁，且证书相关数据建议加密处理，如非必要，最好不要返回证书相关数据。之后可以提高USBKey的检测手段，不要单一只用JS进行识别判断USBKey行为状态。</p>
+<h2 id="证书篡改伪造"><a href="#证书篡改伪造" class="headerlink" title="证书篡改伪造"></a>证书篡改伪造</h2><p><strong>（一）风险描述</strong><br>　　以网银系统为例，当识别完USBKey之后，校验登陆账号密码时，一般会在校验请求中同时校验证书相关身份信息，如证书SN，DN，授权号等。<br><img src="/uploads/20/20-2.png" alt="Angoddess"><br>　　如果这些信息时明文的，那么，我们就可以尝试对其进行篡改测试，尝试修改成其他的用户的证书相关信息，从而越权登陆到他人的账号，当然证书是其他人的，相对应的账号密码也就要是对应的其他用户的。<br>　　一般情况下，我们可以怎么考虑篡改呢？首先DN，SN，授权号这些个信息，肯定是要改的，还有就是用户对应的账号或id，以及密码。密码如果是密文，那么可以一开始输入的时候就输想篡改的用户的密码，不然就要调用站点的加密JS文件来加密明文密码，再进行替换。至于证书的相关参数信息值，我们可能通过上一节中识别USBKey时的一些请求中越权遍历证书编号从response获取到，或者在站点的其他功能中，如登陆了自己的账号后，在登陆后的某些功能请求中能通过证书编号或用户id之类验证获取证书相关信息，从而获取到其他用户的证书信息。<br>证书篡改伪造成其他用户登陆，这个是需要大量测试的，我们首先是要先确定请求中哪些参数是必要的，跟证书和用户身份最相关的，然后再进行逐个或多个篡改，从response反馈信息来判断篡改的有效性。<br>　　比如有时候，证书的校验中，只校验了证书的授权号，SN等信息的合法性，但没有校验该数字证书是否属于该用户id，或者请求中存在两个用户id参数，一个用于与证书校验，假设参数为A，一个用于证书所有校验成功后，校验密码时的用户id并分配给该id成功后的session，假设该参数为B，那么这就很神奇了，我们可以保留自己的所有证书信息，以及A的值，但是B和密码则篡改为其他用户的，这就导致了使用自己的USBKey，却成功登陆了他人的用户。<br><strong>（二）防御建议</strong><br>　　对于篡改伪造的问题，在防御方面，我们很容易想到签名，没错，可以给数字证书签名来防篡改，同时还可以对数据请求的参数进行防篡改等。另外，证书的相关信息，建议密文存储于证书中，且为不可逆算法，在服务端再进行解密获取明文，以防止信息泄露，以及证书信息如授权号的规则被识别从而越权获取。</p>
+<h2 id="空值缺陷"><a href="#空值缺陷" class="headerlink" title="空值缺陷"></a>空值缺陷</h2><p><strong>（一）风险描述</strong><br>　　在上面说到的证书信息篡改请求中，有一种较为特殊的做法，在平时渗透项目中还真遇到过，那就是直接把证书相关信息的所有参数的值都删除，也就是置空，只保留用户id和密码参数值这两个主要的，竟然就成功登陆了，这就相当于说，只要用户id和密码匹配，那么根本不用去管证书什么鬼的，直接就能绕过证书的校验。神不神奇？这个一般出现在请求中同时有公钥之类的信息，对证书一些校验数据进行签名识别，解密等的数据包中，当然置空时，这些值也都要置空的。<br><strong>（二）防御建议</strong><br>　　那么这是为什么呢？其实这是服务端压根没有考虑对证书信息为空时的处理，或者处理不当，导致证书信息只要是空的，就一定会正确匹配，然后就直接使用用户id和密码匹配之后就登陆了，这个神奇的逻辑我甚至一度以为会不会是故意留的后门，23333333！<br>针对此，服务端需要考虑，客户端传递过来的证书校验信息，永远不能为空值，空值则不合法。</p>
+<h2 id="JS加密解密"><a href="#JS加密解密" class="headerlink" title="JS加密解密"></a>JS加密解密</h2><p>　　对校验请求中的证书数据进行篡改的时候，就不得不说说JS的加密解密，大家都知道，JS是客户端可控的，所以如果使用JS加密来防止数据篡改，那么我只能说，骚年，你很傻很天真。<br>当从USBKey中取出数字证书的身份信息时，如果是明文的，但到了发送请求校验时，就变成密文了，那么就基本是JS加密了，这是要改数据，切入点有几种。<br>　　第一种，我们可以直接找到取出数字证书内容的JS代码，启用伟大的F12,直接断点调试，想改哪个值就改哪个值，改完之后，他会继续往下跑，加密传输就是密文请求了。<br>　　第二种，如果JS中存在解密函数，或者加密算法可逆，我们可以直接借助F12中的console这个前端大神器直接调用JS中的方法进行加解密。只要网页加载了JS，那么就可以在concole中直接调用JS中的方法对变量进行操作，非常方便，也就可以进行JS加解密了。<br>　　如下图，密码是密文<br><img src="/uploads/20/20-3.png" alt="Angoddess"><br>　　首先找到他对这个参数是如何处理的<br><img src="/uploads/20/20-4.png" alt="Angoddess"><br>　　JS中可以找到MD5加密方法<br><img src="/uploads/20/20-5.png" alt="Angoddess"><br>　　直接console中调用MD5并最终转化为请求传递的值<br><img src="/uploads/20/20-6.png" alt="Angoddess"><br>　　同理，解密方法也是这么调用就可以，主要要弄清楚需要传递什么参数值进入加密方法，以及对于整个加密流程要明白，酱紫就可以把明文加密成对应的密文进行篡改了。如果JS用了不可逆的加密方法，又没有解密方法，那么就用第一种方式篡改数据。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>　　说了那么多，总的来说，对于USBKey数字证书的校验，我们要保证数据的篡改不可行，可以把证书敏感信息加密存储和传输，且这个加密不能是在客户端加密，客户端加密还是有一定风险的，同时对证书数据进行签名防篡改，以及还要考虑证书空值的校验以防止置空绕过。<br>　　这些是目前我在平时项目中遇到和总结的一些测试和防御心得，有什么不对的，欢迎指正交流！</p>
 
       
     </div>
@@ -359,9 +358,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/渗透测试/" rel="tag">#渗透测试</a>
+            <a href="/tags/security/" rel="tag">#security</a>
           
-            <a href="/tags/网络安全/" rel="tag">#网络安全</a>
+            <a href="/tags/渗透测试/" rel="tag">#渗透测试</a>
           
         </div>
       
@@ -370,17 +369,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/渗透测试平台DVWA之SQL盲注/" rel="next" title="11.渗透测试平台DVWA之SQL盲注">
-                <i class="fa fa-chevron-left"></i> 11.渗透测试平台DVWA之SQL盲注
+              <a href="/风评中渗透的那些事/" rel="next" title="19.风评中渗透的那些事">
+                <i class="fa fa-chevron-left"></i> 19.风评中渗透的那些事
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/利用sqlmap进行简单的注入/" rel="prev" title="13.利用sqlmap进行简单的注入">
-                13.利用sqlmap进行简单的注入 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -406,8 +401,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="渗透测试平台DVWA之反射型XSS/"
-           data-title="12.渗透测试平台DVWA之反射型XSS" data-url="http://yoursite.com/渗透测试平台DVWA之反射型XSS/">
+      <div class="ds-thread" data-thread-key="关于USBKey数字证书安全测试的一些心得/"
+           data-title="20.关于USBKey数字证书安全测试的一些心得" data-url="http://yoursite.com/关于USBKey数字证书安全测试的一些心得/">
       </div>
     
   </div>
@@ -516,7 +511,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#XSS介绍"><span class="nav-number">1.</span> <span class="nav-text">XSS介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（一）Low级别XSS"><span class="nav-number">2.</span> <span class="nav-text">（一）Low级别XSS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（二）Medium级别XSS"><span class="nav-number">3.</span> <span class="nav-text">（二）Medium级别XSS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（三）High级别XSS"><span class="nav-number">4.</span> <span class="nav-text">（三）High级别XSS</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS识别获取USBKey"><span class="nav-number">2.</span> <span class="nav-text">JS识别获取USBKey</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#证书篡改伪造"><span class="nav-number">3.</span> <span class="nav-text">证书篡改伪造</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空值缺陷"><span class="nav-number">4.</span> <span class="nav-text">空值缺陷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS加密解密"><span class="nav-number">5.</span> <span class="nav-text">JS加密解密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
         </section>
